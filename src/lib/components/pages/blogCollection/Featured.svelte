@@ -75,7 +75,7 @@
   });
 </script>
 
-<section class="bg-white p-5 md:px-40 md:py-32 lg:px-56 py-20" bind:this={section}>
+<section class="bg-white p-5 md:px-40 md:py-32 lg:px-56 flex flex-col items-center justify-center py-20" bind:this={section}>
   <a href="/blog/{sectionData?.featuredBlog?.data?.id}">
     <div class="blog-wrapper">
       <div class="relative">
@@ -86,7 +86,7 @@
         </div>
         <img
           bind:this={img}
-          class="thumbnail"
+          class="w-full"
           src={PUBLIC_IMAGE_URL +
             sectionData?.featuredBlog?.data?.attributes?.thumbnail?.data
               ?.attributes?.url}
@@ -96,7 +96,7 @@
       </div>
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <span
-        class="overflow-hidden flex flex-col md:flex-row justify-between md:items-end md:px-2 mt-10"
+        class="overflow-hidden flex flex-col space-x-10 md:flex-row justify-between md:items-end md:px-5 mt-10"
         on:mouseenter={() => {
           blogTitle.style.transform = "scale(0.9)";
           blogLink.style.transform = "scale(0.9)";

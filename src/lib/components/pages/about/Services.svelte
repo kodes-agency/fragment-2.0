@@ -5,6 +5,8 @@
   import { PUBLIC_IMAGE_URL } from "$env/static/public";
   import type { ServiceEntity } from "../../../../__generated__/graphql";
   import { page } from "$app/stores";
+  import Accordion from "$lib/components/elements/accordion/accordion.svelte";
+  import AccordionItem from "$lib/components/elements/accordion/accordion-item.svelte";
 
   const imgGloveLeft = "/uploads/right_glove_3dd7ba6603.png";
   const imgGloveRight = "/uploads/left_glove_678d307ac5.png";
@@ -22,31 +24,6 @@
   const tl = gsap.timeline();
 
   onMount(() => {
-    const h2Elements = document.querySelectorAll(".h2-el");
-    const pElements = document.querySelectorAll(".p-el");
-
-    h2Elements.forEach((listItem) => {
-      listItem.addEventListener("click", (event) => {
-        h2Elements.forEach((h2Element) => {
-          gsap.set(h2Element, {
-            color: "var(--cyan-color)",
-          });
-        });
-        pElements.forEach((pElement) => {
-          gsap.set(pElement, {
-            maxHeight: "0px",
-            opacity: 0,
-          });
-        });
-        //   @ts-ignore
-        event.target.style.color = "var(--magenta-color)";
-        //   @ts-ignore
-        event.target.nextElementSibling.style.maxHeight = "500px";
-        //  @ts-ignore
-        event.target.nextElementSibling.style.opacity = "1";
-      });
-    });
-
     const ctx = gsap.context(() => {
       const aboutImgTl = gsap.timeline({
         scrollTrigger: {
@@ -133,7 +110,7 @@
   <div
     class="flex flex-col space-y-10 px-5 lg:px-72 2xl:px-96 min-h-screen py-20"
   >
-    <div class="headings-wrapper">
+    <div class="headings-wrapper mb-10">
       <div class="overflow-hidden">
         <h2
           bind:this={heading}
@@ -150,32 +127,28 @@
       </h2>
     </div>
 
-    <ul bind:this={serviceWrapper} class="space-y-10">
-      {#each services as service}
-        <li id="li-el" data-service={service.attributes?.title}>
-          <h2
-            class="h2-el text-4xl z-10 font-bold transition-all duration-1000 w-fit cursor-pointer text-cyan"
-          >
-            {service.attributes?.title}
-          </h2>
-          <p
-            class="p-el max-h-0 z-0 max-w-3xl text-black opacity-0 text-xl pointer-events-none"
-          >
-            {service.attributes?.text}
-          </p>
-        </li>
-      {/each}
-    </ul>
+    <div bind:this={serviceWrapper}>
+      <Accordion
+        collapse
+        --accordion-width="70ch"
+        --accordion-color="var(--white-color)"
+        --text-color="var(--magenta-color)"
+      >
+        {#each services as service, i}
+          <AccordionItem open={i === 0}>
+            <svelte:fragment slot="title">
+              <h2
+                class="anmClass text-cyan title font-bold text-start text-4xl md:text-5xl transition-all duration-700 mb-4"
+              >
+                {service.attributes?.title}
+              </h2>
+            </svelte:fragment>
+            <svelte:fragment slot="content">
+              <p class="text-black text-xl">{service.attributes?.text}</p>
+            </svelte:fragment>
+          </AccordionItem>
+        {/each}
+      </Accordion>
+    </div>
   </div>
 </section>
-
-<style>
-  li:first-child h2 {
-    color: var(--magenta-color);
-  }
-
-  li:first-child p {
-    opacity: 1;
-    max-height: 500px;
-  }
-</style>

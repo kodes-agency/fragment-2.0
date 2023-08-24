@@ -3,6 +3,8 @@
   import type { Blog, BlogLayoutDynamicZone } from "../../../__generated__/graphql";
   import Hero from "$lib/components/pages/blogSingle/Hero.svelte";
   import Content from "$lib/components/pages/blogSingle/Content.svelte";
+  import Next from "$lib/components/pages/blogSingle/Next.svelte";
+
 
   let layout: BlogLayoutDynamicZone[]
   let blogs: {attributes: Blog}[]
@@ -18,8 +20,7 @@
 
 <Hero/>
 <Content/>
-
-
+<Next/>
 
 <style>
 </style>

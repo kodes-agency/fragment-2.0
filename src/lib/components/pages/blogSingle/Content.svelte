@@ -6,95 +6,33 @@
   let layout: BlogLayoutDynamicZone[];
   // @ts-expect-error
   $: layout = $page.data.data?.blog?.data?.attributes?.layout;
+
 </script>
 
-<section>
+<section class="">
   {#if layout[0]}
-    <div class="section-wrapper">
+    <article class=" bg-white min-h-screen flex flex-col p-5 md:px-40 2xl:px-60 py-20 space-y-14 md:space-y-20">
       {#each layout as element}
         {#if element.__typename == "ComponentBlogLayoutParagraph"}
-          <p>{element?.paragraph}</p>
+          <p class="text-xl text-black md:px-20">{element?.paragraph}</p>
         {/if}
         {#if element.__typename == "ComponentBlogLayoutImage"}
-          <div class="img-wrapper">
             <img
+              class="w-full"
               src={PUBLIC_IMAGE_URL + element?.image?.data?.attributes?.url}
               alt={element.image?.data?.attributes?.alternativeText}
             />
-          </div>
         {/if}
         {#if element.__typename == "ComponentBlogLayoutQuote"}
-          <div class="quote-wrapper">
-            <h4>"{element.quote}"</h4>
-            <h4 class="author">{element?.author}</h4>
+          <div class="space-y-5 md:px-20">
+            <h2 class="text-2xl text-magenta font-bold italic">"{element.quote}"</h2>
+            <p class="text-2xl text-black font-bold italic">{element?.author}</p>
           </div>
         {/if}
         {#if element.__typename == "ComponentBlogLayoutHeading"}
-          <h3>{element?.heading}</h3>
+          <h2 class="text-black text-4xl font-bold">{element?.heading}</h2>
         {/if}
       {/each}
-    </div>
+      </article>
   {/if}
 </section>
-
-<style>
-  .section-wrapper {
-    padding: 10vw;
-    background-color: var(--white-color);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    gap: 4vh;
-  }
-
-  p {
-    text-indent: 20px;
-    color: var(--black-color);
-    padding-inline: 5vw;
-    font-size: 20px;
-  }
-
-  h4 {
-    color: var(--black-color);
-    font-weight: bold;
-    font-style: italic;
-    color: var(--magenta-color);
-  }
-
-  h3 {
-    color: var(--black-color);
-    font-weight: bold;
-    font-size: 40px;
-  }
-
-  .author {
-    color: var(--black-color);
-  }
-
-  .quote-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-  }
-
-  .img-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  img {
-    width: 100%;
-  }
-
-  @media only screen and (max-width: 700px) {
-    .section-wrapper {
-      padding-inline: 5vw;
-    }
-
-    p,
-    h4 {
-      padding-inline: 0px;
-    }
-  }
-</style>

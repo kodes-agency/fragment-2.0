@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
   // @ts-expect-error
   import { gsap } from "gsap/dist/gsap.js";
+  // @ts-expect-error
   import { SplitText } from "gsap/dist/SplitText";
   import { PUBLIC_IMAGE_URL } from "$env/static/public";
 
@@ -192,7 +193,7 @@
       </div>
     </div>
     <div id="service-button">
-      <a class="border-b-2 border-cyan text-lg" href="/work">browse all</a>
+      <a class="border-b-2 border-cyan text-lg" href="/about">browse all</a>
     </div>
   </div>
 </section>
@@ -221,14 +222,6 @@
   }
 
   @media only screen and (max-width: 950px) {
-    /* h2 {
-            line-height: 90px;
-        }
-
-        h3 {
-            max-width: 80vw;
-        } */
-
     .img {
       position: absolute;
       aspect-ratio: 9/16;
