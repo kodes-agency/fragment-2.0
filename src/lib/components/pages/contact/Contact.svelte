@@ -23,7 +23,7 @@
                     trigger: section,
                     start: "top 50%",
                     end: "bottom 80%",
-                    toggleActions: "play none none reset"
+                    toggleActions: "play none none none"
                 }
             });
     
@@ -44,7 +44,7 @@
 <section bind:this={section} id="contact-main-wrapper-1" class="px-5 md:px-20 lg:px-60 flex flex-col justify-center py-20">
         <Accordion collapse --accordion-width="60ch" --accordion-color="var(--white-color)">
             {#each contacts as contact, i }  
-                <AccordionItem open={i === 0}>
+                <AccordionItem>
                     <svelte:fragment slot="title">
                         <h2 class="anmClass title font-bold text-start text-4xl md:text-5xl uppercase transition-all duration-700">
                             {contact.channelName}

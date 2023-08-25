@@ -1,7 +1,8 @@
 <script lang="ts">
     import { page } from '$app/stores';
     import type { Project, ProjectCategory, ProjectLayoutDynamicZone } from '../../__generated__/graphql';
-
+    import Hero from '$lib/components/pages/projectCollection/Hero.svelte';
+    import Work from '$lib/components/pages/projectCollection/Work.svelte'
 
     let projectCategories: {attributes: ProjectCategory}[]
     let projects: {attributes: Project}[]
@@ -15,16 +16,5 @@
       
   </script>
   
-  <h1>{workPage?.heroSubtext}</h1>
-
-  {#each projectCategories as category }
-    <h3>{category.attributes.category}</h3>
-  {/each}
-
-  {#each projects as project }
-    <h3>{project.attributes.title}</h3>
-  {/each}
-  
-  <style>
-  </style>
-  
+  <Hero />
+  <Work />

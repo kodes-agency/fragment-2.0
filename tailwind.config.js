@@ -6,6 +6,8 @@ export default {
     theme: {
       colors: {
         'black': '#181818',
+        'transparent': "transparent",
+        'dark-black': "#000000",
         'white': '#F5F5F5',
         'yellow': '#EECC4D',
         'magenta': '#E60576',
