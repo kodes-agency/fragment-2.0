@@ -31,6 +31,7 @@
       <input
         bind:this={subscriptionInput}
         type="text"
+        name="subscribe-email"
         class="ml-10 outline-none italic bg-black"
         bind:value={user_email}
         on:focus={() => {

@@ -118,7 +118,7 @@
             <img
               class="absolute top-0 opacity-50 left-0 h-screen w-screen object-cover"
               src={PUBLIC_IMAGE_URL +
-                project.attributes.thumbnail?.data?.attributes?.url}
+                project.attributes.thumbnail?.data?.attributes?.formats.compress.url}
               alt={project.attributes.thumbnail?.data?.attributes
                 ?.alternativeText}
             />

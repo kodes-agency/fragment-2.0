@@ -6,6 +6,5 @@ export const load = async ({ locals }) => {
     const data = getClient().query({
         query: query(locals.locale)
     })
-
     return data
 }

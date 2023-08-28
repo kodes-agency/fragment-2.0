@@ -8,8 +8,8 @@
   import Accordion from "$lib/components/elements/accordion/accordion.svelte";
   import AccordionItem from "$lib/components/elements/accordion/accordion-item.svelte";
 
-  const imgGloveLeft = "/uploads/right_glove_3dd7ba6603.png";
-  const imgGloveRight = "/uploads/left_glove_678d307ac5.png";
+  const imgGloveLeft = "/uploads/Mask_group_1_307b223e42.png";
+  const imgGloveRight = "/uploads/Mask_group_d48b5efe64.png";
 
   let section: HTMLElement;
   let services: ServiceEntity[];

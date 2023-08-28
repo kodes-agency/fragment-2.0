@@ -37,7 +37,7 @@
           id={blog?.id}
           title={blog?.attributes?.title}
           date={blog.attributes.publishedAt}
-          img={blog.attributes.thumbnail?.data?.attributes?.url}
+          img={blog.attributes.thumbnail?.data?.attributes?.formats.compress.url}
           alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
         />
       </div>
@@ -64,7 +64,7 @@
               id={blog?.id}
               title={blog?.attributes?.title}
               date={blog.attributes.publishedAt}
-              img={blog.attributes.thumbnail?.data?.attributes?.url}
+              img={blog.attributes.thumbnail?.data?.attributes?.formats.compress.url}
               alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
             />
           </div>

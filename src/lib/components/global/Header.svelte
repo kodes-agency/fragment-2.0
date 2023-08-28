@@ -180,7 +180,7 @@
 </nav>
 <!-- Navigation menu modal -->
 <div
-  class="menu hidden opacity-0 bg-black fixed top-0 py-5 px-5 md:px-10 lg:px-12 z-40 flex-col h-screen justify-end space-y-16 items-center w-full"
+  class="menu hidden opacity-0 bg-black fixed top-0 py-5 px-5 md:px-10 lg:px-12 z-40 flex-col min-h-screen justify-end space-y-10 items-center w-full"
 >
   <div class="flex flex-col space-y-5">
     <!-- Navigation links -->

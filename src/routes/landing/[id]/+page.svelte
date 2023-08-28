@@ -4,8 +4,6 @@
 
   let layout: LandingPageLayoutDynamicZone[]
 
-  console.log($page)
-
   $: landingPage = $page.data.data?.landingPage?.data?.attributes
   // @ts-expect-error
   $: layout = $page.data.data?.landingPage?.data?.attributes?.layout

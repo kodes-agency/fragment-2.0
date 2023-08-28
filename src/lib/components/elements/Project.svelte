@@ -1,12 +1,14 @@
 <script lang="ts">
   import { PUBLIC_IMAGE_URL } from "$env/static/public";
+  import type { Maybe } from "graphql/jsutils/Maybe";
+  import LazyImg from "./LazyImg.svelte";
 
-  export let id: number;
-  export let category: string;
-  export let title: string;
-  export let client: string;
-  export let img: string;
-  export let alt: string = "";
+  export let id: Maybe<number>;
+  export let category: Maybe<string>;
+  export let title: Maybe<string>;
+  export let client: Maybe<string>;
+  export let img: Maybe<string>;
+  export let alt: Maybe<string> = "";
 
   let section: HTMLElement;
   let content: HTMLElement;
@@ -33,7 +35,7 @@
     <img
       src={PUBLIC_IMAGE_URL + img}
       {alt}
-      class="lg:absolute lg:p-2 lg:top-0 opacity-70 lg:opacity-100 max-h-80 w-full lg:w-auto lg:aspect-square object-cover z-0"
+      class="lg:absolute lg:p-2 lg:top-0 opacity-70 lg:opacity-100 lg:max-h-[30vw] w-full lg:w-auto lg:aspect-square object-cover z-0"
     />
     <div
       bind:this={content}

@@ -72,7 +72,7 @@
                 <p class="text-2xl hidden md:block">&#160;</p>
                 <div class="overflow-hidden">
                     <p class="italic font-bold text-2xl spotify-p text-center">{sectionData?.spotifySubtextItalicBold}</p>
-                </div>
+                </div> 
             </span>
         </div>
     </a>

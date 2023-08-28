@@ -89,7 +89,7 @@
           class="w-full"
           src={PUBLIC_IMAGE_URL +
             sectionData?.featuredBlog?.data?.attributes?.thumbnail?.data
-              ?.attributes?.url}
+              ?.attributes?.formats.compress.url}
           alt={sectionData?.featuredBlog?.data?.attributes?.thumbnail?.data
             ?.attributes?.alternativeText}
         />

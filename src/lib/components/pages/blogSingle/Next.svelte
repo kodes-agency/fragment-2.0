@@ -19,7 +19,7 @@
                 <BlogsElement
                     title={blog.attributes?.title}
                     id={blog.id}
-                    img={blog.attributes?.thumbnail?.data?.attributes?.url}
+                    img={blog.attributes?.thumbnail?.data?.attributes?.formats.compress.url}
                     date={blog.attributes?.publishedAt}
                     alt={blog.attributes?.thumbnail?.data?.attributes?.alternativeText}
                 />

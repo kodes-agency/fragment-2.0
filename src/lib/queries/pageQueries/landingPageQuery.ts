@@ -28,6 +28,8 @@ export default function(locale: string, id:string|number) {
                             data {
                                 attributes {
                                     url
+                                    alternativeText
+                                    formats
                                 }
                             }
                         }
@@ -44,6 +46,7 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            formats
                                             alternativeText
                                         }
                                     }
@@ -57,6 +60,7 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            formats
                                             alternativeText
                                         }
                                     }
@@ -69,6 +73,7 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            formats
                                             alternativeText
                                         }
                                     }
@@ -81,6 +86,7 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            formats
                                             alternativeText
                                         }
                                     }
@@ -92,6 +98,7 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            formats
                                             alternativeText
                                         }
                                     }
@@ -107,6 +114,7 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            formats
                                             alternativeText
                                         }
                                     }
@@ -122,6 +130,8 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            alternativeText
+                                            formats
                                         }
                                     }
                                 }
@@ -132,6 +142,8 @@ export default function(locale: string, id:string|number) {
                                     data {
                                         attributes {
                                             url
+                                            alternativeText
+                                            formats
                                         }
                                     }
                                 }

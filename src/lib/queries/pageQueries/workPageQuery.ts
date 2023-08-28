@@ -16,6 +16,8 @@ export default function (locale: string) {
                             data {
                                 attributes {
                                     url
+                                    alternativeText
+                                    formats
                                 }
                             }
                         }
@@ -45,6 +47,8 @@ export default function (locale: string) {
                             data {
                                 attributes {
                                     url
+                                    formats
+                                    alternativeText
                                 }
                             }
                         }

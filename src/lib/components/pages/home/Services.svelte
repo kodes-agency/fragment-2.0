@@ -161,15 +161,15 @@
     bind:this={img1}
     class="img"
     id="img1"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage1?.data?.attributes?.url}
-    alt={sectionData?.servicesImage1?.data?.attributes?.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage1?.data?.attributes?.formats.compress.url}
+    alt={sectionData?.servicesImage1?.data?.attributes?.formats.compress.url}
   />
   <img
     bind:this={img2}
     class="img"
     id="img2"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage2?.data?.attributes?.url}
-    alt={sectionData?.servicesImage2?.data?.attributes?.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage2?.data?.attributes?.formats.compress.url}
+    alt={sectionData?.servicesImage2?.data?.attributes?.formats.compress.url}
   />
   <div class="flex p-5 md:p-auto flex-col space-y-20">
     <div class="flex flex-col space-y-5">

@@ -95,7 +95,7 @@
       <div class="blog-item">
         <BlogItem
           title={blog.attributes.title}
-          img={blog.attributes.thumbnail?.data?.attributes?.url}
+          img={blog.attributes.thumbnail?.data?.attributes?.formats.compress.url}
           alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
           id={blog.id}
           date={blog.attributes.publishedAt}

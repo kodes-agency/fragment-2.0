@@ -19,7 +19,7 @@
         {#if element.__typename == "ComponentBlogLayoutImage"}
             <img
               class="w-full"
-              src={PUBLIC_IMAGE_URL + element?.image?.data?.attributes?.url}
+              src={PUBLIC_IMAGE_URL + element?.image?.data?.attributes?.formats.compress.url}
               alt={element.image?.data?.attributes?.alternativeText}
             />
         {/if}

@@ -11,12 +11,6 @@ async function subscribe(email:string) {
       email_address: email,
       status: "subscribed",
     });
-  
-    console.log(
-      `Successfully added contact as an audience member. The contact's id is ${
-        response.id
-      }.`
-    );
   }
   
 
