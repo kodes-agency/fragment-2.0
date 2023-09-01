@@ -1,13 +1,16 @@
-<script>
+ <script lang="ts">
+    // @ts-expect-error
     import { gsap } from 'gsap/dist/gsap'
 	import { onMount } from 'svelte';
-    import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
-    export let heading
-    export let clients
-    export let baseUrl
-    export let gradient
+    import { page } from '$app/stores';
+    import { PUBLIC_IMAGE_URL } from '$env/static/public';
+    import type { Client } from '../../../../__generated__/graphql';
 
-    let aboutClientSection
+    let aboutClientSection: HTMLElement
+
+    let clients: {attributes: Client}[] 
+    // @ts-expect-error
+    $: clients = $page.data.data?.clients?.data
     
 
     onMount(()=>{
@@ -45,14 +48,14 @@
 <section id="about-clients-section" bind:this={aboutClientSection}>
     <div class="section-wrapper">
         <h2
-            style="background-image: url({gradient});"
             id="about-clients-heading"
-        >{heading}</h2>
+            class="gradient gradient-anm gradient-text "
+        >{$page.data.data?.aboutPage?.data?.attributes?.clientsHeading}</h2>
         <div class="grid-wrapper">
             <div class="clients-wrapper">
                 {#each clients as client }
                     <span>
-                        <img class="client-logo" src="{baseUrl+client.attributes.clientLogo.data.attributes.url}" alt="{client.attributes.clientLogo.data.attributes.alternativeText}">
+                        <img class="client-logo" src="{PUBLIC_IMAGE_URL+client.attributes.clientLogo?.data?.attributes?.url}" alt="{client.attributes.clientLogo?.data?.attributes?.alternativeText}">
                     </span>
                 {/each}
             </div>
