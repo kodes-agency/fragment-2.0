@@ -1,9 +1,13 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+    // @ts-expect-error
     import { gsap } from 'gsap/dist/gsap'
+        // @ts-expect-error
     import { SplitText } from 'gsap/dist/SplitText';
+    import { page } from '$app/stores';
 
     let scrollDownTextSection: HTMLElement
+    console.log($page.data)
 
     onMount(() => {
         const ctx = gsap.context(()=>{
@@ -28,7 +32,7 @@
 </script>
 
 <div class="scroll-down-wrapper" bind:this={scrollDownTextSection}>
-    <p id="scroll-down-text">Scroll down</p>
+    <p id="scroll-down-text">{$page.data.layoutData?.data?.menu?.data?.attributes?.scrollDown}</p>
 </div>
 
 <style>

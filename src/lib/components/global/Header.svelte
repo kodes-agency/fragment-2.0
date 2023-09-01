@@ -5,6 +5,7 @@
   import { page } from "$app/stores";
   import Subscribe from "../elements/Subscribe.svelte";
   import ProgressBar from "../elements/ProgressBar.svelte";
+  import Language from "./Language.svelte";
 
   let fadeAnimationElements;
   let navLinks: HTMLElement[];
@@ -136,8 +137,8 @@
     <div class="flex justify-between items-center space-x-5">
       <!-- Action button -->
       <div class="cta-button hidden md:block">
-          <a class="px-2 py-1 border-2 bg-black hover:bg-[rgba(0,0,0,0.5)] border-white" href="mailto:office@fragment.bg" target="_blank">
-            Let's talk
+          <a class="px-4 py-1 border-2 bg-black hover:bg-[rgba(0,0,0,0.2)] border-white" href="mailto:office@fragment.bg" target="_blank">
+            {$page.data.layoutData?.data?.menu?.data?.attributes?.letsTalk}
           </a>
       </div>
       <!-- Navigation button -->
@@ -184,89 +185,42 @@
 >
   <div class="flex flex-col space-y-5">
     <!-- Navigation links -->
-    <div class="nav-animation text-center flex flex-col text-4xl md:text-5xl lg:text-6xl space-y-2">
-      <a
-        class=" hover:-translate-y-5 transition-all duration-300 nav-link p-1"
-        on:click={initMenuAnimation}
-        on:mouseenter={(event) => {
-          linkMouseEnterAnimation(event);
-        }}
-        on:mouseleave={() => {
-          linkMouseLeaveAnimation();
-        }}
-        data-sveltekit-preload-data="tap"
-        href="/"
-        >home
-      </a>
-      <a
-        class=" hover:-translate-y-5 transition-all duration-300 nav-link p-1"
-        on:click={initMenuAnimation}
-        on:mouseenter={(event) => {
-          linkMouseEnterAnimation(event);
-        }}
-        on:mouseleave={() => {
-          linkMouseLeaveAnimation();
-        }}
-        data-sveltekit-preload-data="tap"
-        href="/work"
-        >work
-      </a>
-      <a
-        class=" hover:-translate-y-5 transition-all duration-300 nav-link p-1"
-        on:click={initMenuAnimation}
-        on:mouseenter={(event) => {
-          linkMouseEnterAnimation(event);
-        }}
-        on:mouseleave={() => {
-          linkMouseLeaveAnimation();
-        }}
-        data-sveltekit-preload-data="tap"
-        href="/about"
-        >about
-      </a>
-      <a
-        class=" hover:-translate-y-5 transition-all duration-300 nav-link p-1"
-        on:click={initMenuAnimation}
-        on:mouseenter={(event) => {
-          linkMouseEnterAnimation(event);
-        }}
-        on:mouseleave={() => {
-          linkMouseLeaveAnimation();
-        }}
-        data-sveltekit-preload-data="tap"
-        href="/blog"
-        >blog
-      </a>
-      <a
-        class=" hover:-translate-y-5 transition-all duration-300 nav-link p-1"
-        on:click={initMenuAnimation}
-        on:mouseenter={(event) => {
-          linkMouseEnterAnimation(event);
-        }}
-        on:mouseleave={() => {
-          linkMouseLeaveAnimation();
-        }}
-        data-sveltekit-preload-data="tap"
-        href="/contact"
-        >contact us
-      </a>
+    <div class="nav-animation text-center flex flex-col text-4xl md:text-5xl lg:text-6xl space-y-2 pb-8">
+      {#each $page.data.layoutData?.data?.menu?.data?.attributes?.menuItems as item }
+        <a
+          class=" hover:-translate-y-5 transition-all duration-300 nav-link p-1"
+          on:click={initMenuAnimation}
+          on:mouseenter={(event) => {
+            linkMouseEnterAnimation(event);
+          }}
+          on:mouseleave={() => {
+            linkMouseLeaveAnimation();
+          }}
+          data-sveltekit-preload-data="tap"
+          href="{item?.link}"
+          >{item?.menuItem}
+        </a>
+      {/each}
     </div>
     <!-- Language switch -->
-    <div class="nav-animation space-x-3 text-center">
-      <button class="hover:scale-125 transition-all" id="selected">EN</button>
-      <button class="hover:scale-125 transition-all">БГ</button>
+    <div class="nav-animation">
+      <Language/>
     </div>
   </div>
   <!-- Subscribe element -->
   <div class="nav-animation">
-    <Subscribe />
+    <Subscribe 
+      placeholder={$page.data.layoutData?.data?.menu?.data?.attributes?.subscribePlaceholder}
+      subscribeMessage={$page.data.layoutData?.data?.menu?.data?.attributes?.subscribeSuccess}
+      buttonText={$page.data.layoutData?.data?.menu?.data?.attributes?.subscribeToOurMailing}
+    />
   </div>
   <!-- Bottom modal links -->
   <div
     class="flex flex-col items-center space-y-4 nav-animation w-full"
   >
     <div class="bg-white h-px w-full" />
-    <a class="w-full text-center md:text-start" href="/">Privacy & Cookie Statement</a>
+    <a class="w-full text-center md:text-start" href="/">{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a>
   </div>
 </div>
 <!-- Action button on Landing pages -->

@@ -161,39 +161,43 @@
     bind:this={img1}
     class="img"
     id="img1"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage1?.data?.attributes?.formats.compress.url}
-    alt={sectionData?.servicesImage1?.data?.attributes?.formats.compress.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage1?.data?.attributes?.url}
+    alt={sectionData?.servicesImage1?.data?.attributes?.alternativeText}
   />
   <img
     bind:this={img2}
     class="img"
     id="img2"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage2?.data?.attributes?.formats.compress.url}
-    alt={sectionData?.servicesImage2?.data?.attributes?.formats.compress.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage2?.data?.attributes?.url}
+    alt={sectionData?.servicesImage2?.data?.attributes?.alternativeText}
   />
-  <div class="flex p-5 md:p-auto flex-col space-y-20">
+  <div class="flex md:p-auto flex-col space-y-20">
     <div class="flex flex-col space-y-5">
       <div class="flex flex-col md:flex-row">
         <span class="flex">
-          <h2 id="digital" class="text-7xl md:text-8xl 2xl:text-9xl font-bold">
+          <h2 id="digital" class="text-6xl md:text-8xl 2xl:text-9xl font-bold">
             digital
           </h2>
-          <h2 id="slash" class="text-7xl md:text-8xl 2xl:text-9xl font-bold">
+          <h2 id="slash" class="text-6xl md:text-8xl 2xl:text-9xl font-bold">
             &#160/
           </h2>
         </span>
-        <h2 id="analog" class="text-7xl md:text-8xl 2xl:text-9xl font-bold">
+        <h2 id="analog" class="text-6xl md:text-8xl 2xl:text-9xl font-bold">
           analog
         </h2>
       </div>
       <div class="services-text">
-        <p id="subtext" class="text-3xl">
+        <p id="subtext" class="text-2xl md:text-3xl">
           {sectionData?.servicesSubtext}
         </p>
       </div>
     </div>
     <div id="service-button">
-      <a class="border-b-2 border-cyan text-lg" href="/about">browse all</a>
+      <a
+        class="border-b-2 border-cyan text-lg"
+        href="/{$page.params.lang ? $page.params.lang + '/' : ''}about"
+        >{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</a
+      >
     </div>
   </div>
 </section>

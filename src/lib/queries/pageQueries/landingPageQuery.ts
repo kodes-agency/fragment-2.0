@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client/core/index.js";
 
 
-export default function(locale: string, id:string|number) {
+export default function(locale: string, slug:string) {
     const query = gql`
         query landingPage {
-            landingPage(locale:"${locale}", id:${id}){
+            landingPage(locale:"${locale}", slug:${slug}){
                 data {
                     attributes {
                         title

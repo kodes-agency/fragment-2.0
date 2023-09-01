@@ -4,35 +4,68 @@
   import type { BlogLayoutDynamicZone } from "../../../../__generated__/graphql";
 
   let layout: BlogLayoutDynamicZone[];
-  // @ts-expect-error
-  $: layout = $page.data.data?.blog?.data?.attributes?.layout;
+  $: layout = $page.data?.singleBlog?.data?.blogs?.data[0]?.attributes?.layout
 
 </script>
 
-<section class="">
+<section class="z-10 opacity-100 relative">
   {#if layout[0]}
-    <article class=" bg-white min-h-screen flex flex-col p-5 md:px-40 2xl:px-60 py-20 space-y-14 md:space-y-20">
+    <article class=" bg-white min-h-screen flex flex-col p-5 md:px-32 lg:px-64 2xl:px-72 py-10 space-y-14 md:space-y-20">
       {#each layout as element}
-        {#if element.__typename == "ComponentBlogLayoutParagraph"}
-          <p class="text-xl text-black md:px-20">{element?.paragraph}</p>
-        {/if}
         {#if element.__typename == "ComponentBlogLayoutImage"}
             <img
               class="w-full"
-              src={PUBLIC_IMAGE_URL + element?.image?.data?.attributes?.formats.compress.url}
+              src={PUBLIC_IMAGE_URL + element?.image?.data?.attributes?.url}
               alt={element.image?.data?.attributes?.alternativeText}
             />
         {/if}
-        {#if element.__typename == "ComponentBlogLayoutQuote"}
-          <div class="space-y-5 md:px-20">
-            <h2 class="text-2xl text-magenta font-bold italic">"{element.quote}"</h2>
-            <p class="text-2xl text-black font-bold italic">{element?.author}</p>
-          </div>
-        {/if}
-        {#if element.__typename == "ComponentBlogLayoutHeading"}
-          <h2 class="text-black text-4xl font-bold">{element?.heading}</h2>
+        {#if element.__typename == "ComponentBlogLayoutParagraphContent"}
+          <div class="htmlStyle">{@html element?.Paragraph}</div>
         {/if}
       {/each}
       </article>
   {/if}
 </section>
+
+<style lang="postcss">
+  :global(.htmlStyle p, .htmlStyle a, .htmlStyle li) {
+    color: var(--black-color);
+    font-size: 18px;
+  }
+
+  :global(.htmlStyle ul) {
+    list-style: inside;
+  }
+
+  :global(.htmlStyle h1) {
+    color: var(--black-color);
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  :global(.htmlStyle h2) {
+    color: var(--black-color);
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  :global(.htmlStyle h3) {
+    color: var(--black-color);
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  :global(.htmlStyle h4) {
+    color: var(--black-color);
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  :global(.htmlStyle a) {
+    font-weight: bold;
+  }
+</style>

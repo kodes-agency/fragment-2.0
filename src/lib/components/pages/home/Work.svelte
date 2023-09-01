@@ -18,7 +18,7 @@
 
   let section: HTMLElement;
   let projectElements: any;
-  let sectionHeading: HTMLElement
+  let sectionHeading: HTMLElement;
 
   let tlSlider = gsap.timeline({
     paused: true,
@@ -39,10 +39,13 @@
           tlSlider.restart();
         },
       });
-      
+
       let split = new SplitText(sectionHeading, { type: "lines, words" });
-      new SplitText(sectionHeading, { type: "lines", linesClass: "lineParent" });
-      gsap.set(".lineParent", { overflow: "hidden" });
+      new SplitText(sectionHeading, {
+        type: "lines",
+        linesClass: "lineParent",
+      });
+      gsap.set(".lineParent", { overflow: "hidden", lineHeight: "1.2" });
 
       tlSection.from(split.lines, {
         y: "-150%",
@@ -55,7 +58,7 @@
         stagger: 0.15,
       });
 
-      projectElements.forEach((element:any) => {
+      projectElements.forEach((element: any) => {
         let split = new SplitText(element, { type: "lines, words" });
         new SplitText(element, { type: "lines", linesClass: "lineParent" });
         gsap.set(".lineParent", { overflow: "hidden" });
@@ -93,8 +96,11 @@
   }}
 >
   <div bind:this={section} class="relative">
-    <div class="absolute top-1/3 px-5 md:px-32 z-20">
-      <h2 bind:this={sectionHeading} class="text-5xl md:text-7xl xl:text-8xl 2xl:max-w-5xl font-bold">
+    <div class="absolute top-1/3 lg:top-1/4 px-5 md:px-32 z-20">
+      <h2
+        bind:this={sectionHeading}
+        class="text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl xl:max-w-4xl 2xl:max-w-5xl font-bold"
+      >
         {sectionData?.workHeading}
       </h2>
     </div>
@@ -118,7 +124,7 @@
             <img
               class="absolute top-0 opacity-50 left-0 h-screen w-screen object-cover"
               src={PUBLIC_IMAGE_URL +
-                project.attributes.thumbnail?.data?.attributes?.formats.compress.url}
+                project.attributes.thumbnail?.data?.attributes?.url}
               alt={project.attributes.thumbnail?.data?.attributes
                 ?.alternativeText}
             />
@@ -130,7 +136,10 @@
     <div
       class="absolute bottom-20 left-5 md:left-auto md:bottom-36 md:right-24 flex items-center space-x-8"
     >
-      <a class="border-b-2 border-white text-lg hover:scale-110 transition-all" href="/work">browse all</a>
+      <a
+        class="border-b-2 border-white text-lg hover:scale-110 transition-all"
+        href="/work">{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</a
+      >
       <div class="splide__arrows flex space-x-5">
         <button class="splide__arrow splide__arrow--prev">
           <svg

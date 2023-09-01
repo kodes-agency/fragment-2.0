@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "../app.css";
+  import "../../app.css";
   import Header from "$lib/components/global/Header.svelte";
   // @ts-ignore
   import { gsap } from "gsap/dist/gsap.js";

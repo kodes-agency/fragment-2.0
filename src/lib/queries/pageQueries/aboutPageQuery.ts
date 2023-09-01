@@ -3,7 +3,7 @@ import { gql } from "@apollo/client/core/index.js";
 export default function(locale: string) {
   const query = gql`
         query aboutPage {
-            aboutPage{
+            aboutPage(locale: "${locale}"){
                 data {
                     attributes {
                         heroHeading

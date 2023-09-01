@@ -31,14 +31,14 @@
     const ctx = gsap.context(() => {
       let split = new SplitText(blogTitle, { type: "lines, words" });
       new SplitText(blogTitle, { type: "lines", linesClass: "lineParent" });
-      gsap.set(".lineParent", { overflow: "hidden" });
+      gsap.set(".lineParent", { overflow: "hidden", lineHeight: "1.2" });
       if (section && img && window.innerWidth > 750) {
         section.addEventListener("mousemove", mouseMoveHandler);
       }
       const blogsFeaturedTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 40%",
+          start: "top 50%",
           end: "bottom 80%",
           toggleActions: "play none none none",
         },
@@ -53,7 +53,7 @@
       blogsFeaturedTl.from(".badge", {
         opacity: 0,
         scale: 0.8,
-        duration: 0.5,
+        duration: 0.3,
         ease: "back.out(3)",
       });
 
@@ -61,7 +61,7 @@
         y: "-150%",
         rotation: -45,
         transformOrigin: "0% 50% -50",
-        duration: 0.8,
+        duration: 0.5,
         ease: "power3.out",
         stagger: 0.2,
         opacity: 0,
@@ -76,8 +76,8 @@
 </script>
 
 <section class="bg-white p-5 md:px-40 md:py-32 lg:px-56 flex flex-col items-center justify-center py-20" bind:this={section}>
-  <a href="/blog/{sectionData?.featuredBlog?.data?.id}">
-    <div class="blog-wrapper">
+  <a href="/blog/{sectionData?.featuredBlog?.data?.attributes?.slug}">
+    <div class="blog-wrapper max-w-[1000px]">
       <div class="relative">
         <div
           class="badge absolute -bottom-7 left-3 md:-top-12 w-20 h-20 md:-left-12 md:h-36 md:w-36 rounded-full bg-magenta flex items-center justify-center z-10"
@@ -89,14 +89,14 @@
           class="w-full"
           src={PUBLIC_IMAGE_URL +
             sectionData?.featuredBlog?.data?.attributes?.thumbnail?.data
-              ?.attributes?.formats.compress.url}
+              ?.attributes?.url}
           alt={sectionData?.featuredBlog?.data?.attributes?.thumbnail?.data
             ?.attributes?.alternativeText}
         />
       </div>
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <span
-        class="overflow-hidden flex flex-col space-x-10 md:flex-row justify-between md:items-end md:px-5 mt-10"
+        class="overflow-hidden flex flex-col space-y-4 md:space-y-0 md:space-x-5 md:flex-row justify-between md:items-end px-5 md:px-2 mt-10"
         on:mouseenter={() => {
           blogTitle.style.transform = "scale(0.9)";
           blogLink.style.transform = "scale(0.9)";
@@ -117,7 +117,7 @@
           bind:this={blogLink}
           class="blog-link text-magenta w-fit text-xl whitespace-nowrap border-b-2 border-magenta transition-all"
         >
-          read full article
+        {$page.data.layoutData?.data?.menu?.data?.attributes?.readFullArticle}
         </p>
       </span>
     </div>

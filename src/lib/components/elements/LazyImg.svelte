@@ -23,7 +23,7 @@
 </script>
 
 <div bind:this={divElement} class="{style } bg-no-repeat bg-cover bg-center blurry" style="background-image: url({PUBLIC_IMAGE_URL+img.formats.thumbnail.url});">
-  <img bind:this={imgElement} src={PUBLIC_IMAGE_URL+img.formats.compress.url} class="h-full w-full object-cover object-center" alt={img.alternativeText} loading="lazy" />
+  <img bind:this={imgElement} src={PUBLIC_IMAGE_URL+img.url} class="h-full w-full object-cover object-center" alt={img.alternativeText} loading="lazy" />
 </div>
 
 

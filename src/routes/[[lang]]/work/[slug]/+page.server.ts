@@ -1,11 +1,11 @@
 import { getClient } from "$lib/functions/getClient";
-import query from "$lib/queries/pageQueries/singleBlogPageQuery";
+import query from "$lib/queries/pageQueries/projectPageQuery";
 
 /** @type {import('@sveltejs/kit').Load} */
 export const load = async ({ locals, params }) => {
     const data = getClient().query({
-        query: query(locals.locale, params.id,)
+        query: query(locals.locale, params.slug,)
     })
 
-    return data
+    return await data
 }

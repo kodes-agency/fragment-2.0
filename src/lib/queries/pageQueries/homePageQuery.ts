@@ -31,7 +31,6 @@ export default function(locale:string){
                       data {
                         attributes {
                           url
-                          formats
                           alternativeText
                         }
                       }
@@ -44,7 +43,6 @@ export default function(locale:string){
                 data {
                   attributes {
                     url
-                    formats
                     alternativeText
                   }
                 }
@@ -53,7 +51,6 @@ export default function(locale:string){
                 data {
                   attributes {
                     url
-                    formats
                     alternativeText
                   }
                 }
@@ -62,15 +59,14 @@ export default function(locale:string){
               blogSubtext
               featuredBlogs {
                 data {
-                  id
                   attributes {
+                    slug
                     title
                     publishedAt
                     thumbnail {
                       data {
                         attributes {
                           url
-                          formats
                           alternativeText
                         }
                       }

@@ -18,65 +18,67 @@
   $: blogs = $page.data.data?.blogs?.data;
 
   onMount(() => {
-    const ctx = gsap.context(() => {
-      const split = new SplitText(subHeading, { type: "lines" });
-      new SplitText(subHeading, {
-        type: "lines",
-        linesClass: "parentLine",
-      });
-      gsap.set(".parentLine", { overflow: "hidden" });
-
-      const blogsGalleryTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 40%",
-          end: "bottom 20%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      blogsGalleryTl.from(heading, {
-        opacity: 0,
-        duration: 3,
-        ease: "power2.out",
-      });
-
-      blogsGalleryTl.from(
-        split.lines,
-        {
-          y: "-150%",
-          rotation: -45,
+    if($page.url.search != "?repeat=true"){
+      const ctx = gsap.context(() => {
+        const split = new SplitText(subHeading, { type: "lines" });
+        new SplitText(subHeading, {
+          type: "lines",
+          linesClass: "parentLine",
+        });
+        gsap.set(".parentLine", { overflow: "hidden" });
+  
+        const blogsGalleryTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 40%",
+            end: "bottom 20%",
+            toggleActions: "play none none none",
+          },
+        });
+  
+        blogsGalleryTl.from(heading, {
           opacity: 0,
-          transformOrigin: "0% 50% -50",
-          duration: 1,
-          ease: "power3.out",
-          stagger: 0.15,
-        },
-        "-=2.5"
-      );
-
-      blogsGalleryTl.from(
-        ".blog-item",
-        {
-          opacity: 0,
-          duration: 1,
-          scale: 0.8,
+          duration: 3,
           ease: "power2.out",
-          stagger: 0.15,
-        },
-        "-=1.5"
-      );
-    }, section);
-
-    return () => {
-      ctx.revert();
-    };
+        });
+  
+        blogsGalleryTl.from(
+          split.lines,
+          {
+            y: "-150%",
+            rotation: -45,
+            opacity: 0,
+            transformOrigin: "0% 50% -50",
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.15,
+          },
+          "-=2.5"
+        );
+  
+        blogsGalleryTl.from(
+          ".blog-item",
+          {
+            opacity: 0,
+            duration: 1,
+            scale: 0.8,
+            ease: "power2.out",
+            stagger: 0.15,
+          },
+          "-=1.5"
+        );
+      }, section);
+  
+      return () => {
+        ctx.revert();
+      };
+    }
   });
 </script>
 
 <section
-  id="blogs-gallery-section"
-  class="p-5 md:p-20 lg:p-40 min-h-screen"
+  id="collection"
+  class="p-5 md:p-20 lg:p-40 pt-20 min-h-screen"
   bind:this={section}
 >
   <div class="space-y-4">
@@ -95,10 +97,10 @@
       <div class="blog-item">
         <BlogItem
           title={blog.attributes.title}
-          img={blog.attributes.thumbnail?.data?.attributes?.formats.compress.url}
+          img={blog.attributes.thumbnail?.data?.attributes?.url}
           alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
-          id={blog.id}
-          date={blog.attributes.publishedAt}
+          slug={blog.attributes.slug}
+          date={blog.attributes.datePublished}
         />
       </div>
     {/each}

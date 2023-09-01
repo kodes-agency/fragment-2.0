@@ -1,13 +1,14 @@
 import { gql } from "@apollo/client/core/index.js";
 
 
-export default function (locale:string, id:string|number) {
+export default function (locale:string, slug:string) {
     const query = gql `
         query projectPage {
-            project(locale:"${locale}", id:${id}){
+            projects(locale:"${locale}", filters: {slug: {eq: "${slug}"}}){
                 data {
                     attributes {
                         title
+                        slug
                         category {
                             data {
                                 attributes {

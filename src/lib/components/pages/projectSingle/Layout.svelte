@@ -10,7 +10,7 @@
 
     let layout: ProjectLayoutDynamicZone[]
     // @ts-expect-error
-    $: layout = $page.data.data?.project?.data?.attributes?.layout
+    $: layout = $page.data.data?.projects?.data[0].attributes?.layout
     
     let slideWrapper
     let projectLayoutSection
@@ -207,7 +207,7 @@
                     <div class="dynamicText-{element.id}">
                         <h2 class="text-4xl md:text-5xl font-bold px-5 md:px-20 lg:px-40 leading-normal mt-20 dynamicText-heading-{element.id}">{element.dynamicTitle}</h2>
                         <div class="flex flex-col px-5 md:px-20 lg:px-56 mt-10">
-                            <p class="text-4xl md:text-5xl font-bold uppercase dynamicText-text-{element.id}">{element.dynamicText}</p>
+                            <p class="text-3xl md:text-5xl font-bold uppercase dynamicText-text-{element.id}">{element.dynamicText}</p>
                         </div>
                     </div>
                 {/if}
@@ -215,7 +215,7 @@
                 <!-- Large Image -->
                 {#if element.__typename == 'ComponentProjectLayoutLargeImage'}
                 <div class="largeImage flex flex-col px-5 md:px-20 lg:px-56 mt-10">
-                    <img loading="lazy" src="{PUBLIC_IMAGE_URL+element.image?.data?.attributes?.formats.compress.url}" alt="{element.image?.data?.attributes?.alternativeText}">
+                    <img loading="lazy" src="{PUBLIC_IMAGE_URL+element.image?.data?.attributes?.url}" alt="{element.image?.data?.attributes?.alternativeText}">
                 </div>
                 {/if}
 
@@ -227,7 +227,7 @@
 
                 <!-- Inline Gallery -->
                 {#if element.__typename == 'ComponentProjectLayoutInlineGallery'}
-                    <div class="inlineGallery flex flex-col px-5 md:px-20 lg:px-56 grid mt-10">
+                    <div class="inlineGallery px-5 md:px-20 lg:px-56 grid mt-10">
                         {#each element?.images?.data as item }
                             <img loading="lazy" class="solo-img-inline inline-img" src="{PUBLIC_IMAGE_URL+item.attributes.url}" alt="{item.attributes.alternativeText}">
                         {/each}
@@ -238,7 +238,7 @@
                 {#if element.__typename == 'ComponentProjectLayoutImageNText' }
                     <div class="flex flex-col px-5 md:px-20 lg:px-56 mt-10">
                         <div class="inner-container">
-                            <img loading="lazy" class="w-full aspect-square object-cover object-center" src="{PUBLIC_IMAGE_URL+element.image?.data?.attributes?.formats.compress.url}" alt="{element.image?.data?.attributes?.alternativeText}">
+                            <img loading="lazy" class="w-full aspect-square object-cover object-center" src="{PUBLIC_IMAGE_URL+element.image?.data?.attributes?.url}" alt="{element.image?.data?.attributes?.alternativeText}">
                             <span>
                                 <p class="text-3xl">{element.text}</p>
                             </span>
@@ -326,7 +326,7 @@
                 {#if element.__typename ==  'ComponentProjectLayoutLargeVideo'}
                     <div class="video-wrapper">
                         <!-- svelte-ignore a11y-media-has-caption -->
-                        <video class="large-video" controls src={PUBLIC_IMAGE_URL+element.video?.data?.attributes?.formats.compress.url}></video>
+                        <video class="large-video" controls src={PUBLIC_IMAGE_URL+element.video?.data?.attributes?.url}></video>
                     </div>
                 {/if}
 
@@ -335,16 +335,16 @@
                     <div class="video-wrapper">
                         {#each element?.Videos.data as video }
                             <!-- svelte-ignore a11y-media-has-caption -->
-                            <video class="inline-video" controls src={PUBLIC_IMAGE_URL+video.attributes?.formats.compress.url}></video>
+                            <video class="inline-video" controls src={PUBLIC_IMAGE_URL+video.attributes?.url}></video>
                         {/each}
                     </div>
                 {/if}   
         {/each}
         </div>
     {/if}
-    <div class="flex justify-center items-center p-32">
+    <div class="flex justify-center items-center py-32">
         <div class="flex items-center w-fit justify-center gradient gradient-anm">
-            <a class="border-2 border-white bg-black hover:bg-[rgba(0,0,0,0.3)] text-center w-full h-full py-1 px-10" href="/work?repeat=true">More <b class="font-bold uppercase">Work</b></a>
+            <a class="border-2 whitespace-nowrap border-white bg-black hover:bg-[rgba(0,0,0,0.3)] text-center w-full h-full py-1 px-10" href="/work?repeat=true">{$page.data.layoutData?.data?.menu?.data?.attributes?.moreWork}</a>
         </div>
     </div>
 </section>

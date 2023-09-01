@@ -10,8 +10,8 @@
   let blogHeadingWrapper: HTMLElement;
   let blogShortWrapper: HTMLElement;
 
-  $: sectionData = $page.data.data?.blog?.data?.attributes;
-
+  $: sectionData = $page.data?.singleBlog?.data?.blogs?.data[0]?.attributes
+ 
   function effectHandler() {
     const singleBlogHeroTl2 = gsap.timeline({
       scrollTrigger: {
@@ -42,38 +42,38 @@
 
 <section
   bind:this={section}
-  class="relative flex flex-col justify-end items-center h-screen"
+  class="relative flex flex-col justify-end items-center min-h-screen"
 >
   <img
-    class="absolute w-screen h-screen object-cover top-0 left-0 z-0 opacity-30"
+    class="absolute w-screen min-h-screen object-cover top-0 left-0 z-0 opacity-10"
     src={PUBLIC_IMAGE_URL +
-      sectionData?.thumbnail?.data?.attributes?.formats.compress.url}
+      sectionData?.thumbnail?.data?.attributes?.url}
     alt={sectionData?.thumbnail?.data?.attributes?.alternativeText}
   />
   <article bind:this={blogWrapper} class="wrapper z-10 bg-white">
-    <div class="relative h-4/6">
+    <div class="relative h-2/6 md:h-4/6">
       <img
         class="w-full h-full object-cover"
         src={PUBLIC_IMAGE_URL +
-          sectionData?.thumbnail?.data?.attributes?.formats.compress.url}
+          sectionData?.thumbnail?.data?.attributes?.url}
         alt={sectionData?.thumbnail?.data?.attributes?.alternativeText}
       />
       <div
         bind:this={blogHeadingWrapper}
-        class="absolute bottom-20 bg-[rgba(230,5,117,0.7)] w-full flex items-center justify-center px-5 md:px-10 py-5"
+        class="absolute bottom-8 md:bottom-20 bg-[rgba(230,5,117,0.8)] w-full flex items-center justify-center px-4 md:px-10 py-3"
       >
         <div class="texty">
-          <h1 class="text-white text-3xl md:text-4xl font-bold texty">
+          <h1 class="text-white text-xl md:text-4xl font-bold texty">
             {sectionData?.title}
           </h1>
           <p class="text-white text-lg texty">
-            article by {sectionData?.author}
+            {$page.data.layoutData?.data?.menu?.data?.attributes?.articleBy + " "} {sectionData?.author}
           </p>
         </div>
       </div>
     </div>
     <div
-      class="px-5 md:px-10 h-2/6 relative flex flex-col justify-center items-center"
+      class="px-5 py-20 md:px-10 h-4/6 md:h-2/6 relative flex flex-col justify-center items-center"
       bind:this={blogShortWrapper}
     >
       <p class="text-black texty font-bold text-md md:text-lg">
@@ -85,17 +85,17 @@
 
 <style lang="postcss">
   .texty {
-    width: 60vw;
+    width: 55vw;
   }
 
   .wrapper {
     height: 80vh;
-    width: 70vw;
+    width: 60vw;
   }
 
   @media only screen and (max-width: 766px) {
     .texty {
-      width: 75vw;
+      width: 77vw;
     }
 
     .wrapper {

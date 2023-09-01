@@ -26,8 +26,8 @@ export default function (locale: string) {
             }
             projects(locale:"${locale}", pagination: { page: 1, pageSize: 100 }){
                 data {
-                    id
                     attributes {
+                        slug
                         title
                         category {
                             data {

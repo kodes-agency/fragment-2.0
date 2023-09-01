@@ -55,12 +55,12 @@
 
 <section id="about-hero-section" class="relative" bind:this={section}>
   <img
-    src={PUBLIC_IMAGE_URL + sectionData?.heroBgImage?.data?.attributes?.formats.compress.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.heroBgImage?.data?.attributes?.url}
     class="absolute top-0 left-0 z-0 h-screen w-screen object-cover"
     alt={sectionData?.heroBgImage?.data?.attributes?.alternativeText}
   />
   <div
-    class="min-h-screen flex flex-col p-2 md:p-20 lg:p-40 justify-center space-y-7 relative z-10"
+    class="min-h-screen flex flex-col p-5 md:p-20 lg:p-40 justify-center space-y-7 relative z-10"
   >
     <h1 id="about-hero-heading" class="text-5xl md:text-7xl font-bold">
       {sectionData?.heroHeading}

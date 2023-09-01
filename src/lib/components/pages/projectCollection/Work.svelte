@@ -26,72 +26,72 @@
   // @ts-ignore
   $: projects = $page.data.data?.projects?.data;
 
-//   onMount(() => {
-//     if($page.url.search != "?repeat=true"){
-//     const ctx = gsap.context(() => {
-//             const workH4split = new SplitText("#work-h4", { type: "lines" });
-//             new SplitText("#work-h4", { type: "lines", linesClass: "parentLine" });
-//             gsap.set(".parentLine", { overflow: "hidden" });
-//             let filterButtons = document.querySelectorAll(".work-button");
+  onMount(() => {
+    if($page.url.search != "?repeat=true"){
+    const ctx = gsap.context(() => {
+            const workH4split = new SplitText("#work-h4", { type: "lines" });
+            new SplitText("#work-h4", { type: "lines", linesClass: "parentLine" });
+            gsap.set(".parentLine", { overflow: "hidden" });
+            let filterButtons = document.querySelectorAll(".work-button");
       
-//             const workWrokTl = gsap.timeline({
-//               scrollTrigger: {
-//                 trigger: section,
-//                 start: "top 50%",
-//                 toggleActions: "play none none none ",
-//               },
-//             });
+            const workWrokTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: section,
+                start: "top 50%",
+                toggleActions: "play none none none ",
+              },
+            });
       
-//             workWrokTl.from("#work-h2", {
-//               opacity: 0,
-//               duration: 3,
-//               ease: "power2.out",
-//             });
+            workWrokTl.from("#work-h2", {
+              opacity: 0,
+              duration: 3,
+              ease: "power2.out",
+            });
       
-//             workWrokTl.from(
-//               workH4split.lines,
-//               {
-//                 y: "-150%",
-//                 rotation: -45,
-//                 transformOrigin: "0% 50% -50",
-//                 duration: 1,
-//                 ease: "power3.out",
-//                 stagger: 0.15,
-//                 opacity: 0,
-//               },
-//               "-=2.5"
-//             );
+            workWrokTl.from(
+              workH4split.lines,
+              {
+                y: "-150%",
+                rotation: -45,
+                transformOrigin: "0% 50% -50",
+                duration: 1,
+                ease: "power3.out",
+                stagger: 0.15,
+                opacity: 0,
+              },
+              "-=2.5"
+            );
       
-//             workWrokTl.fromTo(
-//               ".work-button",
-//               {
-//                 autoAlpha: 0,
-//               },
-//               {
-//                 autoAlpha: 1,
-//                 stagger: 0.2,
-//               },
-//               "-=1.5"
-//             );
+            workWrokTl.fromTo(
+              ".work-button",
+              {
+                autoAlpha: 0,
+              },
+              {
+                autoAlpha: 1,
+                stagger: 0.2,
+              },
+              "-=1.5"
+            );
       
-//             workWrokTl.from(
-//               ".grid-item",
-//               {
-//                 duration: 1,
-//                 opacity: 0,
-//                 stagger: 0.1,
-//                 scale: 0.9,
-//                 ease: "power2.out",
-//               },
-//               "-=0.8"
-//             );
-//         }, section);
+            workWrokTl.from(
+              ".grid-item",
+              {
+                duration: 1,
+                opacity: 0,
+                stagger: 0.1,
+                scale: 0.9,
+                ease: "power2.out",
+              },
+              "-=0.8"
+            );
+        }, section);
         
-//         return () => {
-//             ctx.revert();
-//         };
-//     }
-//   });
+        return () => {
+            ctx.revert();
+        };
+    }
+  });
 
   function filterProjects(event: any) {
     let projectItems = document.querySelectorAll(".grid-item");
@@ -140,18 +140,18 @@
 
 <section
   id="work"
-  class=" relative min-h-[130vh] p-5 py-40 md:p-20 lg:p-40 flex flex-col items-center"
+  class=" relative min-h-[200vh] md:min-h-[130vh] p-5 py-40 md:p-20 lg:p-40 flex flex-col items-center"
   bind:this={section}
 >
   <div class="flex flex-col space-y-3 pb-10">
     <h2
-      class="gradient gradient-anm gradient-text text-center font-bold text-5xl lg:text-6xl"
+      class="gradient gradient-anm gradient-text md:text-center font-bold text-5xl lg:text-6xl"
       id="work-h2"
     >
       {sectionData?.workHeading}
     </h2>
     <div class="overflow-hidden">
-      <h4 id="work-h4" class="text-center text-3xl">
+      <h4 id="work-h4" class="md:text-center text-3xl">
         {sectionData?.workSubtext}
       </h4>
     </div>
@@ -183,11 +183,11 @@
         data-category={project.attributes.category?.data?.attributes?.category}
       >
         <ProjectItem
-          id={project.id}
+          slug={project.attributes.slug}
           title={project.attributes.title}
           client={project.attributes.client?.data?.attributes?.clientName}
           category={project.attributes.category?.data?.attributes?.category}
-          img={project.attributes.thumbnail?.data?.attributes?.formats.compress.url}
+          img={project.attributes.thumbnail?.data?.attributes?.url}
           alt={project.attributes.thumbnail?.data?.attributes?.alternativeText}
         />
       </div>

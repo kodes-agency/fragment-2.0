@@ -1,13 +1,14 @@
 import { gql } from "@apollo/client/core/index.js";
 
 
-export default function(locale:string, id:string|number) {
+export default function(locale:string, slug:string) {
     const query = gql`
-        query singleBlogPage {
-            blog(id:${id}, locale:"${locale}"){
+        query singleBlog {
+            blogs(locale:"${locale}", filters: {slug: {eq: "${slug}"}}){
                 data {
                     attributes {
                         title
+                        slug
                         thumbnail {
                             data {
                                 attributes {
@@ -19,18 +20,12 @@ export default function(locale:string, id:string|number) {
                         }
                         author
                         shortDescription
+                        datePublished
                         publishedAt
                         layout {
                             __typename
-                            ...on ComponentBlogLayoutParagraph {
-                                paragraph
-                            }
-                            ...on ComponentBlogLayoutHeading {
-                                heading
-                            }
-                            ...on ComponentBlogLayoutQuote {
-                                quote
-                                author
+                            ...on ComponentBlogLayoutParagraphContent {
+                                Paragraph
                             }
                             ...on ComponentBlogLayoutImage {
                                 image {
@@ -46,25 +41,7 @@ export default function(locale:string, id:string|number) {
                         }
                     }
                 }
-            } 
-            blogs(locale:"${locale}", pagination: { page: 1, pageSize: 100 }){
-                data {
-                    id
-                    attributes {
-                        title
-                        publishedAt
-                        thumbnail {
-                            data {
-                                attributes {
-                                    url
-                                    formats
-                                    alternativeText
-                                }
-                            }
-                        }        
-                    }
-                }
-            }          
+            }   
         }
     `
 

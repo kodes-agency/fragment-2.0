@@ -2,8 +2,9 @@
   import { PUBLIC_IMAGE_URL } from "$env/static/public";
   import type { Maybe } from "graphql/jsutils/Maybe";
   import LazyImg from "./LazyImg.svelte";
+  import { page } from "$app/stores";
 
-  export let id: Maybe<number>;
+  export let slug: Maybe<string>;
   export let category: Maybe<string>;
   export let title: Maybe<string>;
   export let client: Maybe<string>;
@@ -14,7 +15,7 @@
   let content: HTMLElement;
 </script>
 
-<a href="/work/{id}" data-sveltekit-preload-data="tap">
+<a href="/work/{slug}" data-sveltekit-preload-data="tap">
   <!-- svelte-ignore a11y-mouse-events-have-key-events -->
   <article
     bind:this={section}
@@ -35,18 +36,18 @@
     <img
       src={PUBLIC_IMAGE_URL + img}
       {alt}
-      class="lg:absolute lg:p-2 lg:top-0 opacity-70 lg:opacity-100 lg:max-h-[30vw] w-full lg:w-auto lg:aspect-square object-cover z-0"
+      class="lg:absolute lg:p-2 lg:top-0 opacity-70 lg:opacity-100 h-full w-full lg:w-auto aspect-square object-cover z-0"
     />
     <div
       bind:this={content}
-      class="content-wrapper lg:opacity-0 z-10 flex lg:relative lg:m-2 lg:bg-[rgba(0,0,0,0.3)] flex-col justify-center h-full p-6 transition-all duration-300"
+      class="content-wrapper lg:opacity-0 z-10 flex lg:relative lg:m-2 lg:bg-[rgba(0,0,0,0.3)] flex-col justify-center h-full p-5 transition-all duration-300"
     >
       <div class="">
         <h3 class="text-xl">{title}</h3>
         <p class="text-md font-bold">{client}</p>
       </div>
-      <p class="underline font-bold text-sm lg:absolute bottom-8 left-6">
-        open case
+      <p class="underline hidden md:block  font-bold text-sm lg:absolute bottom-8 left-6">
+        {$page.data.layoutData?.data?.menu?.data?.attributes?.openCase}
       </p>
     </div>
   </article>

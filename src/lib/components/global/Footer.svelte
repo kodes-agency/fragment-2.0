@@ -1,10 +1,13 @@
 <script lang="ts">
   import { subscribe } from "$lib/stores/store.js";
   import { onMount } from "svelte";
+  import { page } from "$app/stores";
 
   let subscriptonWrapper;
   let user_email: string;
   let links: any;
+
+  console.log($page.data)
 
   async function userSubscribe() {
     const response = await fetch("/api/subscribe", {
@@ -29,7 +32,7 @@
   }
 
   function linkLeaveAnimation(event: any) {
-    links.forEach((link: { style: { opacity: string } }) => {
+    links.forEach((link: { style: { opacity: string, transform: string } }) => {
       link.style.opacity = "1";
       link.style.transform = "scale(1)";
     });
@@ -56,37 +59,19 @@
     class="flex flex-col md:flex-row space-y-8 md:space-y-0 justify-between"
   >
     <div class="flex flex-col items-center md:items-start space-y-4">
-      <a
-        class="footer-links transition-all text-black text-xl"
-        href="/"
-        data-sveltekit-preload-data="tap">home</a
-      >
-      <a
-        class="footer-links transition-all text-black text-xl"
-        href="/work"
-        data-sveltekit-preload-data="tap">work</a
-      >
-      <a
-        class="footer-links transition-all text-black text-xl"
-        href="/about"
-        data-sveltekit-preload-data="tap">about</a
-      >
-      <a
-        class="footer-links transition-all text-black text-xl"
-        href="/blogs"
-        data-sveltekit-preload-data="tap">blog</a
-      >
-      <a
-        class="footer-links transition-all text-black text-xl"
-        href="/contact"
-        data-sveltekit-preload-data="tap">contact us</a
-      >
+      {#each $page.data.layoutData?.data?.menu?.data?.attributes?.menuItems as item } 
+        <a
+          class="footer-links transition-all text-black text-xl"
+          href={item?.link}
+          data-sveltekit-preload-data="tap">{item?.menuItem}</a
+        >
+      {/each}
     </div>
     <div
       class="flex flex-col items-center space-y-8 md:space-y-4 md:items-end justify-between"
     >
       <div class="flex space-x-6">
-        <a class="footer-links transition-all" href="/">
+        <a class="footer-links transition-all" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.linkedinLink}>
           <svg
             width="20"
             height="20"
@@ -100,7 +85,7 @@
             />
           </svg>
         </a>
-        <a class="footer-links transition-all" href="/">
+        <a class="footer-links transition-all" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.instagramLink}>
           <svg
             width="21"
             height="20"
@@ -114,7 +99,7 @@
             />
           </svg>
         </a>
-        <a class="footer-links transition-all" href="/">
+        <a class="footer-links transition-all" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.facebookLink}>
           <svg
             width="12"
             height="20"
@@ -128,24 +113,25 @@
             />
           </svg>
         </a>
+
       </div>
       <div class="flex flex-col space-y-2 text-center md:text-end">
-        <a href="/#" class="text-black text-md footer-links transition-all"
-          >+359 (2) 469 10 92</a
+        <a href={$page.data.layoutData?.data?.menu?.data?.attributes?.phoneLink} target="_blank" class="text-black text-md footer-links transition-all"
+          >{$page.data.layoutData?.data?.menu?.data?.attributes?.phoneName}</a
         >
-        <a href="/#" class="text-black text-md footer-links transition-all"
-          >office@fragment.bg</a
+        <a href={$page.data.layoutData?.data?.menu?.data?.attributes?.emailLink} target="_blank" class="text-black text-md footer-links transition-all"
+          >{$page.data.layoutData?.data?.menu?.data?.attributes?.emailName}</a
         >
       </div>
       <div class="flex flex-col space-y-2 text-center md:text-end">
-        <a href="/#" class="text-black text-md footer-links transition-all"
-          >79 Tsar Asen Str., 1463 Sofia, Bulgaria</a
+        <a href={$page.data.layoutData?.data?.menu?.data?.attributes?.addressLink} target="_blank" class="text-black text-md footer-links transition-all"
+          >{$page.data.layoutData?.data?.menu?.data?.attributes?.addressName}</a
         >
       </div>
       <div class="subsription-wrapper" bind:this={subscriptonWrapper}>
         <div id="mc_embed_signup" />
         {#if $subscribe}
-          <p class="italic font-bold">Congrats! Your subscription is active.</p>
+          <p class="italic font-bold">{$page.data.layoutData?.data?.menu?.data?.attributes?.subscribeSuccess}</p>
         {:else}
           <div
             class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-3"
@@ -154,13 +140,22 @@
               class="bg-white border border-black text-black text-center text-md h-8 w-56"
               type="text"
               name="subscribe-email"
-              placeholder="your email address"
+              placeholder="{$page.data.layoutData?.data?.menu?.data?.attributes?.subscribePlaceholder}"
               bind:value={user_email}
             />
+            <!-- svelte-ignore a11y-mouse-events-have-key-events -->
             <button
-              class="bg-black h-8 w-56"
+              class="bg-black h-8 w-56 border-2 border-black"
+              on:mouseenter={({target})=>{
+                //@ts-expect-error
+                target.classList.add('gradient', 'gradient-anm')
+              }}
+              on:mouseleave={({target})=>{
+                //@ts-expect-error               
+                target.classList.remove('gradient', 'gradient-anm')
+              }}
               type="submit"
-              on:click={userSubscribe}>Subscribe to our mailing</button
+              on:click={userSubscribe}>{$page.data.layoutData?.data?.menu?.data?.attributes?.subscribeToOurMailing}</button
             >
           </div>
         {/if}
@@ -170,7 +165,7 @@
   <div class="flex flex-col justify-center">
     <div class="w-full h-px bg-black mt-10 mb-2" />
     <a href="/policy" class="text-black text-center md:text-start text-md"
-      >Privacy & Cookie Statement</a
+      >{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a
     >
   </div>
 </footer>

@@ -20,8 +20,8 @@ export default function (locale: string) {
                         heroSubtext
                         featuredBlog {
                             data {
-                                id
                                 attributes {
+                                    slug
                                     title
                                     thumbnail {
                                         data {
@@ -42,10 +42,10 @@ export default function (locale: string) {
             }
             blogs(locale:"${locale}", pagination: { page: 1, pageSize: 100 }){
                 data {
-                    id
                     attributes {
+                        slug
                         title
-                        publishedAt
+                        datePublished
                         thumbnail {
                             data {
                                 attributes {

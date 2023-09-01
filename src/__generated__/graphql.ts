@@ -83,11 +83,13 @@ export type Blog = {
   __typename?: 'Blog';
   author?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  datePublished?: Maybe<Scalars['Date']['output']>;
   layout?: Maybe<Array<Maybe<BlogLayoutDynamicZone>>>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<BlogRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   shortDescription?: Maybe<Scalars['String']['output']>;
+  slug: Scalars['String']['output'];
   thumbnail?: Maybe<UploadFileEntityResponse>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -122,6 +124,7 @@ export type BlogFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<BlogFiltersInput>>>;
   author?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  datePublished?: InputMaybe<DateFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   locale?: InputMaybe<StringFilterInput>;
   localizations?: InputMaybe<BlogFiltersInput>;
@@ -129,20 +132,23 @@ export type BlogFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<BlogFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   shortDescription?: InputMaybe<StringFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type BlogInput = {
   author?: InputMaybe<Scalars['String']['input']>;
+  datePublished?: InputMaybe<Scalars['Date']['input']>;
   layout?: InputMaybe<Array<Scalars['BlogLayoutDynamicZoneInput']['input']>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   shortDescription?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   thumbnail?: InputMaybe<Scalars['ID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type BlogLayoutDynamicZone = ComponentBlogLayoutHeading | ComponentBlogLayoutImage | ComponentBlogLayoutParagraph | ComponentBlogLayoutQuote | Error;
+export type BlogLayoutDynamicZone = ComponentBlogLayoutImage | ComponentBlogLayoutParagraphContent | Error;
 
 export type BlogRelationResponseCollection = {
   __typename?: 'BlogRelationResponseCollection';
@@ -204,6 +210,7 @@ export type BooleanFilterInput = {
   lt?: InputMaybe<Scalars['Boolean']['input']>;
   lte?: InputMaybe<Scalars['Boolean']['input']>;
   ne?: InputMaybe<Scalars['Boolean']['input']>;
+  nei?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<BooleanFilterInput>;
   notContains?: InputMaybe<Scalars['Boolean']['input']>;
   notContainsi?: InputMaybe<Scalars['Boolean']['input']>;
@@ -220,6 +227,8 @@ export type Client = {
   clientName?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   landingPages?: Maybe<LandingPageRelationResponseCollection>;
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations?: Maybe<ClientRelationResponseCollection>;
   projects?: Maybe<ProjectRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -227,6 +236,13 @@ export type Client = {
 
 export type ClientLandingPagesArgs = {
   filters?: InputMaybe<LandingPageFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ClientLocalizationsArgs = {
+  filters?: InputMaybe<ClientFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -262,6 +278,8 @@ export type ClientFiltersInput = {
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   landingPages?: InputMaybe<LandingPageFiltersInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<ClientFiltersInput>;
   not?: InputMaybe<ClientFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ClientFiltersInput>>>;
   projects?: InputMaybe<ProjectFiltersInput>;
@@ -273,6 +291,11 @@ export type ClientInput = {
   clientName?: InputMaybe<Scalars['String']['input']>;
   landingPages?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   projects?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+};
+
+export type ClientRelationResponseCollection = {
+  __typename?: 'ClientRelationResponseCollection';
+  data: Array<ClientEntity>;
 };
 
 export type ComponentBlogLayoutHeading = {
@@ -291,6 +314,12 @@ export type ComponentBlogLayoutParagraph = {
   __typename?: 'ComponentBlogLayoutParagraph';
   id: Scalars['ID']['output'];
   paragraph?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentBlogLayoutParagraphContent = {
+  __typename?: 'ComponentBlogLayoutParagraphContent';
+  Paragraph?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
 };
 
 export type ComponentBlogLayoutQuote = {
@@ -529,6 +558,7 @@ export type DateFilterInput = {
   lt?: InputMaybe<Scalars['Date']['input']>;
   lte?: InputMaybe<Scalars['Date']['input']>;
   ne?: InputMaybe<Scalars['Date']['input']>;
+  nei?: InputMaybe<Scalars['Date']['input']>;
   not?: InputMaybe<DateFilterInput>;
   notContains?: InputMaybe<Scalars['Date']['input']>;
   notContainsi?: InputMaybe<Scalars['Date']['input']>;
@@ -553,6 +583,7 @@ export type DateTimeFilterInput = {
   lt?: InputMaybe<Scalars['DateTime']['input']>;
   lte?: InputMaybe<Scalars['DateTime']['input']>;
   ne?: InputMaybe<Scalars['DateTime']['input']>;
+  nei?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<DateTimeFilterInput>;
   notContains?: InputMaybe<Scalars['DateTime']['input']>;
   notContainsi?: InputMaybe<Scalars['DateTime']['input']>;
@@ -589,6 +620,7 @@ export type FloatFilterInput = {
   lt?: InputMaybe<Scalars['Float']['input']>;
   lte?: InputMaybe<Scalars['Float']['input']>;
   ne?: InputMaybe<Scalars['Float']['input']>;
+  nei?: InputMaybe<Scalars['Float']['input']>;
   not?: InputMaybe<FloatFilterInput>;
   notContains?: InputMaybe<Scalars['Float']['input']>;
   notContainsi?: InputMaybe<Scalars['Float']['input']>;
@@ -599,7 +631,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = AboutPage | Blog | BlogsPage | Client | ComponentBlogLayoutHeading | ComponentBlogLayoutImage | ComponentBlogLayoutParagraph | ComponentBlogLayoutQuote | ComponentContactChannelsContactChannel | ComponentGeneralStylingMixedStylesHeading | ComponentNavMenuNavMenu | ComponentProjectLayoutBgImagaNText | ComponentProjectLayoutBgImageNDynamicText | ComponentProjectLayoutDynamicText | ComponentProjectLayoutImageNText | ComponentProjectLayoutInlineGallery | ComponentProjectLayoutInlineVideos | ComponentProjectLayoutLargeHeading | ComponentProjectLayoutLargeImage | ComponentProjectLayoutLargeVideo | ComponentProjectLayoutParagraph | ComponentProjectLayoutProjectCarousel | ComponentStepsLayoutStep | ContactPage | HomePage | I18NLocale | LandingPage | Menu | Project | ProjectCategory | Service | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | WorkPage;
+export type GenericMorph = AboutPage | Blog | BlogsPage | Client | ComponentBlogLayoutHeading | ComponentBlogLayoutImage | ComponentBlogLayoutParagraph | ComponentBlogLayoutParagraphContent | ComponentBlogLayoutQuote | ComponentContactChannelsContactChannel | ComponentGeneralStylingMixedStylesHeading | ComponentNavMenuNavMenu | ComponentProjectLayoutBgImagaNText | ComponentProjectLayoutBgImageNDynamicText | ComponentProjectLayoutDynamicText | ComponentProjectLayoutImageNText | ComponentProjectLayoutInlineGallery | ComponentProjectLayoutInlineVideos | ComponentProjectLayoutLargeHeading | ComponentProjectLayoutLargeImage | ComponentProjectLayoutLargeVideo | ComponentProjectLayoutParagraph | ComponentProjectLayoutProjectCarousel | ComponentStepsLayoutStep | ContactPage | HomePage | I18NLocale | LandingPage | Menu | Project | ProjectCategory | Service | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | WorkPage;
 
 export type HomePage = {
   __typename?: 'HomePage';
@@ -724,6 +756,7 @@ export type IdFilterInput = {
   lt?: InputMaybe<Scalars['ID']['input']>;
   lte?: InputMaybe<Scalars['ID']['input']>;
   ne?: InputMaybe<Scalars['ID']['input']>;
+  nei?: InputMaybe<Scalars['ID']['input']>;
   not?: InputMaybe<IdFilterInput>;
   notContains?: InputMaybe<Scalars['ID']['input']>;
   notContainsi?: InputMaybe<Scalars['ID']['input']>;
@@ -748,6 +781,7 @@ export type IntFilterInput = {
   lt?: InputMaybe<Scalars['Int']['input']>;
   lte?: InputMaybe<Scalars['Int']['input']>;
   ne?: InputMaybe<Scalars['Int']['input']>;
+  nei?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<IntFilterInput>;
   notContains?: InputMaybe<Scalars['Int']['input']>;
   notContainsi?: InputMaybe<Scalars['Int']['input']>;
@@ -772,6 +806,7 @@ export type JsonFilterInput = {
   lt?: InputMaybe<Scalars['JSON']['input']>;
   lte?: InputMaybe<Scalars['JSON']['input']>;
   ne?: InputMaybe<Scalars['JSON']['input']>;
+  nei?: InputMaybe<Scalars['JSON']['input']>;
   not?: InputMaybe<JsonFilterInput>;
   notContains?: InputMaybe<Scalars['JSON']['input']>;
   notContainsi?: InputMaybe<Scalars['JSON']['input']>;
@@ -856,11 +891,21 @@ export type LandingPageRelationResponseCollection = {
 
 export type Menu = {
   __typename?: 'Menu';
+  browseAll?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  letsTalk?: Maybe<Scalars['String']['output']>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<MenuRelationResponseCollection>;
   menuItems?: Maybe<Array<Maybe<ComponentNavMenuNavMenu>>>;
+  moreWork?: Maybe<Scalars['String']['output']>;
+  openCase?: Maybe<Scalars['String']['output']>;
+  readFullArticle?: Maybe<Scalars['String']['output']>;
+  scrollDown?: Maybe<Scalars['String']['output']>;
+  subscribePlaceholder?: Maybe<Scalars['String']['output']>;
+  subscribeSuccess?: Maybe<Scalars['String']['output']>;
+  subscribeToOurMailing?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  viewAllBlogs?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -882,7 +927,17 @@ export type MenuEntityResponse = {
 };
 
 export type MenuInput = {
+  browseAll?: InputMaybe<Scalars['String']['input']>;
+  letsTalk?: InputMaybe<Scalars['String']['input']>;
   menuItems?: InputMaybe<Array<InputMaybe<ComponentNavMenuNavMenuInput>>>;
+  moreWork?: InputMaybe<Scalars['String']['input']>;
+  openCase?: InputMaybe<Scalars['String']['input']>;
+  readFullArticle?: InputMaybe<Scalars['String']['input']>;
+  scrollDown?: InputMaybe<Scalars['String']['input']>;
+  subscribePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  subscribeSuccess?: InputMaybe<Scalars['String']['input']>;
+  subscribeToOurMailing?: InputMaybe<Scalars['String']['input']>;
+  viewAllBlogs?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MenuRelationResponseCollection = {
@@ -899,6 +954,7 @@ export type Mutation = {
   createBlogLocalization?: Maybe<BlogEntityResponse>;
   createBlogsPageLocalization?: Maybe<BlogsPageEntityResponse>;
   createClient?: Maybe<ClientEntityResponse>;
+  createClientLocalization?: Maybe<ClientEntityResponse>;
   createContactPageLocalization?: Maybe<ContactPageEntityResponse>;
   createHomePageLocalization?: Maybe<HomePageEntityResponse>;
   createLandingPage?: Maybe<LandingPageEntityResponse>;
@@ -1004,6 +1060,14 @@ export type MutationCreateBlogsPageLocalizationArgs = {
 
 export type MutationCreateClientArgs = {
   data: ClientInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+
+export type MutationCreateClientLocalizationArgs = {
+  data?: InputMaybe<ClientInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
@@ -1117,6 +1181,7 @@ export type MutationDeleteBlogsPageArgs = {
 
 export type MutationDeleteClientArgs = {
   id: Scalars['ID']['input'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
@@ -1245,6 +1310,7 @@ export type MutationUpdateBlogsPageArgs = {
 export type MutationUpdateClientArgs = {
   data: ClientInput;
   id: Scalars['ID']['input'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
@@ -1362,6 +1428,7 @@ export type Project = {
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<ProjectRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  slug: Scalars['String']['output'];
   thumbnail?: Maybe<UploadFileEntityResponse>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1463,6 +1530,7 @@ export type ProjectFiltersInput = {
   not?: InputMaybe<ProjectFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ProjectFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -1473,6 +1541,7 @@ export type ProjectInput = {
   date?: InputMaybe<Scalars['Date']['input']>;
   layout?: InputMaybe<Array<Scalars['ProjectLayoutDynamicZoneInput']['input']>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   thumbnail?: InputMaybe<Scalars['ID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1550,11 +1619,13 @@ export type QueryBlogsPageArgs = {
 
 export type QueryClientArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
 export type QueryClientsArgs = {
   filters?: InputMaybe<ClientFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -1770,6 +1841,7 @@ export type StringFilterInput = {
   lt?: InputMaybe<Scalars['String']['input']>;
   lte?: InputMaybe<Scalars['String']['input']>;
   ne?: InputMaybe<Scalars['String']['input']>;
+  nei?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<StringFilterInput>;
   notContains?: InputMaybe<Scalars['String']['input']>;
   notContainsi?: InputMaybe<Scalars['String']['input']>;
@@ -2194,67 +2266,61 @@ export type WorkPageRelationResponseCollection = {
   data: Array<WorkPageEntity>;
 };
 
-export type BlogsCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type BlogsCollectionQuery = { __typename?: 'Query', blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
-
-export type ClientsCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ClientsCollectionQuery = { __typename?: 'Query', clients?: { __typename?: 'ClientEntityResponseCollection', data: Array<{ __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientLogo?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
-
-export type ProjectCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ProjectCategoriesQuery = { __typename?: 'Query', projectCategories?: { __typename?: 'ProjectCategoryEntityResponseCollection', data: Array<{ __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null }> } | null };
-
-export type ProjectsCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ProjectsCollectionQuery = { __typename?: 'Query', projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', id?: string | null, attributes?: { __typename?: 'Project', title?: string | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
-
-export type ServicesCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ServicesCollectionQuery = { __typename?: 'Query', services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title?: string | null, text?: string | null } | null }> } | null };
-
 export type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename?: 'AboutPageEntityResponse', data?: { __typename?: 'AboutPageEntity', attributes?: { __typename?: 'AboutPage', heroHeading?: string | null, heroSubtext?: string | null, stepsHeading?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, clientsHeading?: string | null, heroBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, step?: Array<{ __typename?: 'ComponentStepsLayoutStep', heading?: string | null, text?: string | null } | null> | null } | null } | null } | null, services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title?: string | null, text?: string | null } | null }> } | null, clients?: { __typename?: 'ClientEntityResponseCollection', data: Array<{ __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientLogo?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
+export type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename?: 'AboutPageEntityResponse', data?: { __typename?: 'AboutPageEntity', attributes?: { __typename?: 'AboutPage', heroHeading?: string | null, heroSubtext?: string | null, stepsHeading?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, clientsHeading?: string | null, heroBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null, step?: Array<{ __typename?: 'ComponentStepsLayoutStep', heading?: string | null, text?: string | null } | null> | null } | null } | null } | null, services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title?: string | null, text?: string | null } | null }> } | null, clients?: { __typename?: 'ClientEntityResponseCollection', data: Array<{ __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientLogo?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
 
 export type BlogsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type BlogsPageQuery = { __typename?: 'Query', blogsPage?: { __typename?: 'BlogsPageEntityResponse', data?: { __typename?: 'BlogsPageEntity', attributes?: { __typename?: 'BlogsPage', heroHeadingBold?: string | null, heroHeadingItalic?: string | null, heroSubtext?: string | null, blogsHeading?: string | null, blogsSubtext?: string | null, heroImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, featuredBlog?: { __typename?: 'BlogEntityResponse', data?: { __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null } | null } | null } | null } | null } | null, blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+export type BlogsPageQuery = { __typename?: 'Query', blogsPage?: { __typename?: 'BlogsPageEntityResponse', data?: { __typename?: 'BlogsPageEntity', attributes?: { __typename?: 'BlogsPage', heroHeadingBold?: string | null, heroHeadingItalic?: string | null, heroSubtext?: string | null, blogsHeading?: string | null, blogsSubtext?: string | null, heroImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null, featuredBlog?: { __typename?: 'BlogEntityResponse', data?: { __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null } | null } | null } | null } | null } | null, blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', slug: string, title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null } | null }> } | null };
 
 export type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageEntityResponse', data?: { __typename?: 'ContactPageEntity', attributes?: { __typename?: 'ContactPage', heroHeading?: string | null, heroSubtextNormal?: string | null, heroSubtextItalicBold?: string | null, spotifyHeading?: string | null, spotifySubtextNormal?: string | null, spotifySubtextItalicBold?: string | null, spotifyLink?: string | null, contactChannels?: Array<{ __typename?: 'ComponentContactChannelsContactChannel', channelName?: string | null, channelInfo?: string | null, channelLink?: string | null } | null> | null, contactBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null } | null } | null };
+export type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageEntityResponse', data?: { __typename?: 'ContactPageEntity', attributes?: { __typename?: 'ContactPage', heroHeading?: string | null, heroSubtextNormal?: string | null, heroSubtextItalicBold?: string | null, spotifyHeading?: string | null, spotifySubtextNormal?: string | null, spotifySubtextItalicBold?: string | null, spotifyLink?: string | null, contactChannels?: Array<{ __typename?: 'ComponentContactChannelsContactChannel', channelName?: string | null, channelInfo?: string | null, channelLink?: string | null } | null> | null, contactBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null } | null } | null } | null };
 
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageEntityResponse', data?: { __typename?: 'HomePageEntity', attributes?: { __typename?: 'HomePage', heroHeading?: string | null, heroSubtext?: string | null, workHeading?: string | null, servicesSubtext?: string | null, blogHeading?: string | null, blogSubtext?: string | null, contactHeadingBold1?: string | null, contactHeadingBold2?: string | null, contactHeadingItalicBold?: string | null, contactSubtext?: string | null, contactFormSubtext?: string | null, featuredProjects?: { __typename?: 'ProjectRelationResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', title?: string | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null, servicesImage1?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, servicesImage2?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, featuredBlogs?: { __typename?: 'BlogRelationResponseCollection', data: Array<{ __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null } | null } | null } | null };
+export type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageEntityResponse', data?: { __typename?: 'HomePageEntity', attributes?: { __typename?: 'HomePage', heroHeading?: string | null, heroSubtext?: string | null, workHeading?: string | null, servicesSubtext?: string | null, blogHeading?: string | null, blogSubtext?: string | null, contactHeadingBold1?: string | null, contactHeadingBold2?: string | null, contactHeadingItalicBold?: string | null, contactSubtext?: string | null, contactFormSubtext?: string | null, featuredProjects?: { __typename?: 'ProjectRelationResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', title?: string | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null, servicesImage1?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, servicesImage2?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, featuredBlogs?: { __typename?: 'BlogRelationResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', slug: string, title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null } | null } | null } | null };
+
+export type LayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LayoutQueryQuery = { __typename?: 'Query', menu?: { __typename?: 'MenuEntityResponse', data?: { __typename?: 'MenuEntity', attributes?: { __typename?: 'Menu', scrollDown?: string | null, letsTalk?: string | null, browseAll?: string | null, readFullArticle?: string | null, subscribeSuccess?: string | null, subscribeToOurMailing?: string | null, subscribePlaceholder?: string | null, moreWork?: string | null, viewAllBlogs?: string | null, openCase?: string | null, menuItems?: Array<{ __typename?: 'ComponentNavMenuNavMenu', menuItem?: string | null } | null> | null } | null } | null } | null, contactPage?: { __typename?: 'ContactPageEntityResponse', data?: { __typename?: 'ContactPageEntity', attributes?: { __typename?: 'ContactPage', contactChannels?: Array<{ __typename?: 'ComponentContactChannelsContactChannel', channelName?: string | null, channelInfo?: string | null, channelLink?: string | null } | null> | null } | null } | null } | null };
+
+export type ProjectPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProjectPageQuery = { __typename?: 'Query', projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', title?: string | null, slug: string, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null } | null } | null } | null, layout?: Array<{ __typename: 'ComponentProjectLayoutBgImagaNText', id: string, title?: string | null, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutBgImageNDynamicText', id: string, dynamicText?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutDynamicText', id: string, dynamicTitle?: string | null, dynamicText?: string | null } | { __typename: 'ComponentProjectLayoutImageNText', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutInlineGallery', id: string, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null }> } | null } | { __typename: 'ComponentProjectLayoutInlineVideos', id: string, Videos?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null }> } | null } | { __typename: 'ComponentProjectLayoutLargeHeading', id: string, heading?: string | null } | { __typename: 'ComponentProjectLayoutLargeImage', id: string, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutLargeVideo', id: string, video?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutParagraph', id: string, paragraph?: string | null } | { __typename: 'ComponentProjectLayoutProjectCarousel', id: string, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null }> } | null } | { __typename: 'Error' } | null> | null } | null }> } | null };
+
+export type SingleBlogPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SingleBlogPageQuery = { __typename?: 'Query', blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', slug: string, title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
+
+export type SingleBlogQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SingleBlogQuery = { __typename?: 'Query', blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', title?: string | null, slug: string, author?: string | null, shortDescription?: string | null, datePublished?: any | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null, layout?: Array<{ __typename: 'ComponentBlogLayoutImage', image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentBlogLayoutParagraphContent', Paragraph?: string | null } | { __typename: 'Error' } | null> | null } | null }> } | null };
 
 export type WorkPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WorkPageQuery = { __typename?: 'Query', workPage?: { __typename?: 'WorkPageEntityResponse', data?: { __typename?: 'WorkPageEntity', attributes?: { __typename?: 'WorkPage', heroHeadingBold1?: string | null, heroHeadingItalic?: string | null, heroHeadingBold2?: string | null, heroSubtext?: string | null, workHeading?: string | null, workSubtext?: string | null, workBackgroundImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null } | null } | null, projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', id?: string | null, attributes?: { __typename?: 'Project', title?: string | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null, projectCategories?: { __typename?: 'ProjectCategoryEntityResponseCollection', data: Array<{ __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null }> } | null };
+export type WorkPageQuery = { __typename?: 'Query', workPage?: { __typename?: 'WorkPageEntityResponse', data?: { __typename?: 'WorkPageEntity', attributes?: { __typename?: 'WorkPage', heroHeadingBold1?: string | null, heroHeadingItalic?: string | null, heroHeadingBold2?: string | null, heroSubtext?: string | null, workHeading?: string | null, workSubtext?: string | null, workBackgroundImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null } | null } | null } | null, projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', slug: string, title?: string | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null, projectCategories?: { __typename?: 'ProjectCategoryEntityResponseCollection', data: Array<{ __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null }> } | null };
 
 
-export const BlogsCollectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogsCollectionQuery, BlogsCollectionQueryVariables>;
-export const ClientsCollectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"clientsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ClientsCollectionQuery, ClientsCollectionQueryVariables>;
-export const ProjectCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"projectCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projectCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ProjectCategoriesQuery, ProjectCategoriesQueryVariables>;
-export const ProjectsCollectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"projectsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projects"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"client"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientName"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ProjectsCollectionQuery, ProjectsCollectionQueryVariables>;
-export const ServicesCollectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"servicesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"services"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ServicesCollectionQuery, ServicesCollectionQueryVariables>;
-export const AboutPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aboutPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aboutPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"heroBgImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"stepsHeading"}},{"kind":"Field","name":{"kind":"Name","value":"step"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heading"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"Field","name":{"kind":"Name","value":"servicesHeading"}},{"kind":"Field","name":{"kind":"Name","value":"servicesSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"clientsHeading"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"clients"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<AboutPageQuery, AboutPageQueryVariables>;
-export const BlogsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogsPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingBold"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingItalic"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"featuredBlog"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"blogsHeading"}},{"kind":"Field","name":{"kind":"Name","value":"blogsSubtext"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"blogs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogsPageQuery, BlogsPageQueryVariables>;
-export const ContactPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contactPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtextNormal"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtextItalicBold"}},{"kind":"Field","name":{"kind":"Name","value":"contactChannels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"channelName"}},{"kind":"Field","name":{"kind":"Name","value":"channelInfo"}},{"kind":"Field","name":{"kind":"Name","value":"channelLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"spotifyHeading"}},{"kind":"Field","name":{"kind":"Name","value":"spotifySubtextNormal"}},{"kind":"Field","name":{"kind":"Name","value":"spotifySubtextItalicBold"}},{"kind":"Field","name":{"kind":"Name","value":"spotifyLink"}},{"kind":"Field","name":{"kind":"Name","value":"contactBgImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ContactPageQuery, ContactPageQueryVariables>;
-export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"homePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"workHeading"}},{"kind":"Field","name":{"kind":"Name","value":"featuredProjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"client"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientName"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"servicesSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"servicesImage1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"servicesImage2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"blogHeading"}},{"kind":"Field","name":{"kind":"Name","value":"blogSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"featuredBlogs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contactHeadingBold1"}},{"kind":"Field","name":{"kind":"Name","value":"contactHeadingBold2"}},{"kind":"Field","name":{"kind":"Name","value":"contactHeadingItalicBold"}},{"kind":"Field","name":{"kind":"Name","value":"contactSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"contactFormSubtext"}}]}}]}}]}}]}}]} as unknown as DocumentNode<HomePageQuery, HomePageQueryVariables>;
-export const WorkPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"workPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeadingBold1"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingItalic"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingBold2"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"workHeading"}},{"kind":"Field","name":{"kind":"Name","value":"workSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"workBackgroundImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"projects"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"client"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientName"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"projectCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}}]}}]} as unknown as DocumentNode<WorkPageQuery, WorkPageQueryVariables>;
+export const AboutPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"aboutPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aboutPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"heroBgImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"stepsHeading"}},{"kind":"Field","name":{"kind":"Name","value":"step"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heading"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"Field","name":{"kind":"Name","value":"servicesHeading"}},{"kind":"Field","name":{"kind":"Name","value":"servicesSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"clientsHeading"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"clients"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<AboutPageQuery, AboutPageQueryVariables>;
+export const BlogsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogsPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingBold"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingItalic"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"featuredBlog"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"blogsHeading"}},{"kind":"Field","name":{"kind":"Name","value":"blogsSubtext"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"blogs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogsPageQuery, BlogsPageQueryVariables>;
+export const ContactPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contactPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtextNormal"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtextItalicBold"}},{"kind":"Field","name":{"kind":"Name","value":"contactChannels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"channelName"}},{"kind":"Field","name":{"kind":"Name","value":"channelInfo"}},{"kind":"Field","name":{"kind":"Name","value":"channelLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"spotifyHeading"}},{"kind":"Field","name":{"kind":"Name","value":"spotifySubtextNormal"}},{"kind":"Field","name":{"kind":"Name","value":"spotifySubtextItalicBold"}},{"kind":"Field","name":{"kind":"Name","value":"spotifyLink"}},{"kind":"Field","name":{"kind":"Name","value":"contactBgImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ContactPageQuery, ContactPageQueryVariables>;
+export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"homePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"workHeading"}},{"kind":"Field","name":{"kind":"Name","value":"featuredProjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"client"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientName"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"servicesSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"servicesImage1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"servicesImage2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"blogHeading"}},{"kind":"Field","name":{"kind":"Name","value":"blogSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"featuredBlogs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contactHeadingBold1"}},{"kind":"Field","name":{"kind":"Name","value":"contactHeadingBold2"}},{"kind":"Field","name":{"kind":"Name","value":"contactHeadingItalicBold"}},{"kind":"Field","name":{"kind":"Name","value":"contactSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"contactFormSubtext"}}]}}]}}]}}]}}]} as unknown as DocumentNode<HomePageQuery, HomePageQueryVariables>;
+export const LayoutQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"layoutQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"menu"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"menuItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"menuItem"}}]}},{"kind":"Field","name":{"kind":"Name","value":"scrollDown"}},{"kind":"Field","name":{"kind":"Name","value":"letsTalk"}},{"kind":"Field","name":{"kind":"Name","value":"browseAll"}},{"kind":"Field","name":{"kind":"Name","value":"readFullArticle"}},{"kind":"Field","name":{"kind":"Name","value":"subscribeSuccess"}},{"kind":"Field","name":{"kind":"Name","value":"subscribeToOurMailing"}},{"kind":"Field","name":{"kind":"Name","value":"subscribePlaceholder"}},{"kind":"Field","name":{"kind":"Name","value":"moreWork"}},{"kind":"Field","name":{"kind":"Name","value":"viewAllBlogs"}},{"kind":"Field","name":{"kind":"Name","value":"openCase"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contactPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactChannels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"channelName"}},{"kind":"Field","name":{"kind":"Name","value":"channelInfo"}},{"kind":"Field","name":{"kind":"Name","value":"channelLink"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<LayoutQueryQuery, LayoutQueryQueryVariables>;
+export const ProjectPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"projectPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projects"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"StringValue","value":"","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"client"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientName"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"layout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutDynamicText"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"dynamicTitle"}},{"kind":"Field","name":{"kind":"Name","value":"dynamicText"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutProjectCarousel"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutBgImagaNText"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutBgImageNDynamicText"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"dynamicText"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutImageNText"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutInlineGallery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutLargeHeading"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"heading"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutLargeImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutParagraph"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"paragraph"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutLargeVideo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"video"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentProjectLayoutInlineVideos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"Videos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ProjectPageQuery, ProjectPageQueryVariables>;
+export const SingleBlogPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"singleBlogPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SingleBlogPageQuery, SingleBlogPageQueryVariables>;
+export const SingleBlogDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"singleBlog"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"StringValue","value":"","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"}},{"kind":"Field","name":{"kind":"Name","value":"datePublished"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"layout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentBlogLayoutParagraphContent"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Paragraph"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentBlogLayoutImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SingleBlogQuery, SingleBlogQueryVariables>;
+export const WorkPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"workPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroHeadingBold1"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingItalic"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeadingBold2"}},{"kind":"Field","name":{"kind":"Name","value":"heroSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"workHeading"}},{"kind":"Field","name":{"kind":"Name","value":"workSubtext"}},{"kind":"Field","name":{"kind":"Name","value":"workBackgroundImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"projects"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"StringValue","value":"","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"100"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"client"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientName"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"projectCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"}}]}}]}}]}}]}}]} as unknown as DocumentNode<WorkPageQuery, WorkPageQueryVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -2331,11 +2397,13 @@ export type Blog = {
   __typename?: 'Blog';
   author?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  datePublished?: Maybe<Scalars['Date']['output']>;
   layout?: Maybe<Array<Maybe<BlogLayoutDynamicZone>>>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<BlogRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   shortDescription?: Maybe<Scalars['String']['output']>;
+  slug: Scalars['String']['output'];
   thumbnail?: Maybe<UploadFileEntityResponse>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -2370,6 +2438,7 @@ export type BlogFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<BlogFiltersInput>>>;
   author?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  datePublished?: InputMaybe<DateFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   locale?: InputMaybe<StringFilterInput>;
   localizations?: InputMaybe<BlogFiltersInput>;
@@ -2377,20 +2446,23 @@ export type BlogFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<BlogFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   shortDescription?: InputMaybe<StringFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type BlogInput = {
   author?: InputMaybe<Scalars['String']['input']>;
+  datePublished?: InputMaybe<Scalars['Date']['input']>;
   layout?: InputMaybe<Array<Scalars['BlogLayoutDynamicZoneInput']['input']>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   shortDescription?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   thumbnail?: InputMaybe<Scalars['ID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type BlogLayoutDynamicZone = ComponentBlogLayoutHeading | ComponentBlogLayoutImage | ComponentBlogLayoutParagraph | ComponentBlogLayoutQuote | Error;
+export type BlogLayoutDynamicZone = ComponentBlogLayoutImage | ComponentBlogLayoutParagraphContent | Error;
 
 export type BlogRelationResponseCollection = {
   __typename?: 'BlogRelationResponseCollection';
@@ -2452,6 +2524,7 @@ export type BooleanFilterInput = {
   lt?: InputMaybe<Scalars['Boolean']['input']>;
   lte?: InputMaybe<Scalars['Boolean']['input']>;
   ne?: InputMaybe<Scalars['Boolean']['input']>;
+  nei?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<BooleanFilterInput>;
   notContains?: InputMaybe<Scalars['Boolean']['input']>;
   notContainsi?: InputMaybe<Scalars['Boolean']['input']>;
@@ -2468,6 +2541,8 @@ export type Client = {
   clientName?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   landingPages?: Maybe<LandingPageRelationResponseCollection>;
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations?: Maybe<ClientRelationResponseCollection>;
   projects?: Maybe<ProjectRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2475,6 +2550,13 @@ export type Client = {
 
 export type ClientLandingPagesArgs = {
   filters?: InputMaybe<LandingPageFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ClientLocalizationsArgs = {
+  filters?: InputMaybe<ClientFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -2510,6 +2592,8 @@ export type ClientFiltersInput = {
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   landingPages?: InputMaybe<LandingPageFiltersInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<ClientFiltersInput>;
   not?: InputMaybe<ClientFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ClientFiltersInput>>>;
   projects?: InputMaybe<ProjectFiltersInput>;
@@ -2521,6 +2605,11 @@ export type ClientInput = {
   clientName?: InputMaybe<Scalars['String']['input']>;
   landingPages?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   projects?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+};
+
+export type ClientRelationResponseCollection = {
+  __typename?: 'ClientRelationResponseCollection';
+  data: Array<ClientEntity>;
 };
 
 export type ComponentBlogLayoutHeading = {
@@ -2539,6 +2628,12 @@ export type ComponentBlogLayoutParagraph = {
   __typename?: 'ComponentBlogLayoutParagraph';
   id: Scalars['ID']['output'];
   paragraph?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentBlogLayoutParagraphContent = {
+  __typename?: 'ComponentBlogLayoutParagraphContent';
+  Paragraph?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
 };
 
 export type ComponentBlogLayoutQuote = {
@@ -2777,6 +2872,7 @@ export type DateFilterInput = {
   lt?: InputMaybe<Scalars['Date']['input']>;
   lte?: InputMaybe<Scalars['Date']['input']>;
   ne?: InputMaybe<Scalars['Date']['input']>;
+  nei?: InputMaybe<Scalars['Date']['input']>;
   not?: InputMaybe<DateFilterInput>;
   notContains?: InputMaybe<Scalars['Date']['input']>;
   notContainsi?: InputMaybe<Scalars['Date']['input']>;
@@ -2801,6 +2897,7 @@ export type DateTimeFilterInput = {
   lt?: InputMaybe<Scalars['DateTime']['input']>;
   lte?: InputMaybe<Scalars['DateTime']['input']>;
   ne?: InputMaybe<Scalars['DateTime']['input']>;
+  nei?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<DateTimeFilterInput>;
   notContains?: InputMaybe<Scalars['DateTime']['input']>;
   notContainsi?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2837,6 +2934,7 @@ export type FloatFilterInput = {
   lt?: InputMaybe<Scalars['Float']['input']>;
   lte?: InputMaybe<Scalars['Float']['input']>;
   ne?: InputMaybe<Scalars['Float']['input']>;
+  nei?: InputMaybe<Scalars['Float']['input']>;
   not?: InputMaybe<FloatFilterInput>;
   notContains?: InputMaybe<Scalars['Float']['input']>;
   notContainsi?: InputMaybe<Scalars['Float']['input']>;
@@ -2847,7 +2945,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = AboutPage | Blog | BlogsPage | Client | ComponentBlogLayoutHeading | ComponentBlogLayoutImage | ComponentBlogLayoutParagraph | ComponentBlogLayoutQuote | ComponentContactChannelsContactChannel | ComponentGeneralStylingMixedStylesHeading | ComponentNavMenuNavMenu | ComponentProjectLayoutBgImagaNText | ComponentProjectLayoutBgImageNDynamicText | ComponentProjectLayoutDynamicText | ComponentProjectLayoutImageNText | ComponentProjectLayoutInlineGallery | ComponentProjectLayoutInlineVideos | ComponentProjectLayoutLargeHeading | ComponentProjectLayoutLargeImage | ComponentProjectLayoutLargeVideo | ComponentProjectLayoutParagraph | ComponentProjectLayoutProjectCarousel | ComponentStepsLayoutStep | ContactPage | HomePage | I18NLocale | LandingPage | Menu | Project | ProjectCategory | Service | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | WorkPage;
+export type GenericMorph = AboutPage | Blog | BlogsPage | Client | ComponentBlogLayoutHeading | ComponentBlogLayoutImage | ComponentBlogLayoutParagraph | ComponentBlogLayoutParagraphContent | ComponentBlogLayoutQuote | ComponentContactChannelsContactChannel | ComponentGeneralStylingMixedStylesHeading | ComponentNavMenuNavMenu | ComponentProjectLayoutBgImagaNText | ComponentProjectLayoutBgImageNDynamicText | ComponentProjectLayoutDynamicText | ComponentProjectLayoutImageNText | ComponentProjectLayoutInlineGallery | ComponentProjectLayoutInlineVideos | ComponentProjectLayoutLargeHeading | ComponentProjectLayoutLargeImage | ComponentProjectLayoutLargeVideo | ComponentProjectLayoutParagraph | ComponentProjectLayoutProjectCarousel | ComponentStepsLayoutStep | ContactPage | HomePage | I18NLocale | LandingPage | Menu | Project | ProjectCategory | Service | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | WorkPage;
 
 export type HomePage = {
   __typename?: 'HomePage';
@@ -2972,6 +3070,7 @@ export type IdFilterInput = {
   lt?: InputMaybe<Scalars['ID']['input']>;
   lte?: InputMaybe<Scalars['ID']['input']>;
   ne?: InputMaybe<Scalars['ID']['input']>;
+  nei?: InputMaybe<Scalars['ID']['input']>;
   not?: InputMaybe<IdFilterInput>;
   notContains?: InputMaybe<Scalars['ID']['input']>;
   notContainsi?: InputMaybe<Scalars['ID']['input']>;
@@ -2996,6 +3095,7 @@ export type IntFilterInput = {
   lt?: InputMaybe<Scalars['Int']['input']>;
   lte?: InputMaybe<Scalars['Int']['input']>;
   ne?: InputMaybe<Scalars['Int']['input']>;
+  nei?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<IntFilterInput>;
   notContains?: InputMaybe<Scalars['Int']['input']>;
   notContainsi?: InputMaybe<Scalars['Int']['input']>;
@@ -3020,6 +3120,7 @@ export type JsonFilterInput = {
   lt?: InputMaybe<Scalars['JSON']['input']>;
   lte?: InputMaybe<Scalars['JSON']['input']>;
   ne?: InputMaybe<Scalars['JSON']['input']>;
+  nei?: InputMaybe<Scalars['JSON']['input']>;
   not?: InputMaybe<JsonFilterInput>;
   notContains?: InputMaybe<Scalars['JSON']['input']>;
   notContainsi?: InputMaybe<Scalars['JSON']['input']>;
@@ -3104,11 +3205,21 @@ export type LandingPageRelationResponseCollection = {
 
 export type Menu = {
   __typename?: 'Menu';
+  browseAll?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  letsTalk?: Maybe<Scalars['String']['output']>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<MenuRelationResponseCollection>;
   menuItems?: Maybe<Array<Maybe<ComponentNavMenuNavMenu>>>;
+  moreWork?: Maybe<Scalars['String']['output']>;
+  openCase?: Maybe<Scalars['String']['output']>;
+  readFullArticle?: Maybe<Scalars['String']['output']>;
+  scrollDown?: Maybe<Scalars['String']['output']>;
+  subscribePlaceholder?: Maybe<Scalars['String']['output']>;
+  subscribeSuccess?: Maybe<Scalars['String']['output']>;
+  subscribeToOurMailing?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  viewAllBlogs?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -3130,7 +3241,17 @@ export type MenuEntityResponse = {
 };
 
 export type MenuInput = {
+  browseAll?: InputMaybe<Scalars['String']['input']>;
+  letsTalk?: InputMaybe<Scalars['String']['input']>;
   menuItems?: InputMaybe<Array<InputMaybe<ComponentNavMenuNavMenuInput>>>;
+  moreWork?: InputMaybe<Scalars['String']['input']>;
+  openCase?: InputMaybe<Scalars['String']['input']>;
+  readFullArticle?: InputMaybe<Scalars['String']['input']>;
+  scrollDown?: InputMaybe<Scalars['String']['input']>;
+  subscribePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  subscribeSuccess?: InputMaybe<Scalars['String']['input']>;
+  subscribeToOurMailing?: InputMaybe<Scalars['String']['input']>;
+  viewAllBlogs?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MenuRelationResponseCollection = {
@@ -3147,6 +3268,7 @@ export type Mutation = {
   createBlogLocalization?: Maybe<BlogEntityResponse>;
   createBlogsPageLocalization?: Maybe<BlogsPageEntityResponse>;
   createClient?: Maybe<ClientEntityResponse>;
+  createClientLocalization?: Maybe<ClientEntityResponse>;
   createContactPageLocalization?: Maybe<ContactPageEntityResponse>;
   createHomePageLocalization?: Maybe<HomePageEntityResponse>;
   createLandingPage?: Maybe<LandingPageEntityResponse>;
@@ -3252,6 +3374,14 @@ export type MutationCreateBlogsPageLocalizationArgs = {
 
 export type MutationCreateClientArgs = {
   data: ClientInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+
+export type MutationCreateClientLocalizationArgs = {
+  data?: InputMaybe<ClientInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
@@ -3365,6 +3495,7 @@ export type MutationDeleteBlogsPageArgs = {
 
 export type MutationDeleteClientArgs = {
   id: Scalars['ID']['input'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
@@ -3493,6 +3624,7 @@ export type MutationUpdateBlogsPageArgs = {
 export type MutationUpdateClientArgs = {
   data: ClientInput;
   id: Scalars['ID']['input'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
@@ -3610,6 +3742,7 @@ export type Project = {
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<ProjectRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  slug: Scalars['String']['output'];
   thumbnail?: Maybe<UploadFileEntityResponse>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -3711,6 +3844,7 @@ export type ProjectFiltersInput = {
   not?: InputMaybe<ProjectFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ProjectFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -3721,6 +3855,7 @@ export type ProjectInput = {
   date?: InputMaybe<Scalars['Date']['input']>;
   layout?: InputMaybe<Array<Scalars['ProjectLayoutDynamicZoneInput']['input']>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   thumbnail?: InputMaybe<Scalars['ID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3798,11 +3933,13 @@ export type QueryBlogsPageArgs = {
 
 export type QueryClientArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
 export type QueryClientsArgs = {
   filters?: InputMaybe<ClientFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -4018,6 +4155,7 @@ export type StringFilterInput = {
   lt?: InputMaybe<Scalars['String']['input']>;
   lte?: InputMaybe<Scalars['String']['input']>;
   ne?: InputMaybe<Scalars['String']['input']>;
+  nei?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<StringFilterInput>;
   notContains?: InputMaybe<Scalars['String']['input']>;
   notContainsi?: InputMaybe<Scalars['String']['input']>;
@@ -4442,52 +4580,47 @@ export type WorkPageRelationResponseCollection = {
   data: Array<WorkPageEntity>;
 };
 
-export type BlogsCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type BlogsCollectionQuery = { __typename?: 'Query', blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
-
-export type ClientsCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ClientsCollectionQuery = { __typename?: 'Query', clients?: { __typename?: 'ClientEntityResponseCollection', data: Array<{ __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientLogo?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
-
-export type ProjectCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ProjectCategoriesQuery = { __typename?: 'Query', projectCategories?: { __typename?: 'ProjectCategoryEntityResponseCollection', data: Array<{ __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null }> } | null };
-
-export type ProjectsCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ProjectsCollectionQuery = { __typename?: 'Query', projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', id?: string | null, attributes?: { __typename?: 'Project', title?: string | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
-
-export type ServicesCollectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ServicesCollectionQuery = { __typename?: 'Query', services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title?: string | null, text?: string | null } | null }> } | null };
-
 export type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename?: 'AboutPageEntityResponse', data?: { __typename?: 'AboutPageEntity', attributes?: { __typename?: 'AboutPage', heroHeading?: string | null, heroSubtext?: string | null, stepsHeading?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, clientsHeading?: string | null, heroBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, step?: Array<{ __typename?: 'ComponentStepsLayoutStep', heading?: string | null, text?: string | null } | null> | null } | null } | null } | null, services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title?: string | null, text?: string | null } | null }> } | null, clients?: { __typename?: 'ClientEntityResponseCollection', data: Array<{ __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientLogo?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
+export type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename?: 'AboutPageEntityResponse', data?: { __typename?: 'AboutPageEntity', attributes?: { __typename?: 'AboutPage', heroHeading?: string | null, heroSubtext?: string | null, stepsHeading?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, clientsHeading?: string | null, heroBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null, step?: Array<{ __typename?: 'ComponentStepsLayoutStep', heading?: string | null, text?: string | null } | null> | null } | null } | null } | null, services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title?: string | null, text?: string | null } | null }> } | null, clients?: { __typename?: 'ClientEntityResponseCollection', data: Array<{ __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientLogo?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
 
 export type BlogsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type BlogsPageQuery = { __typename?: 'Query', blogsPage?: { __typename?: 'BlogsPageEntityResponse', data?: { __typename?: 'BlogsPageEntity', attributes?: { __typename?: 'BlogsPage', heroHeadingBold?: string | null, heroHeadingItalic?: string | null, heroSubtext?: string | null, blogsHeading?: string | null, blogsSubtext?: string | null, heroImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, featuredBlog?: { __typename?: 'BlogEntityResponse', data?: { __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null } | null } | null } | null } | null } | null, blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+export type BlogsPageQuery = { __typename?: 'Query', blogsPage?: { __typename?: 'BlogsPageEntityResponse', data?: { __typename?: 'BlogsPageEntity', attributes?: { __typename?: 'BlogsPage', heroHeadingBold?: string | null, heroHeadingItalic?: string | null, heroSubtext?: string | null, blogsHeading?: string | null, blogsSubtext?: string | null, heroImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null, featuredBlog?: { __typename?: 'BlogEntityResponse', data?: { __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null } | null } | null } | null } | null } | null, blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', slug: string, title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null } | null }> } | null };
 
 export type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageEntityResponse', data?: { __typename?: 'ContactPageEntity', attributes?: { __typename?: 'ContactPage', heroHeading?: string | null, heroSubtextNormal?: string | null, heroSubtextItalicBold?: string | null, spotifyHeading?: string | null, spotifySubtextNormal?: string | null, spotifySubtextItalicBold?: string | null, spotifyLink?: string | null, contactChannels?: Array<{ __typename?: 'ComponentContactChannelsContactChannel', channelName?: string | null, channelInfo?: string | null, channelLink?: string | null } | null> | null, contactBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null } | null } | null };
+export type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageEntityResponse', data?: { __typename?: 'ContactPageEntity', attributes?: { __typename?: 'ContactPage', heroHeading?: string | null, heroSubtextNormal?: string | null, heroSubtextItalicBold?: string | null, spotifyHeading?: string | null, spotifySubtextNormal?: string | null, spotifySubtextItalicBold?: string | null, spotifyLink?: string | null, contactChannels?: Array<{ __typename?: 'ComponentContactChannelsContactChannel', channelName?: string | null, channelInfo?: string | null, channelLink?: string | null } | null> | null, contactBgImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null } | null } | null } | null };
 
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageEntityResponse', data?: { __typename?: 'HomePageEntity', attributes?: { __typename?: 'HomePage', heroHeading?: string | null, heroSubtext?: string | null, workHeading?: string | null, servicesSubtext?: string | null, blogHeading?: string | null, blogSubtext?: string | null, contactHeadingBold1?: string | null, contactHeadingBold2?: string | null, contactHeadingItalicBold?: string | null, contactSubtext?: string | null, contactFormSubtext?: string | null, featuredProjects?: { __typename?: 'ProjectRelationResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', title?: string | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null, servicesImage1?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, servicesImage2?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, featuredBlogs?: { __typename?: 'BlogRelationResponseCollection', data: Array<{ __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null } | null } | null } | null };
+export type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageEntityResponse', data?: { __typename?: 'HomePageEntity', attributes?: { __typename?: 'HomePage', heroHeading?: string | null, heroSubtext?: string | null, workHeading?: string | null, servicesSubtext?: string | null, blogHeading?: string | null, blogSubtext?: string | null, contactHeadingBold1?: string | null, contactHeadingBold2?: string | null, contactHeadingItalicBold?: string | null, contactSubtext?: string | null, contactFormSubtext?: string | null, featuredProjects?: { __typename?: 'ProjectRelationResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', title?: string | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null, servicesImage1?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, servicesImage2?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, featuredBlogs?: { __typename?: 'BlogRelationResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', slug: string, title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null }> } | null } | null } | null } | null };
+
+export type LayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LayoutQueryQuery = { __typename?: 'Query', menu?: { __typename?: 'MenuEntityResponse', data?: { __typename?: 'MenuEntity', attributes?: { __typename?: 'Menu', scrollDown?: string | null, letsTalk?: string | null, browseAll?: string | null, readFullArticle?: string | null, subscribeSuccess?: string | null, subscribeToOurMailing?: string | null, subscribePlaceholder?: string | null, moreWork?: string | null, viewAllBlogs?: string | null, openCase?: string | null, menuItems?: Array<{ __typename?: 'ComponentNavMenuNavMenu', menuItem?: string | null } | null> | null } | null } | null } | null, contactPage?: { __typename?: 'ContactPageEntityResponse', data?: { __typename?: 'ContactPageEntity', attributes?: { __typename?: 'ContactPage', contactChannels?: Array<{ __typename?: 'ComponentContactChannelsContactChannel', channelName?: string | null, channelInfo?: string | null, channelLink?: string | null } | null> | null } | null } | null } | null };
+
+export type ProjectPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProjectPageQuery = { __typename?: 'Query', projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', title?: string | null, slug: string, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null } | null } | null } | null, layout?: Array<{ __typename: 'ComponentProjectLayoutBgImagaNText', id: string, title?: string | null, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutBgImageNDynamicText', id: string, dynamicText?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutDynamicText', id: string, dynamicTitle?: string | null, dynamicText?: string | null } | { __typename: 'ComponentProjectLayoutImageNText', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutInlineGallery', id: string, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null }> } | null } | { __typename: 'ComponentProjectLayoutInlineVideos', id: string, Videos?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null }> } | null } | { __typename: 'ComponentProjectLayoutLargeHeading', id: string, heading?: string | null } | { __typename: 'ComponentProjectLayoutLargeImage', id: string, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutLargeVideo', id: string, video?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentProjectLayoutParagraph', id: string, paragraph?: string | null } | { __typename: 'ComponentProjectLayoutProjectCarousel', id: string, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null }> } | null } | { __typename: 'Error' } | null> | null } | null }> } | null };
+
+export type SingleBlogPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SingleBlogPageQuery = { __typename?: 'Query', blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', slug: string, title?: string | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
+
+export type SingleBlogQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SingleBlogQuery = { __typename?: 'Query', blogs?: { __typename?: 'BlogEntityResponseCollection', data: Array<{ __typename?: 'BlogEntity', attributes?: { __typename?: 'Blog', title?: string | null, slug: string, author?: string | null, shortDescription?: string | null, datePublished?: any | null, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null, layout?: Array<{ __typename: 'ComponentBlogLayoutImage', image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | { __typename: 'ComponentBlogLayoutParagraphContent', Paragraph?: string | null } | { __typename: 'Error' } | null> | null } | null }> } | null };
 
 export type WorkPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WorkPageQuery = { __typename?: 'Query', workPage?: { __typename?: 'WorkPageEntityResponse', data?: { __typename?: 'WorkPageEntity', attributes?: { __typename?: 'WorkPage', heroHeadingBold1?: string | null, heroHeadingItalic?: string | null, heroHeadingBold2?: string | null, heroSubtext?: string | null, workHeading?: string | null, workSubtext?: string | null, workBackgroundImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null } | null } | null, projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', id?: string | null, attributes?: { __typename?: 'Project', title?: string | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null, projectCategories?: { __typename?: 'ProjectCategoryEntityResponseCollection', data: Array<{ __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null }> } | null };
+export type WorkPageQuery = { __typename?: 'Query', workPage?: { __typename?: 'WorkPageEntityResponse', data?: { __typename?: 'WorkPageEntity', attributes?: { __typename?: 'WorkPage', heroHeadingBold1?: string | null, heroHeadingItalic?: string | null, heroHeadingBold2?: string | null, heroSubtext?: string | null, workHeading?: string | null, workSubtext?: string | null, workBackgroundImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null, formats?: any | null } | null } | null } | null } | null } | null } | null, projects?: { __typename?: 'ProjectEntityResponseCollection', data: Array<{ __typename?: 'ProjectEntity', attributes?: { __typename?: 'Project', slug: string, title?: string | null, category?: { __typename?: 'ProjectCategoryEntityResponse', data?: { __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null } | null } | null, client?: { __typename?: 'ClientEntityResponse', data?: { __typename?: 'ClientEntity', attributes?: { __typename?: 'Client', clientName?: string | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, formats?: any | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null, projectCategories?: { __typename?: 'ProjectCategoryEntityResponseCollection', data: Array<{ __typename?: 'ProjectCategoryEntity', attributes?: { __typename?: 'ProjectCategory', category?: string | null } | null }> } | null };

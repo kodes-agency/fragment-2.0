@@ -9,7 +9,7 @@
 
   let section: HTMLElement;
   let img: HTMLElement;
-  $: sectionData = $page.data.data?.project?.data?.attributes;
+  $: sectionData = $page.data.data?.projects?.data[0].attributes
 
   onMount(() => {
     const ctx = gsap.context(() => {
@@ -38,7 +38,7 @@
     loading="lazy"
     class="absolute top-0 min-h-screen object-center object-cover opacity-50 -z-10 w-full"
     src={PUBLIC_IMAGE_URL +
-      sectionData?.thumbnail?.data?.attributes?.formats.compress.url}
+      sectionData?.thumbnail?.data?.attributes?.url}
     alt={sectionData?.thumbnail?.data?.attributes?.alternativeText}
   />
   <div

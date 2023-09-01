@@ -102,12 +102,14 @@
         <div class="flex flex-col justify-between w-full space-y-10">
             <div class="block space-y-3 p-5 md:p-0">
                 <span class="flex flex-nowrap">
-                    <h2 class="text-3xl sm:text-4xl md:text-6xl whitespace-nowrap font-bold heading-anm">{sectionData?.contactHeadingBold1}</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-6xl font-bold heading-anm">{sectionData?.contactHeadingBold1}</h2>
+                    {#if sectionData?.contactHeadingItalicBold && sectionData.contactHeadingBold2 }              
                     <div class="flex">
                         <p class="text-3xl sm:text-4xl md:text-6xl">&#160;</p>
                         <h2 class="text-3xl sm:text-4xl md:text-6xl font-bold text-yellow heading-anm">{sectionData?.contactHeadingItalicBold}</h2>
                         <h2 class="text-3xl sm:text-4xl md:text-6xl font-bold heading-anm">{sectionData?.contactHeadingBold2}</h2>
                     </div>
+                    {/if}
                 </span>
                 <p class="text-2xl md:text-3xl heading-anm">{sectionData?.contactSubtext}</p>
             </div>

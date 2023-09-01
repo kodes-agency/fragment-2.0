@@ -20,7 +20,7 @@
         type: "lines, words",
       });
       new SplitText(subHeading, { type: "lines", linesClass: "lineParent" });
-      gsap.set(".lineParent", { overflow: "hidden" });
+      gsap.set(".lineParent", { overflow: "hidden"});
       const contactHeroTl = gsap.timeline({});
       contactHeroTl.from(heading, {
         opacity: 0,
@@ -53,9 +53,7 @@
 
 <section bind:this={section} class="h-screen flex flex-col justify-center px-5 lg:px-52 space-y-10">
   <h1 bind:this={heading} class="text-7xl lg:text-8xl 2xl:text-9xl font-bold max-w-screen-md ">{sectionData?.heroHeading}</h1>
-  <div class="overflow-hidden">
-    <h3 bind:this={subHeading} class="text-3xl max-w-screen-sm 2xl:max-w-screen-lg 2xl:text-4xl">{sectionData?.heroSubtextNormal} <i>{sectionData?.heroSubtextItalicBold}</i></h3>
-  </div>
+  <h3 bind:this={subHeading} class="text-3xl max-w-screen-sm 2xl:max-w-screen-lg 2xl:text-4xl">{sectionData?.heroSubtextNormal} <i>{sectionData?.heroSubtextItalicBold}</i></h3>
   <ScrollDown />
 </section>
 

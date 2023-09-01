@@ -27,17 +27,17 @@
             <h2 class="text-5xl font-bold">{sectionData?.blogHeading}</h2>
             <h3 class="text-2xl font-normal">{sectionData?.blogSubtext}</h3>
           </div>
-          <p class="border-b-2 border-white w-fit font-normal">browse all</p>
+          <p class="border-b-2 border-white w-fit font-normal">{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</p>
         </div>
       </a>
     </div>
     {#each blogs as blog}
       <div class="">
         <BlogItem
-          id={blog?.id}
+          slug={blog?.attributes.slug}
           title={blog?.attributes?.title}
           date={blog.attributes.publishedAt}
-          img={blog.attributes.thumbnail?.data?.attributes?.formats.compress.url}
+          img={blog.attributes.thumbnail?.data?.attributes?.url}
           alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
         />
       </div>
@@ -61,10 +61,10 @@
         <SplideSlide>
           <div class="">
             <BlogItem
-              id={blog?.id}
+              slug={blog?.attributes.slug}
               title={blog?.attributes?.title}
               date={blog.attributes.publishedAt}
-              img={blog.attributes.thumbnail?.data?.attributes?.formats.compress.url}
+              img={blog.attributes.thumbnail?.data?.attributes?.url}
               alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
             />
           </div>
@@ -75,7 +75,7 @@
     <div class="flex justify-between mt-10">
       <a
         class="border-b-2 border-white text-lg hover:scale-110 transition-all"
-        href="/work">browse all</a
+        href="/work">{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</a
       >
       <div class="flex space-x-5 splide__arrows">
         <button class="splide__arrow splide__arrow--prev">

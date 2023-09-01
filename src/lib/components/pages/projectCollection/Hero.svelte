@@ -61,7 +61,7 @@
     <img
       class="h-screen w-full object-cover object-bottom absolute top-0 left-0"
       src={PUBLIC_IMAGE_URL +
-        sectionData?.workBackgroundImage?.data?.attributes?.formats.compress.url}
+        sectionData?.workBackgroundImage?.data?.attributes?.url}
       alt={PUBLIC_IMAGE_URL +
         sectionData?.workBackgroundImage?.data?.attributes?.alternativeText}
     />
@@ -70,12 +70,14 @@
         <h1 class="work-heading text-7xl font-bold">
           {sectionData?.heroHeadingBold1}
         </h1>
-        <h1 class="italic work-heading text-7xl">
-          {sectionData?.heroHeadingItalic}
-        </h1>
-        <h1 class="work-heading text-7xl font-bold">
-          {sectionData?.heroHeadingBold2}
-        </h1>
+        {#if sectionData?.heroHeadingItalic && sectionData?.heroHeadingBold2 }
+          <h1 class="italic work-heading text-7xl">
+            {sectionData?.heroHeadingItalic}
+          </h1>
+          <h1 class="work-heading text-7xl font-bold">
+            {sectionData?.heroHeadingBold2}
+          </h1>
+        {/if}
       </span>
       <h4 id="work-hero-subtext" class="text-3xl">
         {sectionData?.heroSubtext}
