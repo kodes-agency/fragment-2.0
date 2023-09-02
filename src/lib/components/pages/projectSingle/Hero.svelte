@@ -63,7 +63,7 @@
       </div>
     </span>
     <div
-      class="absolute bottom-14 flex flex-col justify-between max-w-2xl overflow-hidden"
+      class="absolute bottom-14 portrait:left-auto landscape:right-5 landscape:md:right-auto flex flex-col max-w-2xl overflow-hidden"
     >
     {#each sectionData?.categories?.data as category }  
       <p class="heading-anm uppercase text-yellow italic font-bold text-xl">
