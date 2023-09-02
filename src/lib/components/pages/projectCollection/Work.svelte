@@ -174,13 +174,13 @@
     <button
       on:click={filterProjects}
       data-category="all"
-      class="work-button border-b-2 border-white my-5 md:my-0 text-lg transition-all mr-5 md:m-0 duration-300 lowercase whitespace-nowrap isActive"
+      class="work-button border-b-2 border-white my-5 md:my-0 text-lg transition-all mr-4 md:m-0 duration-300 lowercase whitespace-nowrap isActive"
     >
       all
     </button>
     {#each categories as category}
       <button
-        class="work-button border-b-2 border-white text-lg mr-5 md:m-0 transition-all duration-300 lowercase whitespace-nowrap"
+        class="work-button border-b-2 border-white text-lg mr-4 md:m-0 transition-all duration-300 lowercase whitespace-nowrap"
         data-category={category.attributes.category}
         on:click={filterProjects}
       >
@@ -229,13 +229,13 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-template-rows: auto;
     gap: 3vh;
-    max-width: 70vw;
+    width: 70vw;
     /* position: relative; */
   }
 
   @media only screen and (max-width: 700px) {
     .projects-wrapper {
-      max-width: 90vw;
+      width: 90vw;
       display: flex;
       flex-direction: column;
     }

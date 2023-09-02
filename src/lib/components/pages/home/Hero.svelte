@@ -62,7 +62,7 @@
     class="flex-col px-5 md:px-20 lg:px-40 opacity-0"
   >
   <!-- svelte-ignore a11y-missing-attribute -->
-    <h1 class="gradient gradient-text gradient-anm text-5xl md:text-7xl pb-5 lg:text-8xl 2xl:text-9xl font-bold">
+    <h1 class="gradient gradient-text gradient-anm text-6xl md:text-7xl pb-5 lg:text-8xl 2xl:text-9xl font-bold">
       {sectionData?.heroHeading}
     </h1>
 

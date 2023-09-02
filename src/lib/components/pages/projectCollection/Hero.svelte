@@ -84,9 +84,9 @@
           </h1>
         {/if}
       </span>
-      <h4 id="work-hero-subtext" class="text-3xl">
+      <h2 id="work-hero-subtext" class="text-2xl">
         {sectionData?.heroSubtext}
-      </h4>
+      </h2>
     </div>
     <ScrollDown />
   </section>
