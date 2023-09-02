@@ -152,7 +152,7 @@
 
 <section
   id="work"
-  class=" relative min-h-[300vh] md:min-h-[200vh] p-5 py-40 md:p-20 lg:p-40 flex flex-col items-center"
+  class=" relative min-h-[300vh] md:min-h-[200vh] p-5 py-24 md:p-20 lg:p-40 flex flex-col items-center"
   bind:this={section}
 >
   <div class="flex flex-col space-y-3 pb-10">
@@ -163,9 +163,9 @@
       {sectionData?.workHeading}
     </h2>
     <div class="overflow-hidden">
-      <h4 id="work-h4" class="md:text-center text-3xl">
+      <p id="work-h4" class="md:text-center text-2xl">
         {sectionData?.workSubtext}
-      </h4>
+      </p>
     </div>
   </div>
   <div
