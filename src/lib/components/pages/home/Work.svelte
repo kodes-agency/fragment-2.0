@@ -117,7 +117,7 @@
                 </p>
               </span>
               <div
-              class="flex flex-col justify-between"
+              class="flex flex-col portrait:justify-between landscape:justify-start landscape:items-end landscape:md:items-start landscape:md:justify-between"
             >
             {#each project?.attributes?.categories.data as category }  
               <p class="project heading-anm uppercase text-yellow italic font-bold text-xl">
