@@ -108,7 +108,7 @@
         <SplideSlide>
           <article class="h-screen w-full relative">
             <section
-              class="relative h-full z-10 p-5 portrait:py-32 landscape:py-8 landscape:md:py-32 md:p-32 flex portrait:flex-col landscape:flex-row landscape:md:flex-col justify-between"
+              class="relative h-full z-10 p-5 portrait:py-32 landscape:py-14 landscape:md:py-32 md:p-32 flex portrait:flex-col landscape:flex-row landscape:md:flex-col justify-between"
             >
               <span>
                 <h2 class="project text-2xl">{project?.attributes?.title}</h2>
@@ -139,7 +139,7 @@
     </SplideTrack>
 
     <div
-      class="absolute bottom-20 portrait:left-5 landscape:left-auto landscape:right-5 md:left-auto md:bottom-36 landscape:md:right-24 flex items-center space-x-8"
+      class="absolute portrait:bottom-20 landscape:bottom-32 portrait:left-5 landscape:left-auto landscape:right-5 md:left-auto landscape:md:bottom-36 landscape:md:right-24 flex items-center space-x-8"
     >
       <a
         class="border-b-2 border-white text-lg hover:scale-110 transition-all"
