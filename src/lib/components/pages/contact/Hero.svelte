@@ -64,7 +64,7 @@
   });
 </script>
 
-<section bind:this={section} class="h-screen opacity-0 flex flex-col justify-center px-5 lg:px-52 space-y-5">
+<section bind:this={section} class="h-[100svh] opacity-0 flex flex-col justify-center px-5 lg:px-52 space-y-5">
   <img bind:this={img} class="fixed blur-md top-0 left-0 opacity-0 w-full h-screen object-cover -z-10" src="{PUBLIC_IMAGE_URL+sectionData?.contactBgImage?.data?.attributes?.url+"?format=webp"}" alt="{sectionData?.contactBgImage?.data?.attributes?.alternativeText}">
   <h1 bind:this={heading} class="text-6xl lg:text-7xl 2xl:text-8xl font-bold max-w-screen-md ">{sectionData?.heroHeading}</h1>
   <h3 bind:this={subHeading} class="text-3xl max-w-screen-sm 2xl:max-w-screen-lg 2xl:text-4xl">{sectionData?.heroSubtextNormal} <i>{sectionData?.heroSubtextItalicBold}</i></h3>

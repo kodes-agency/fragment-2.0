@@ -44,7 +44,7 @@
     {/each}
   </div>
 </section>
-<section class="md:hidden p-5 h-screen">
+<section class="md:hidden p-5 min-h-screen">
   <div class="mb-10">
     <h2 class="text-4xl font-bold">{sectionData?.blogHeading}</h2>
     <h3 class="text-xl font-normal">{sectionData?.blogSubtext}</h3>

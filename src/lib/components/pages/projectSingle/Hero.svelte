@@ -39,7 +39,7 @@
   });
 </script>
 
-<section bind:this={section} class="relative blur-md flex min-h-screen opacity-0">
+<section bind:this={section} class="relative blur-md flex opacity-0">
   <img
     loading="lazy"
     class="absolute top-0 h-[100svh] object-center object-cover opacity-50 -z-10 w-full"

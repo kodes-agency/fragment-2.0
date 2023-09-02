@@ -56,7 +56,7 @@
 </script>
 
 
-<section class="h-screen flex items-center relative">
+<section class="h-[100svh] flex items-center relative">
   <div
     bind:this={headerWrapper}
     class="flex-col px-5 md:px-20 lg:px-40 opacity-0"

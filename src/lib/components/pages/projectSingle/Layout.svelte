@@ -36,7 +36,7 @@
             const text = new SplitText(".dynamicText-text-" + element.id, {
               type: "chars, lines",
             });
-            gsap.set(text.chars, { color: "gray", lineHeight: "1.2" });
+            gsap.set(text.chars, { color: "gray" });
             gsap.set(".lineParent", { overflow: "hidden" });
 
             const dynamicTextTl = gsap.timeline({
@@ -97,7 +97,7 @@
               type: "lines",
               linesClass: "lineParent",
             });
-            gsap.set(".lineParent", { overflow: "hidden", lineHeight: "1.2" });
+            gsap.set(".lineParent", { overflow: "hidden", lineHeight: "1" });
 
             const headingTl = gsap.timeline({
               scrollTrigger: {
@@ -256,7 +256,7 @@
             </h2>
             <div class="flex flex-col px-5 md:px-20 lg:px-56">
               <p
-                class="text-3xl md:text-5xl font-bold uppercase dynamicText-text-{element.id}"
+                class="text-2xl md:text-5xl font-bold uppercase dynamicText-text-{element.id}"
               >
                 {element.dynamicText}
               </p>

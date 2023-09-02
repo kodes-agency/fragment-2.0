@@ -61,18 +61,18 @@
 <section id="about-hero-section" class="relative opacity-0 blur-md" bind:this={section}>
   <img
     src={PUBLIC_IMAGE_URL + sectionData?.heroBgImage?.data?.attributes?.url+"?format=webp"}
-    class="absolute top-0 left-0 z-0 h-screen w-screen object-cover"
+    class="absolute top-0 left-0 z-0 h-[100svh] w-screen object-cover"
     alt={sectionData?.heroBgImage?.data?.attributes?.alternativeText}
   />
   <div
-    class="min-h-screen flex flex-col p-5 md:p-20 lg:p-40 justify-center space-y-7 relative z-10"
+    class="min-h-[100svh] flex flex-col p-5 md:p-20 lg:p-40 justify-center space-y-7 relative z-10"
   >
     <h1 id="about-hero-heading" class="text-5xl md:text-7xl font-bold">
       {sectionData?.heroHeading}
     </h1>
-    <h3 id="about-hero-subtext" class="text-3xl max-w-3xl">
+    <h2 id="about-hero-subtext" class="text-2xl max-w-3xl">
       {sectionData?.heroSubtext}
-    </h3>
+    </h2>
   </div>
   <ScrollDown />
 </section>
