@@ -59,7 +59,7 @@
     <SplideTrack>
       {#each blogs as blog}
         <SplideSlide>
-          <div class="">
+          <div class="max-w-[90vh]">
             <BlogItem
               slug={blog?.attributes.slug}
               title={blog?.attributes?.title}

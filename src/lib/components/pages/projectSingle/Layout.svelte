@@ -464,7 +464,7 @@
       {/each}
     </div>
   {/if}
-  <div class="flex justify-center items-center py-32">
+  <div class="flex justify-center items-center pt-12 pb-32">
     <div class="flex items-center w-fit justify-center gradient gradient-anm">
       <a
         class="border-2 whitespace-nowrap border-white bg-black hover:bg-[rgba(0,0,0,0.3)] text-center w-full h-full py-1 px-10"
