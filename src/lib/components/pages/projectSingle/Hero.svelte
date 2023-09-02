@@ -48,7 +48,7 @@
     alt={sectionData?.thumbnail?.data?.attributes?.alternativeText}
   />
   <div
-    class="content-wrapper relative h-[100svh] flex flex-col p-5 md:p-20 lg:p-52 justify-center"
+    class="content-wrapper relative h-[100svh] flex flex-col p-5 md:p-20 lg:p-52 justify-center w-full"
   >
     <span class="flex flex-col space-y-7 md:space-y-10">
       <div class="overflow-hidden">
@@ -63,10 +63,10 @@
       </div>
     </span>
     <div
-      class="absolute bottom-14 portrait:left-auto landscape:right-5 landscape:md:right-auto flex flex-col max-w-2xl overflow-hidden"
+      class="absolute bottom-14 portrait:left-auto landscape:right-5 landscape:md:right-auto flex flex-col overflow-hidden"
     >
     {#each sectionData?.categories?.data as category }  
-      <p class="heading-anm uppercase text-yellow italic font-bold text-xl">
+      <p class="heading-anm uppercase text-yellow italic font-bold text-xl landscape:text-end landscape:md:text-start">
           {category?.attributes?.category}
       </p>
     {/each}
