@@ -7,7 +7,6 @@
     import { page } from '$app/stores';
 
     let scrollDownTextSection: HTMLElement
-    console.log($page.data)
 
     onMount(() => {
         const ctx = gsap.context(()=>{

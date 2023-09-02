@@ -21,8 +21,6 @@
     gtag("config", "G-4N5M0K1N5X");
   }
 
-  console.log($page)
-
   function initTracking() {
     // @ts-ignore-all
     !(function (f, b, e, v, n, t, s) {

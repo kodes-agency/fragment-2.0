@@ -9,6 +9,5 @@ export const load = async ({ locals }) => {
       query: query(locals.locale)
   })
 
-  console.log(lang)
   return {lang, layoutData};
 }

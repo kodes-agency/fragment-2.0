@@ -7,8 +7,6 @@
   let user_email: string;
   let links: any;
 
-  console.log($page.data)
-
   async function userSubscribe() {
     const response = await fetch("/api/subscribe", {
       method: "POST",
