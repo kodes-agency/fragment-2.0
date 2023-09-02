@@ -223,15 +223,6 @@
     <a class="w-full text-center md:text-start" href="/">{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a>
   </div>
 </div>
-<!-- Action button on Landing pages -->
-{#if $page.route.id == "/landing/[id]"}
-  <div class="cta-button w-fit fixed bottom-10 right-5 md:bottom-10 md:right-10 lg:bottom-12 lg:right-12">
-    <a class="px-2 py-1 border-2 bg-magenta hover:bg-[rgba(0,0,0,0.5)] border-white" href={$page.data.data?.landingPage?.data?.attributes?.actionButtonLink}
-      >{$page.data.data?.landingPage?.data?.attributes?.actionButtonText}</a
-    >
-  </div>
-{/if}
-
 <style lang="postcss">
 
   nav {
@@ -243,16 +234,4 @@
     transform: rotate(45deg);
   }
 
-  .cta-button {
-    background: rgb(211, 45, 117);
-    background: linear-gradient(
-      90deg,
-      rgba(211, 45, 117, 1) 0%,
-      rgba(92, 41, 182, 1) 33%,
-      rgba(234, 207, 97, 1) 66%,
-      rgba(78, 149, 145, 1) 100%
-    );
-    background-size: 400%;
-    animation: gradient 5s ease infinite;
-  }
 </style>
