@@ -6,6 +6,9 @@ export default function(locale:string){
         homePage(locale: "${locale}") {
           data {
             attributes {
+              seoTitle
+              seoDescription
+              seoKeywords
               heroHeading
               heroSubtext
               workHeading
@@ -20,7 +23,7 @@ export default function(locale:string){
                         }
                       }
                     }
-                    category {
+                    categories {
                       data {
                         attributes {
                           category

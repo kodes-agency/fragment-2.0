@@ -7,9 +7,12 @@ export default function (locale:string, slug:string) {
             projects(locale:"${locale}", filters: {slug: {eq: "${slug}"}}){
                 data {
                     attributes {
+                        seoTitle
+                        seoDescription
+                        seoKeywords
                         title
                         slug
-                        category {
+                        categories {
                             data {
                                 attributes {
                                     category
@@ -41,33 +44,6 @@ export default function (locale:string, slug:string) {
                             ...on ComponentProjectLayoutProjectCarousel {
                                 id
                                 images {
-                                    data {
-                                        attributes {
-                                            url
-                                            formats
-                                            alternativeText
-                                        }
-                                    }
-                                }
-                            }
-                            ...on ComponentProjectLayoutBgImagaNText {
-                                id
-                                title
-                                text
-                                image {
-                                    data {
-                                        attributes {
-                                            url
-                                            formats
-                                            alternativeText
-                                        }
-                                    }
-                                }
-                            }
-                            ...on ComponentProjectLayoutBgImageNDynamicText {
-                                id
-                                dynamicText
-                                image {
                                     data {
                                         attributes {
                                             url
@@ -123,27 +99,7 @@ export default function (locale:string, slug:string) {
                             }
                             ...on ComponentProjectLayoutLargeVideo {
                                 id
-                                video {
-                                    data {
-                                        attributes {
-                                            url
-                                            formats
-                                            alternativeText
-                                        }
-                                    }
-                                }
-                            }
-                            ...on ComponentProjectLayoutInlineVideos {
-                                id
-                                Videos {
-                                    data {
-                                        attributes {
-                                            url
-                                            formats
-                                            alternativeText
-                                        }
-                                    }
-                                }
+                                videoLink
                             }
                         }
                     }

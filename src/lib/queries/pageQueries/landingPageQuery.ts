@@ -4,13 +4,17 @@ import { gql } from "@apollo/client/core/index.js";
 export default function(locale: string, slug:string) {
     const query = gql`
         query landingPage {
-            landingPage(locale:"${locale}", slug:${slug}){
+            landingPages(locale:"${locale}", filters: {slug: {eq: "${slug}"}}){
                 data {
                     attributes {
+                        seoTitle
+                        seoDescription
+                        seoKeywords
+                        slug
                         title
                         actionButtonText
                         actionButtonLink
-                        category {
+                        categories {
                             data {
                                 attributes {
                                     category
@@ -43,33 +47,6 @@ export default function(locale: string, slug:string) {
                             ...on ComponentProjectLayoutProjectCarousel {
                                 id
                                 images {
-                                    data {
-                                        attributes {
-                                            url
-                                            formats
-                                            alternativeText
-                                        }
-                                    }
-                                }
-                            }
-                            ...on ComponentProjectLayoutBgImagaNText {
-                                id
-                                title
-                                text
-                                image {
-                                    data {
-                                        attributes {
-                                            url
-                                            formats
-                                            alternativeText
-                                        }
-                                    }
-                                }
-                            }
-                            ...on ComponentProjectLayoutBgImageNDynamicText {
-                                id
-                                dynamicText
-                                image {
                                     data {
                                         attributes {
                                             url
@@ -126,27 +103,7 @@ export default function(locale: string, slug:string) {
                             }
                             ...on ComponentProjectLayoutLargeVideo {
                                 id
-                                video {
-                                    data {
-                                        attributes {
-                                            url
-                                            alternativeText
-                                            formats
-                                        }
-                                    }
-                                }
-                            }
-                            ...on ComponentProjectLayoutInlineVideos {
-                                id
-                                Videos {
-                                    data {
-                                        attributes {
-                                            url
-                                            alternativeText
-                                            formats
-                                        }
-                                    }
-                                }
+                                videoLink
                             }
                         }
                     }

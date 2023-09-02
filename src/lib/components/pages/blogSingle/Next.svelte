@@ -18,7 +18,7 @@
                 <BlogsElement
                     title={blog.attributes?.title}
                     slug={blog.attributes?.slug}
-                    img={blog.attributes?.thumbnail?.data?.attributes?.url}
+                    img={blog.attributes?.thumbnail?.data?.attributes?.url+"?format=webp"}
                     date={blog.attributes?.publishedAt}
                     alt={blog.attributes?.thumbnail?.data?.attributes?.alternativeText}
                     

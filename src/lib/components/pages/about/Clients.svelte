@@ -20,7 +20,7 @@
                     trigger: aboutClientSection,
                     start: 'top 40%',
                     end: 'bottom 80%',
-                    toggleActions: 'play none none reverse',
+                    toggleActions: 'play none none none',
                 }
             })
     
@@ -32,7 +32,7 @@
     
             aboutClientsTl.from('.client-logo', {
                 opacity: 0,
-                duration: 3,
+                duration: 2,
                 stagger: 0.2,
                 ease: 'power2.out',
             }, '-=2')
@@ -45,56 +45,30 @@
     })
 </script>
 
-<section id="about-clients-section" bind:this={aboutClientSection}>
-    <div class="section-wrapper">
+<section class="min-h-screen flex flex-col py-20 justify-center md:space-y-10" bind:this={aboutClientSection}>
         <h2
             id="about-clients-heading"
-            class="gradient gradient-anm gradient-text "
+            class="text-center text-4xl md:text-6xl font-bold p-10 gradient gradient-anm gradient-text "
         >{$page.data.data?.aboutPage?.data?.attributes?.clientsHeading}</h2>
         <div class="grid-wrapper">
-            <div class="clients-wrapper">
+            <div class="clients-wrapper p-5 md:px-20">
                 {#each clients as client }
-                    <span>
-                        <img class="client-logo" src="{PUBLIC_IMAGE_URL+client.attributes.clientLogo?.data?.attributes?.url}" alt="{client.attributes.clientLogo?.data?.attributes?.alternativeText}">
-                    </span>
+                    {#if client.attributes.clientLogo?.data }             
+                        <span>
+                            <img class="client-logo max-w-[200px] h-24 object-contain" src="{PUBLIC_IMAGE_URL+client.attributes.clientLogo?.data?.attributes?.url+"?format=webp"}" alt="{client.attributes.clientLogo?.data?.attributes?.alternativeText}">
+                        </span>
+                    {/if}
                 {/each}
             </div>
         </div>
-    </div>
 </section>
 
-<style>
-    .section-wrapper {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        padding: 10vw;
-        padding-block: 10vh;
-        justify-content: center;
-        gap: 10vh;
-    }
-
-    h2 {
-        text-align: center;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        -webkit-background-clip: text;
-        background-position: 20% 50%;
-        background-size: 150%;
-        font-weight: bold;
-    }
-
+<style lang="postcss">
     .clients-wrapper {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         align-items: center;
         justify-items: center;
-        gap: 8vh;
-    }
-
-    .client-logo {
-        max-width: 100px;
-        max-height: 100px;
-        object-fit: contain;
+        gap: 10vh;
     }
 </style>

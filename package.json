@@ -32,6 +32,7 @@
 	"type": "module",
 	"dependencies": {
 		"@apollo/client": "^3.8.1",
+		"@beyonk/gdpr-cookie-consent-banner": "^10.1.1",
 		"@mailchimp/mailchimp_marketing": "^3.0.80",
 		"@splidejs/svelte-splide": "^0.2.9",
 		"graphql": "^16.8.0",

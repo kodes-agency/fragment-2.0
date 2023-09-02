@@ -25,9 +25,14 @@
 
       const aboutHeroTl = gsap.timeline({});
 
+      aboutHeroTl.to(section, {
+        filter: "blur(0px)",
+        opacity: 1,
+        duration: 1,
+      })
+
       aboutHeroTl.from("#about-hero-heading", {
         opacity: 0,
-        delay: 1,
         duration: 3,
         ease: "power2.out",
       });
@@ -53,9 +58,9 @@
   });
 </script>
 
-<section id="about-hero-section" class="relative" bind:this={section}>
+<section id="about-hero-section" class="relative opacity-0 blur-md" bind:this={section}>
   <img
-    src={PUBLIC_IMAGE_URL + sectionData?.heroBgImage?.data?.attributes?.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.heroBgImage?.data?.attributes?.url+"?format=webp"}
     class="absolute top-0 left-0 z-0 h-screen w-screen object-cover"
     alt={sectionData?.heroBgImage?.data?.attributes?.alternativeText}
   />

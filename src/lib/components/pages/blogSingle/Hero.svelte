@@ -19,9 +19,15 @@
         start: "top 0%",
         end: "bottom 40%",
         scrub: true,
-        toggleActions: "play none none reset",
+        toggleActions: "play none none none",
       },
     });
+
+    gsap.to(section, {
+      opacity: 1,
+      filter: "blur(0px)",
+      duration: 0.5
+    })
 
     singleBlogHeroTl2.to(blogWrapper, {
       width: "100%",
@@ -42,12 +48,12 @@
 
 <section
   bind:this={section}
-  class="relative flex flex-col justify-end items-center min-h-screen"
+  class="relative blur-md flex flex-col justify-end opacity-0 items-center min-h-screen"
 >
   <img
     class="absolute w-screen min-h-screen object-cover top-0 left-0 z-0 opacity-10"
     src={PUBLIC_IMAGE_URL +
-      sectionData?.thumbnail?.data?.attributes?.url}
+      sectionData?.thumbnail?.data?.attributes?.url+"?format=webp"}
     alt={sectionData?.thumbnail?.data?.attributes?.alternativeText}
   />
   <article bind:this={blogWrapper} class="wrapper z-10 bg-white">
@@ -55,7 +61,7 @@
       <img
         class="w-full h-full object-cover"
         src={PUBLIC_IMAGE_URL +
-          sectionData?.thumbnail?.data?.attributes?.url}
+          sectionData?.thumbnail?.data?.attributes?.url+"?format=webp"}
         alt={sectionData?.thumbnail?.data?.attributes?.alternativeText}
       />
       <div

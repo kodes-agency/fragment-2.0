@@ -13,8 +13,7 @@
   let projects: { attributes: Project }[];
   $: sectionData = $page.data.data?.homePage?.data?.attributes;
   // @ts-expect-error
-  $: projects =
-    $page.data.data?.homePage?.data?.attributes?.featuredProjects?.data;
+  $: projects = $page.data.data?.homePage?.data?.attributes?.featuredProjects?.data;
 
   let section: HTMLElement;
   let projectElements: any;
@@ -117,14 +116,20 @@
                   {project?.attributes?.client?.data?.attributes?.clientName}
                 </p>
               </span>
-              <p class="project font-bold text-xl italic uppercase text-yellow">
-                {project?.attributes?.category?.data?.attributes?.category}
+              <div
+              class="flex flex-col justify-between"
+            >
+            {#each project?.attributes?.categories.data as category }  
+              <p class="project heading-anm uppercase text-yellow italic font-bold text-xl">
+                  {category?.attributes?.category}
               </p>
+            {/each}
+            </div>
             </section>
             <img
               class="absolute top-0 opacity-50 left-0 h-screen w-screen object-cover"
               src={PUBLIC_IMAGE_URL +
-                project.attributes.thumbnail?.data?.attributes?.url}
+                project.attributes.thumbnail?.data?.attributes?.url+"?format=webp"}
               alt={project.attributes.thumbnail?.data?.attributes
                 ?.alternativeText}
             />

@@ -15,6 +15,9 @@ export default function (locale: string) {
                                 }
                             }
                         }
+                        seoTitle
+                        seoDescription
+                        seoKeywords
                         heroHeadingBold
                         heroHeadingItalic
                         heroSubtext

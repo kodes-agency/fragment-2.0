@@ -6,6 +6,9 @@ export default function(locale: string) {
             aboutPage(locale: "${locale}"){
                 data {
                     attributes {
+                        seoTitle
+                        seoDescription
+                        seoKeywords
                         heroHeading
                         heroSubtext
                         heroBgImage {
@@ -28,7 +31,7 @@ export default function(locale: string) {
                     }
                 }
             }
-            services{
+            services(locale: "${locale}"){
                 data {
                     id
                     attributes {

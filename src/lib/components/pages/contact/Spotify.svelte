@@ -20,7 +20,7 @@
                     trigger: section,
                     start: "top 50%",
                     end: "bottom 80%",
-                    toggleActions: "play none none reverse",
+                    toggleActions: "play none none none",
                 }
             });
     

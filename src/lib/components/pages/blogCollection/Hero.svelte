@@ -23,12 +23,17 @@
             new SplitText('#blogs-hero-subtext', {type: 'lines', linesClass: 'parentLine'})
             gsap.set('.parentLine', {overflow: 'hidden'})
             const blogsHeroTl = gsap.timeline({})
+
+            blogsHeroTl.to(section, {
+                filter: "blur(0px)",
+                opacity: 1.5,
+                duration: 1,
+            })
     
             blogsHeroTl.from('.heading', {
                 opacity: 0,
                 duration: 3,
                 stagger: 0.3,
-                delay: 1,
                 ease: 'power2.out'
             })
     
@@ -50,8 +55,8 @@
     
 </script>
 
-<section bind:this={section} class="relative h-screen">
-    <img class="absolute top-0 left-0 w-screen h-screen object-cover object-bottom opacity-70 z-0" src={PUBLIC_IMAGE_URL+sectionData?.heroImage?.data?.attributes?.url} alt={sectionData?.heroImage?.data?.attributes?.alternativeText}>
+<section bind:this={section} class="relative blur-md h-screen opacity-0">
+    <img class="absolute top-0 left-0 w-screen h-screen object-cover object-bottom opacity-70 z-0" src={PUBLIC_IMAGE_URL+sectionData?.heroImage?.data?.attributes?.url+"?format=webp"} alt={sectionData?.heroImage?.data?.attributes?.alternativeText}>
         <div class="relative z-10 flex flex-col justify-center h-full px-5 md:px-20 lg:px-40 space-y-3">
             <span class="flex flex-wrap">
                 <h1 class="heading text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl font-bold">{sectionData?.heroHeadingBold}</h1>

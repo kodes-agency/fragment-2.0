@@ -11,6 +11,9 @@ export default function (locale:string) {
                             menuItem
                             link
                         }
+                        seoTitle
+                        seoDescription
+                        seoKeywords
                         privacyMenuItem
                         scrollDown
                         letsTalk
@@ -32,6 +35,27 @@ export default function (locale:string) {
                         emailLink
                         phoneName
                         phoneLink
+                    }
+                }
+            }
+            cookiesPolicy(locale: "${locale}") {
+                data {
+                    attributes {
+                        bannerHeading
+                        bannerDescription
+                        acceptLabel
+                        rejectLabel
+                        settingsLabel
+                        closeLabel
+                        editLabel
+                        necessaryLabel
+                        necessaryDescription
+                        trackingLabel
+                        trackingDescription
+                        analyticsLabel
+                        analyticsDescription
+                        marketingLabel
+                        marketingDescription
                     }
                 }
             }

@@ -12,7 +12,7 @@
 
   let layout: ProjectLayoutDynamicZone[];
   // @ts-expect-error
-  $: layout = $page.data.data?.projects?.data[0].attributes?.layout;
+  $: layout = $page.data.data?.landingPages?.data[0].attributes?.layout;
 
   let projectLayoutSection;
 

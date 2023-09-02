@@ -26,13 +26,26 @@
   // @ts-ignore
   $: projects = $page.data.data?.projects?.data;
 
+  function categoryHandler(arr:[]){
+    if (!Array.isArray(arr)) {
+      throw new Error('Input is not an array');
+    }
+
+    let categoriesString:any = []
+
+    arr.forEach((category)=>{
+      categoriesString.push(category.attributes.category)
+    })
+
+    return categoriesString
+  }
+
   onMount(() => {
     if($page.url.search != "?repeat=true"){
     const ctx = gsap.context(() => {
             const workH4split = new SplitText("#work-h4", { type: "lines" });
             new SplitText("#work-h4", { type: "lines", linesClass: "parentLine" });
             gsap.set(".parentLine", { overflow: "hidden" });
-            let filterButtons = document.querySelectorAll(".work-button");
       
             const workWrokTl = gsap.timeline({
               scrollTrigger: {
@@ -44,7 +57,7 @@
       
             workWrokTl.from("#work-h2", {
               opacity: 0,
-              duration: 3,
+              duration: 1,
               ease: "power2.out",
             });
       
@@ -56,10 +69,9 @@
                 transformOrigin: "0% 50% -50",
                 duration: 1,
                 ease: "power3.out",
-                stagger: 0.15,
                 opacity: 0,
               },
-              "-=2.5"
+              "-=0.5"
             );
       
             workWrokTl.fromTo(
@@ -71,7 +83,7 @@
                 autoAlpha: 1,
                 stagger: 0.2,
               },
-              "-=1.5"
+              "-=0.3"
             );
       
             workWrokTl.from(
@@ -110,7 +122,7 @@
     } else {
       projectItems.forEach((project) => {
         // @ts-expect-error
-        if (project.dataset.category != event.target.dataset.category) {
+        if (!project.dataset.category.includes(event.target.dataset.category)) {
           // @ts-expect-error
           project.style.display = "none";
         } else {
@@ -140,7 +152,7 @@
 
 <section
   id="work"
-  class=" relative min-h-[200vh] md:min-h-[130vh] p-5 py-40 md:p-20 lg:p-40 flex flex-col items-center"
+  class=" relative min-h-[300vh] md:min-h-[200vh] p-5 py-40 md:p-20 lg:p-40 flex flex-col items-center"
   bind:this={section}
 >
   <div class="flex flex-col space-y-3 pb-10">
@@ -180,14 +192,14 @@
     {#each projects as project}
       <div
         class="grid-item md:max-w-[28vw]"
-        data-category={project.attributes.category?.data?.attributes?.category}
+        data-category={categoryHandler(project.attributes.categories.data)}
       >
         <ProjectItem
           slug={project.attributes.slug}
           title={project.attributes.title}
           client={project.attributes.client?.data?.attributes?.clientName}
           category={project.attributes.category?.data?.attributes?.category}
-          img={project.attributes.thumbnail?.data?.attributes?.url}
+          img={project.attributes.thumbnail?.data?.attributes?.url+"?format=webp"}
           alt={project.attributes.thumbnail?.data?.attributes?.alternativeText}
         />
       </div>

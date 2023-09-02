@@ -161,14 +161,14 @@
     bind:this={img1}
     class="img"
     id="img1"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage1?.data?.attributes?.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage1?.data?.attributes?.url+"?format=webp"}
     alt={sectionData?.servicesImage1?.data?.attributes?.alternativeText}
   />
   <img
     bind:this={img2}
     class="img"
     id="img2"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage2?.data?.attributes?.url}
+    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage2?.data?.attributes?.url+"?format=webp"}
     alt={sectionData?.servicesImage2?.data?.attributes?.alternativeText}
   />
   <div class="flex md:p-auto flex-col space-y-20">

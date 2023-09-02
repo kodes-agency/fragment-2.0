@@ -6,6 +6,9 @@ export default function (locale: string) {
             workPage(locale:"${locale}"){
                 data {
                     attributes {
+                        seoTitle
+                        seoDescription
+                        seoKeywords
                         heroHeadingBold1
                         heroHeadingItalic
                         heroHeadingBold2
@@ -29,7 +32,7 @@ export default function (locale: string) {
                     attributes {
                         slug
                         title
-                        category {
+                        categories {
                             data {
                                 attributes {
                                     category

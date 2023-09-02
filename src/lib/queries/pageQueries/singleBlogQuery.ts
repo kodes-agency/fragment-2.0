@@ -7,6 +7,9 @@ export default function(locale:string, slug:string) {
             blogs(locale:"${locale}", filters: {slug: {eq: "${slug}"}}){
                 data {
                     attributes {
+                        seoTitle
+                        seoDescription
+                        seoKeywords
                         title
                         slug
                         thumbnail {
