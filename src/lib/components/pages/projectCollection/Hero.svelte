@@ -61,10 +61,10 @@
 {#if $page.url.search != "?repeat=true"}
   <section
     bind:this={section}
-    class="relativ flex flex-col blur-md justify-center h-[100svh] opacity-0"
+    class="relativ flex flex-col blur-md justify-center h-[100svh] min-h-[90vh] opacity-0"
   >
     <img
-      class="h-[100svh] w-full object-cover object-bottom absolute top-0 left-0"
+      class="h-[100svh] min-h-[90vh] w-full object-cover object-bottom absolute top-0 left-0"
       src={PUBLIC_IMAGE_URL +
         sectionData?.workBackgroundImage?.data?.attributes?.url+"?format=webp"}
       alt={PUBLIC_IMAGE_URL +

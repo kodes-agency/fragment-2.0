@@ -61,11 +61,11 @@
 <section id="about-hero-section" class="relative opacity-0 blur-md" bind:this={section}>
   <img
     src={PUBLIC_IMAGE_URL + sectionData?.heroBgImage?.data?.attributes?.url+"?format=webp"}
-    class="absolute top-0 left-0 z-0 h-[100svh] w-screen object-cover"
+    class="absolute top-0 left-0 z-0 h-[100svh] min-h-[90vh] w-screen object-cover"
     alt={sectionData?.heroBgImage?.data?.attributes?.alternativeText}
   />
   <div
-    class="min-h-[100svh] flex flex-col p-5 md:p-20 lg:p-40 justify-center space-y-7 relative z-10"
+    class="h-[100svh] min-h-[90vh] flex flex-col p-5 md:p-20 lg:p-40 justify-center space-y-7 relative z-10"
   >
     <h1 id="about-hero-heading" class="text-5xl md:text-7xl font-bold">
       {sectionData?.heroHeading}
