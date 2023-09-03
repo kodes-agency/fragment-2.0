@@ -42,13 +42,13 @@
 <section bind:this={section} class="relative blur-md flex opacity-0">
   <img
     loading="lazy"
-    class="absolute top-0 h-[100svh] object-center object-cover opacity-50 -z-10 w-full"
+    class="absolute top-0 h-[100svh] min-h-[90vh] object-center object-cover opacity-50 -z-10 w-full"
     src={PUBLIC_IMAGE_URL +
       sectionData?.thumbnail?.data?.attributes?.url+"?format=webp"}
     alt={sectionData?.thumbnail?.data?.attributes?.alternativeText}
   />
   <div
-    class="content-wrapper relative h-[100svh] flex flex-col p-5 md:p-20 lg:p-52 justify-center w-full"
+    class="content-wrapper relative h-[100svh] min-h-[90vh] flex flex-col p-5 md:p-20 lg:p-52 justify-center w-full"
   >
     <span class="flex flex-col space-y-7 md:space-y-10">
       <div class="overflow-hidden">
