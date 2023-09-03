@@ -6,13 +6,15 @@
     let blogs: {id:number, attributes: Blog}[]
     $: blogs = $page.data.singleBlogPage?.data?.blogs?.data
 
+    console.log($page.data)
+
     let displayBlogs: {id:number, attributes: Blog}[]
     $: displayBlogs = blogs.filter(blog=>{return blog.attributes.slug != $page.params.slug}).sort(() => 0.5 - Math.random()).slice(0,3)
 
 </script>
  
 <section class="flex flex-col items-center justify-center p-7 py-20 md:p-20 lg:p-40 space-y-12">
-        <h2 class="center font-bold text-4xl md:text-5xl gradient gradient-anm gradient-text py-5">You may also find interesting to read:</h2>
+        <h2 class="center font-bold text-4xl md:text-5xl gradient gradient-anm gradient-text py-5">{$page.data?.layoutData?.data?.menu?.data?.attributes?.youMayFindInteresting}</h2>
         <div class="blogs-wrapper">
             {#each displayBlogs as blog}
                 <BlogsElement

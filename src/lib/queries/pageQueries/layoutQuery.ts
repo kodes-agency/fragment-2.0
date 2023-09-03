@@ -35,6 +35,7 @@ export default function (locale:string) {
                         emailLink
                         phoneName
                         phoneLink
+                        youMayFindInteresting
                     }
                 }
             }
