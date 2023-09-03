@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition'
 	import { getAccordionOptions } from './context'
+	import { v4 as uuidv4 } from 'uuid';
+
 
 	// by default the accordion item is closed
 	export let open = false
 
 	// assign a unique identifier for the component
-	const componentId = crypto.randomUUID()
+	const componentId = uuidv4()
 
 	// get the accordion options using the context api
 	const { collapse, activeComponentId } = getAccordionOptions()
