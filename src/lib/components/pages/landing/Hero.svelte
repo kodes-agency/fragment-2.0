@@ -81,7 +81,7 @@
 </section>
 
 <div
-  class="w-fit fixed bottom-20 right-5 md:right-10 lg:bottom-20 lg:right-10 z-20"
+  class="w-fit fixed bottom-10 right-5 md:right-10 lg:right-12 z-20"
 >
   <a
     class="px-2 py-1 border-2 bg-magenta hover:bg-[rgba(0,0,0,0.5)] border-white"

@@ -256,7 +256,7 @@
             </h2>
             <div class="flex flex-col px-5 md:px-20 lg:px-56">
               <p
-                class="text-3xl md:text-5xl font-bold uppercase dynamicText-text-{element.id}"
+                class="text-2xl md:text-5xl font-bold uppercase dynamicText-text-{element.id}"
               >
                 {element.dynamicText}
               </p>
@@ -401,7 +401,7 @@
         <!-- Paragraph -->
         {#if element.__typename == "ComponentProjectLayoutParagraph"}
           <div class="flex flex-col px-5 md:px-20 lg:px-56">
-            <p class="paragraph-{element.id} text-2xl">{element.paragraph}</p>
+            <p class="paragraph-{element.id} text-xl">{element.paragraph}</p>
           </div>
         {/if}
 
