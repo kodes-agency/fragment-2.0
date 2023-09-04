@@ -32,6 +32,7 @@
         <p class="border-b border-white text-sm w-fit">{$page.data.layoutData?.data?.menu?.data?.attributes?.readFullArticle}</p>
       </div>
       <img
+        loading="lazy"
         class="absolute top-0 left-0 w-full h-full object-cover opacity-40 scale-110 z-0 transition-all duration-500"
         src={PUBLIC_IMAGE_URL + img}
         {alt}

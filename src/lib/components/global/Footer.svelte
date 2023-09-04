@@ -69,7 +69,7 @@
       class="flex flex-col items-center space-y-8 md:space-y-4 md:items-end justify-between"
     >
       <div class="flex space-x-6">
-        <a class="footer-links transition-all" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.linkedinLink}>
+        <a class="footer-links transition-all" aria-label="linkedin" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.linkedinLink}>
           <svg
             width="20"
             height="20"
@@ -83,7 +83,7 @@
             />
           </svg>
         </a>
-        <a class="footer-links transition-all" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.instagramLink}>
+        <a class="footer-links transition-all" aria-label="instagram" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.instagramLink}>
           <svg
             width="21"
             height="20"
@@ -97,7 +97,7 @@
             />
           </svg>
         </a>
-        <a class="footer-links transition-all" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.facebookLink}>
+        <a class="footer-links transition-all" aria-label="facebook" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.facebookLink}>
           <svg
             width="12"
             height="20"

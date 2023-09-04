@@ -70,6 +70,7 @@
     <!-- Logo container  -->
     <div class="">
       <a
+        aria-label="Home page"
         href="/"
         on:click={() => {
           if (isOpen == true) {
@@ -85,7 +86,7 @@
           viewBox="0 0 200 28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          class="hover:scale-110 transition-all"
+          class=""
         >
           <g clip-path="url(#clip0_137_13)">
             <path
@@ -143,6 +144,8 @@
       </div>
       <!-- Navigation button -->
       <button
+        id="toggle"
+        aria-label="Menu toggle button"
         class="transition-all {isOpen ? "isRotated" : ""}"
         on:click={() => {
           initMenuAnimation();
@@ -154,7 +157,7 @@
           viewBox="0 0 22 22"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          class="transition-all hover:scale-125"
+          class=""
         >
           <line
             x1="1"

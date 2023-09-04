@@ -37,7 +37,7 @@
           slug={blog?.attributes.slug}
           title={blog?.attributes?.title}
           date={blog.attributes.publishedAt}
-          img={blog.attributes.thumbnail?.data?.attributes?.url+"?format=webp"}
+          img={blog.attributes.thumbnail?.data?.attributes?.url+"?format=webp&resize=400x400&embed"}
           alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
         />
       </div>
@@ -64,7 +64,7 @@
               slug={blog?.attributes.slug}
               title={blog?.attributes?.title}
               date={blog.attributes.publishedAt}
-              img={blog.attributes.thumbnail?.data?.attributes?.url+"?format=webp"}
+              img={blog.attributes.thumbnail?.data?.attributes?.url+"?format=webp&resize=400x400&embed"}
               alt={blog.attributes.thumbnail?.data?.attributes?.alternativeText}
             />
           </div>

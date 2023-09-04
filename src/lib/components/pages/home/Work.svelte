@@ -95,10 +95,10 @@
   }}
 >
   <div bind:this={section} class="relative">
-    <div class="absolute top-1/3 lg:top-1/4 px-5 md:px-32 z-20">
+    <div class="absolute h-screen top-0 flex flex-col justify-center px-5 md:px-32 z-10">
       <h2
         bind:this={sectionHeading}
-        class="text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl xl:max-w-4xl 2xl:max-w-5xl font-bold"
+        class="text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl xl:max-w-4xl 2xl:max-w-5xl font-bold pb-10"
       >
         {sectionData?.workHeading}
       </h2>
@@ -108,7 +108,7 @@
         <SplideSlide>
           <article class="h-screen w-full relative">
             <section
-              class="relative h-full z-10 p-5 portrait:py-32 landscape:py-14 landscape:md:py-32 md:p-32 flex portrait:flex-col landscape:flex-row landscape:md:flex-col justify-between"
+              class="relative h-full z-10 p-5 portrait:py-32 landscape:py-14 landscape:md:py-28 md:p-32  flex portrait:flex-col landscape:flex-row landscape:md:flex-col justify-between"
             >
               <span>
                 <h2 class="project text-2xl">{project?.attributes?.title}</h2>
@@ -116,30 +116,28 @@
                   {project?.attributes?.client?.data?.attributes?.clientName}
                 </p>
               </span>
-              <div
+            <div
               class="flex flex-col portrait:justify-between landscape:justify-start landscape:items-end landscape:md:items-start landscape:md:justify-between"
             >
-            {#each project?.attributes?.categories.data as category }  
-              <p class="project heading-anm uppercase text-yellow italic font-bold text-xl">
-                  {category?.attributes?.category}
-              </p>
-            {/each}
+              {#each project?.attributes?.categories.data as category }  
+                <p class="project heading-anm uppercase text-yellow italic font-bold text-xl">
+                    {category?.attributes?.category}
+                </p>
+              {/each}
             </div>
             </section>
-            <img
-              class="absolute top-0 opacity-50 left-0 h-screen w-screen object-cover"
-              src={PUBLIC_IMAGE_URL +
-                project.attributes.thumbnail?.data?.attributes?.url+"?format=webp"}
-              alt={project.attributes.thumbnail?.data?.attributes
-                ?.alternativeText}
-            />
+            <picture>
+              <source media="(min-width: 900px)" srcset={PUBLIC_IMAGE_URL+project.attributes.thumbnail?.data?.attributes?.url+"?format=webp&resize=1440x1024&embed"}>
+              <source media="(min-width: 500px)" srcset={PUBLIC_IMAGE_URL+project.attributes.thumbnail?.data?.attributes?.url+"?format=webp&resize=744x1133&embed"}>
+              <img loading="lazy" class="absolute top-0 opacity-50 left-0 h-screen w-screen object-cover" src={PUBLIC_IMAGE_URL + project.attributes.thumbnail?.data?.attributes?.url+"?format=webp&resize=400x900&embed"} alt={project.attributes.thumbnail?.data?.attributes?.alternativeText}>
+            </picture>
           </article>
         </SplideSlide>
       {/each}
     </SplideTrack>
 
     <div
-      class="absolute portrait:bottom-20 landscape:bottom-32 portrait:left-5 landscape:left-auto landscape:right-5 md:left-auto landscape:md:bottom-36 landscape:md:right-24 flex items-center space-x-8"
+      class="absolute z-20 portrait:bottom-20 landscape:bottom-32 portrait:left-5 landscape:left-auto landscape:right-5 md:left-auto landscape:md:bottom-32 landscape:md:right-24 flex items-center space-x-8"
     >
       <a
         class="border-b-2 border-white text-lg hover:scale-110 transition-all"

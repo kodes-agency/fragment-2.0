@@ -157,20 +157,14 @@
   class="relative flex flex-col justify-center items-center h-screen p-5"
   bind:this={section}
 >
-  <img
-    bind:this={img1}
-    class="img"
-    id="img1"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage1?.data?.attributes?.url+"?format=webp"}
-    alt={sectionData?.servicesImage1?.data?.attributes?.alternativeText}
-  />
-  <img
-    bind:this={img2}
-    class="img"
-    id="img2"
-    src={PUBLIC_IMAGE_URL + sectionData?.servicesImage2?.data?.attributes?.url+"?format=webp"}
-    alt={sectionData?.servicesImage2?.data?.attributes?.alternativeText}
-  />
+  <picture>
+    <source media="(min-width: 600px)" srcset={PUBLIC_IMAGE_URL+sectionData?.servicesImage1?.data?.attributes?.url+"?format=webp&resize=800x500"} >
+    <img class="img" id="img1" bind:this={img1} loading="lazy" src={PUBLIC_IMAGE_URL+sectionData?.servicesImage1?.data?.attributes?.url+"?format=webp&resize=400x700"} alt={sectionData?.servicesImage1?.data?.attributes?.alternativeText}>
+  </picture>
+  <picture>
+    <source media="(min-width: 600px)" srcset={PUBLIC_IMAGE_URL+sectionData?.servicesImage2?.data?.attributes?.url+"?format=webp&resize=800x500"} >
+    <img class="img" id="img2" bind:this={img2} loading="lazy" src={PUBLIC_IMAGE_URL+sectionData?.servicesImage2?.data?.attributes?.url+"?format=webp&resize=400x700"} alt={sectionData?.servicesImage1?.data?.attributes?.alternativeText}>
+  </picture>
   <div class="flex md:p-auto flex-col space-y-20">
     <div class="flex flex-col space-y-5">
       <div class="flex flex-col md:flex-row">
@@ -227,28 +221,26 @@
 
   @media only screen and (max-width: 950px) {
     .img {
-      position: absolute;
       aspect-ratio: 9/16;
-      object-fit: cover;
-      object-position: center;
       width: auto;
       max-height: 50vh;
     }
 
     #img1 {
-      bottom: 28vh;
-      right: 5vw;
-      left: auto;
-      z-index: -2;
-      width: 60vw;
+      bottom: 35vh;
+      right: auto;
+      left: 5vw;
+      z-index: -1;
+      width: 55vw;
     }
 
     #img2 {
-      top: 15vh;
-      left: 5vw;
-      right: auto;
-      z-index: -1;
-      width: 50vw;
+      top:auto;
+      bottom: 20vh;
+      right: 5vw;
+      left: auto;
+      z-index: -2;
+      width: 55vw;
     }
 
     #subtext {
