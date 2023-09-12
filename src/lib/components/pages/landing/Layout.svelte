@@ -309,7 +309,7 @@
                 alt={element.image?.data?.attributes?.alternativeText}
               />
               <span>
-                <p class="text-3xl">{element.text}</p>
+                <p class="text-2xl md:text-3xl">{element.text}</p>
               </span>
             </div>
           </div>
