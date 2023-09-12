@@ -23,7 +23,7 @@
   <a
   data-sveltekit-reload
     href={substituteLangParameter($page.route.id, "en", $page.params.slug)}
-    class="cursor-pointer transition-all hover:text-yellow text-xl {$page.params.lang == 'en' ? "font-bold" : "font-normal"}"
+    class="cursor-pointer transition-all hover:text-yellow text-xl {$page.params.lang == 'en' || !$page.params.lang ? "font-bold" : "font-normal"}"
   >
     EN
   </a>
