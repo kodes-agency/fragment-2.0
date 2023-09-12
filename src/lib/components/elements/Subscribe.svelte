@@ -32,7 +32,7 @@
         bind:this={subscriptionInput}
         type="text"
         name="subscribe-email"
-        class="ml-10 outline-none italic bg-black"
+        class="outline-none text-center italic bg-black"
         bind:value={user_email}
         on:focus={() => {
           cursor.style.display = "none";
@@ -46,7 +46,7 @@
       <p
         id="cursor"
         bind:this={cursor}
-        class="absolute top-0 right-7 animate-[cursor_1s_step-start_0s_infinite]"
+        class="absolute top-0 right-0 animate-[cursor_1s_step-start_0s_infinite]"
       >
         |
       </p>

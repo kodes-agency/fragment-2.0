@@ -184,7 +184,7 @@
 </nav>
 <!-- Navigation menu modal -->
 <div
-  class="menu hidden opacity-0 bg-black fixed top-0 py-5 px-5 md:px-10 lg:px-12 z-40 flex-col min-h-screen justify-end space-y-10 items-center w-full"
+  class="menu hidden opacity-0 bg-black fixed top-0 py-5 px-5 md:px-10 lg:px-12 z-40 flex-col min-h-screen justify-end space-y-6 md:space-y-10 items-center w-full"
 >
   <div class="flex flex-col space-y-5">
     <!-- Navigation links -->
@@ -223,7 +223,7 @@
     class="flex flex-col items-center space-y-4 nav-animation w-full"
   >
     <div class="bg-white h-px w-full" />
-    <a class="w-full text-center md:text-start" href="{$page.params.lang ? "/"+$page.params.lang : ""}/privacy">{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a>
+    <a class="w-full text-center md:text-start pb-8 mb:pb-0" href="{$page.params.lang ? "/"+$page.params.lang : ""}/privacy">{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a>
   </div>
 </div>
 <style lang="postcss">

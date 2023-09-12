@@ -23,14 +23,14 @@
   <a
   data-sveltekit-reload
     href={substituteLangParameter($page.route.id, "en", $page.params.slug)}
-    class="cursor-pointer peer-checked:font-bold peer-checked:italic transition-all hover:text-yellow text-xl"
+    class="cursor-pointer transition-all hover:text-yellow text-xl {$page.params.lang == 'en' ? "font-bold" : "font-normal"}"
   >
     EN
   </a>
   <a 
     data-sveltekit-reload
     href={substituteLangParameter($page.route.id, "bg", $page.params.slug)}
-    class="cursor-pointer peer-checked:font-bold peer-checked:italic transition-all hover:text-yellow text-xl"
+    class="cursor-pointer transition-all hover:text-yellow text-xl {$page.params.lang == 'bg' ? "font-bold" : "font-normal"}"
   >
     БГ
   </a>
