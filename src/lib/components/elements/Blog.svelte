@@ -13,7 +13,7 @@
 
 <article class="">
   <a
-    href="/blog/{slug}"
+    href="{$page.params.lang ? "/"+$page.params.lang : ""}/blog/{slug}"
     on:mouseenter={(event) => {
       imgElement.style.opacity = "0.6";
       imgElement.style.transform = "scale(1)";

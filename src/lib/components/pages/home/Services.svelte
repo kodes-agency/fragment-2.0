@@ -189,7 +189,7 @@
     <div id="service-button">
       <a
         class="border-b-2 border-cyan text-lg"
-        href="/{$page.params.lang ? $page.params.lang + '/' : ''}about"
+        href="{$page.params.lang ? "/"+$page.params.lang : ""}/about"
         >{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</a
       >
     </div>

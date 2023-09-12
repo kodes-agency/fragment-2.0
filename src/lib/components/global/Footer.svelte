@@ -7,6 +7,16 @@
   let user_email: string;
   let links: any;
 
+  let langParam:string
+  
+  if($page.params.lang == "en" || $page.params.lang == "bg"){
+    langParam = $page.params.lang+"/"
+  } else {
+    langParam = ""
+  }
+
+  
+
   async function userSubscribe() {
     const response = await fetch("/api/subscribe", {
       method: "POST",
@@ -60,7 +70,7 @@
       {#each $page.data.layoutData?.data?.menu?.data?.attributes?.menuItems as item } 
         <a
           class="footer-links transition-all text-black text-xl"
-          href={item?.link}
+          href="{$page.params.lang ? "/"+$page.params.lang : ""}{item?.link}"
           data-sveltekit-preload-data="tap">{item?.menuItem}</a
         >
       {/each}
@@ -135,7 +145,7 @@
             class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-3"
           >
             <input
-              class="bg-white border border-black text-black text-center text-md h-8 w-56"
+              class="bg-white border border-black rounded-none text-black text-center text-md h-8 w-56"
               type="text"
               name="subscribe-email"
               placeholder="{$page.data.layoutData?.data?.menu?.data?.attributes?.subscribePlaceholder}"
@@ -162,7 +172,7 @@
   </section>
   <div class="flex flex-col justify-center">
     <div class="w-full h-px bg-black mt-10 mb-2" />
-    <a href="/policy" class="text-black text-center md:text-start text-md"
+    <a href="{$page.params.lang ? "/"+$page.params.lang : ""}/policy" class="text-black text-center md:text-start text-md"
       >{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a
     >
   </div>

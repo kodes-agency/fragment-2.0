@@ -28,7 +28,7 @@
             {/each}
         </div>
         <div class="gradient gradient-anm">
-            <a class="py-1 px-10 border border-white h-full w-full bg-black hover:bg-[rgba(0,0,0,0.2)]" href="/blog?repeat=true#collection">{$page.data.layoutData?.data?.menu?.data?.attributes?.viewAllBlogs}</a>
+            <a class="py-1 px-10 border border-white h-full w-full bg-black hover:bg-[rgba(0,0,0,0.2)]" href="{$page.params.lang ? "/"+$page.params.lang : ""}/blog?repeat=true#collection">{$page.data.layoutData?.data?.menu?.data?.attributes?.viewAllBlogs}</a>
         </div>
 </section>
 

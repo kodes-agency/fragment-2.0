@@ -468,7 +468,7 @@
     <div class="flex items-center w-fit justify-center gradient gradient-anm">
       <a
         class="border-2 whitespace-nowrap border-white bg-black hover:bg-[rgba(0,0,0,0.3)] text-center w-full h-full py-1 px-10"
-        href="/work?repeat=true"
+        href="{$page.params.lang ? "/"+$page.params.lang : ""}/work?repeat=true"
         >{$page.data.layoutData?.data?.menu?.data?.attributes?.moreWork}</a
       >
     </div>

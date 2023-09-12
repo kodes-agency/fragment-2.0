@@ -21,7 +21,7 @@
     <div
       class="flex flex-col justify-between col-span-2 2xl:col-span-3 element gradient transition-all z-10 gradient-anm h-80 2xl:h-96"
     >
-      <a class="h-full w-full transition-all" href="/blog">
+      <a class="h-full w-full transition-all" href="{$page.params.lang ? "/"+$page.params.lang : ""}/blog">
         <div class="h-full p-5 relative flex flex-col justify-between">
           <div class="">
             <h2 class="text-5xl font-bold">{sectionData?.blogHeading}</h2>
@@ -75,7 +75,7 @@
     <div class="flex justify-between mt-10">
       <a
         class="border-b-2 border-white text-lg hover:scale-110 transition-all"
-        href="/work">{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</a
+        href="{$page.params.lang ? "/"+$page.params.lang : ""}/work">{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</a
       >
       <div class="flex space-x-5 splide__arrows">
         <button class="splide__arrow splide__arrow--prev">

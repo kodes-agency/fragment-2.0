@@ -71,7 +71,7 @@
     <div class="">
       <a
         aria-label="Home page"
-        href="/"
+        href="{$page.params.lang ? "/"+$page.params.lang : ""}/"
         on:click={() => {
           if (isOpen == true) {
             initMenuAnimation();
@@ -200,7 +200,7 @@
             linkMouseLeaveAnimation();
           }}
           data-sveltekit-preload-data="tap"
-          href="{item?.link}"
+          href="{$page.params.lang ? "/"+$page.params.lang : ""}{item?.link}"
           >{item?.menuItem}
         </a>
       {/each}
@@ -223,7 +223,7 @@
     class="flex flex-col items-center space-y-4 nav-animation w-full"
   >
     <div class="bg-white h-px w-full" />
-    <a class="w-full text-center md:text-start" href="/">{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a>
+    <a class="w-full text-center md:text-start" href="{$page.params.lang ? "/"+$page.params.lang : ""}/privacy">{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a>
   </div>
 </div>
 <style lang="postcss">

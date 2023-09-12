@@ -76,7 +76,7 @@
 </script>
 
 <section class="bg-white p-5 md:px-40 md:py-32 lg:px-56 flex flex-col items-center justify-center py-20" bind:this={section}>
-  <a href="/blog/{sectionData?.featuredBlog?.data?.attributes?.slug}">
+  <a href="{$page.params.lang ? "/"+$page.params.lang : ""}/blog/{sectionData?.featuredBlog?.data?.attributes?.slug}">
     <div class="blog-wrapper max-w-[1000px]">
       <div class="relative">
         <div

@@ -15,7 +15,7 @@
   let content: HTMLElement;
 </script>
 
-<a href="/work/{slug}" data-sveltekit-preload-data="tap">
+<a href="{$page.params.lang ? "/"+$page.params.lang : ""}/work/{slug}" data-sveltekit-preload-data="tap">
   <!-- svelte-ignore a11y-mouse-events-have-key-events -->
   <article
     bind:this={section}

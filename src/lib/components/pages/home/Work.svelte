@@ -164,7 +164,7 @@
     >
       <a
         class="border-b-2 border-white text-lg hover:scale-110 transition-all"
-        href="/work"
+        href="{$page.params.lang ? "/"+$page.params.lang : ""}/work"
         >{$page.data.layoutData?.data?.menu?.data?.attributes?.browseAll}</a
       >
       <div class="splide__arrows flex space-x-5">
