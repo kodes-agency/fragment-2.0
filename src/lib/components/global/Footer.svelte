@@ -7,15 +7,13 @@
   let user_email: string;
   let links: any;
 
-  let langParam:string
-  
-  if($page.params.lang == "en" || $page.params.lang == "bg"){
-    langParam = $page.params.lang+"/"
-  } else {
-    langParam = ""
-  }
+  let langParam: string;
 
-  
+  if ($page.params.lang == "en" || $page.params.lang == "bg") {
+    langParam = $page.params.lang + "/";
+  } else {
+    langParam = "";
+  }
 
   async function userSubscribe() {
     const response = await fetch("/api/subscribe", {
@@ -40,7 +38,7 @@
   }
 
   function linkLeaveAnimation(event: any) {
-    links.forEach((link: { style: { opacity: string, transform: string } }) => {
+    links.forEach((link: { style: { opacity: string; transform: string } }) => {
       link.style.opacity = "1";
       link.style.transform = "scale(1)";
     });
@@ -67,10 +65,10 @@
     class="flex flex-col md:flex-row space-y-8 md:space-y-0 justify-between"
   >
     <div class="flex flex-col items-center md:items-start space-y-4">
-      {#each $page.data.layoutData?.data?.menu?.data?.attributes?.menuItems as item } 
+      {#each $page.data.layoutData?.data?.menu?.data?.attributes?.menuItems as item}
         <a
           class="footer-links transition-all text-black text-xl"
-          href="{$page.params.lang ? "/"+$page.params.lang : ""}{item?.link}"
+          href="{$page.params.lang ? '/' + $page.params.lang : ''}{item?.link}"
           data-sveltekit-preload-data="tap">{item?.menuItem}</a
         >
       {/each}
@@ -79,7 +77,13 @@
       class="flex flex-col items-center space-y-8 md:space-y-4 md:items-end justify-between"
     >
       <div class="flex space-x-6">
-        <a class="footer-links transition-all" aria-label="linkedin" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.linkedinLink}>
+        <a
+          class="footer-links transition-all"
+          aria-label="linkedin"
+          target="_blank"
+          href={$page.data.layoutData?.data?.menu?.data?.attributes
+            ?.linkedinLink}
+        >
           <svg
             width="20"
             height="20"
@@ -93,7 +97,13 @@
             />
           </svg>
         </a>
-        <a class="footer-links transition-all" aria-label="instagram" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.instagramLink}>
+        <a
+          class="footer-links transition-all"
+          aria-label="instagram"
+          target="_blank"
+          href={$page.data.layoutData?.data?.menu?.data?.attributes
+            ?.instagramLink}
+        >
           <svg
             width="21"
             height="20"
@@ -107,7 +117,13 @@
             />
           </svg>
         </a>
-        <a class="footer-links transition-all" aria-label="facebook" target="_blank" href={$page.data.layoutData?.data?.menu?.data?.attributes?.facebookLink}>
+        <a
+          class="footer-links transition-all"
+          aria-label="facebook"
+          target="_blank"
+          href={$page.data.layoutData?.data?.menu?.data?.attributes
+            ?.facebookLink}
+        >
           <svg
             width="12"
             height="20"
@@ -121,25 +137,37 @@
             />
           </svg>
         </a>
-
       </div>
       <div class="flex flex-col space-y-2 text-center md:text-end">
-        <a href={$page.data.layoutData?.data?.menu?.data?.attributes?.phoneLink} target="_blank" class="text-black text-md footer-links transition-all"
+        <a
+          href={$page.data.layoutData?.data?.menu?.data?.attributes?.phoneLink}
+          target="_blank"
+          class="text-black text-md footer-links transition-all"
           >{$page.data.layoutData?.data?.menu?.data?.attributes?.phoneName}</a
         >
-        <a href={$page.data.layoutData?.data?.menu?.data?.attributes?.emailLink} target="_blank" class="text-black text-md footer-links transition-all"
+        <a
+          href={$page.data.layoutData?.data?.menu?.data?.attributes?.emailLink}
+          target="_blank"
+          class="text-black text-md footer-links transition-all"
           >{$page.data.layoutData?.data?.menu?.data?.attributes?.emailName}</a
         >
       </div>
       <div class="flex flex-col space-y-2 text-center md:text-end">
-        <a href={$page.data.layoutData?.data?.menu?.data?.attributes?.addressLink} target="_blank" class="text-black text-md footer-links transition-all"
+        <a
+          href={$page.data.layoutData?.data?.menu?.data?.attributes
+            ?.addressLink}
+          target="_blank"
+          class="text-black text-md footer-links transition-all"
           >{$page.data.layoutData?.data?.menu?.data?.attributes?.addressName}</a
         >
       </div>
       <div class="subsription-wrapper" bind:this={subscriptonWrapper}>
         <div id="mc_embed_signup" />
         {#if $subscribe}
-          <p class="italic font-bold">{$page.data.layoutData?.data?.menu?.data?.attributes?.subscribeSuccess}</p>
+          <p class="italic font-bold">
+            {$page.data.layoutData?.data?.menu?.data?.attributes
+              ?.subscribeSuccess}
+          </p>
         {:else}
           <div
             class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-3"
@@ -148,22 +176,25 @@
               class="bg-white border border-black rounded-none text-black text-center text-md h-8 w-56"
               type="text"
               name="subscribe-email"
-              placeholder="{$page.data.layoutData?.data?.menu?.data?.attributes?.subscribePlaceholder}"
+              placeholder={$page.data.layoutData?.data?.menu?.data?.attributes
+                ?.subscribePlaceholder}
               bind:value={user_email}
             />
             <!-- svelte-ignore a11y-mouse-events-have-key-events -->
             <button
               class="bg-black h-8 w-56 border-2 border-black"
-              on:mouseenter={({target})=>{
+              on:mouseenter={({ target }) => {
                 //@ts-expect-error
-                target.classList.add('gradient', 'gradient-anm')
+                target.classList.add("gradient", "gradient-anm");
               }}
-              on:mouseleave={({target})=>{
-                //@ts-expect-error               
-                target.classList.remove('gradient', 'gradient-anm')
+              on:mouseleave={({ target }) => {
+                //@ts-expect-error
+                target.classList.remove("gradient", "gradient-anm");
               }}
               type="submit"
-              on:click={userSubscribe}>{$page.data.layoutData?.data?.menu?.data?.attributes?.subscribeToOurMailing}</button
+              on:click={userSubscribe}
+              >{$page.data.layoutData?.data?.menu?.data?.attributes
+                ?.subscribeToOurMailing}</button
             >
           </div>
         {/if}
@@ -172,8 +203,22 @@
   </section>
   <div class="flex flex-col justify-center">
     <div class="w-full h-px bg-black mt-10 mb-2" />
-    <a href="{$page.params.lang ? "/"+$page.params.lang : ""}/policy" class="text-black text-center md:text-start text-md"
-      >{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a
-    >
+    <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:justify-between pb-5">
+      <a
+        href="{$page.params.lang ? '/' + $page.params.lang : ''}/policy"
+        class="text-black text-center md:text-start text-md"
+        >{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a
+      >
+      <a
+        href="{$page.params.lang ? '/' + $page.params.lang : ''}/gdpr"
+        class="text-black text-center md:text-start text-md"
+        >{$page.data.layoutData?.data?.menu?.data?.attributes?.gdprMenuItem}</a
+      >
+      <a
+        href="{$page.params.lang ? '/' + $page.params.lang : ''}/cookies"
+        class="text-black text-center md:text-start text-md md:pr-14"
+        >{$page.data.layoutData?.data?.menu?.data?.attributes?.cookiesMenuItem}</a
+      >
+    </div>
   </div>
 </footer>

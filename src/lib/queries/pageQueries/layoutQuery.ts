@@ -15,6 +15,8 @@ export default function (locale:string) {
                         seoDescription
                         seoKeywords
                         privacyMenuItem
+                        gdprMenuItem
+                        cookiesMenuItem
                         scrollDown
                         letsTalk
                         browseAll

@@ -44,7 +44,7 @@
         },
       });
 
-      blogsFeaturedTl.from(".thumbnail", {
+      blogsFeaturedTl.from(section, {
         opacity: 0,
         duration: 1,
         ease: "power3.out",

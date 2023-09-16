@@ -6,6 +6,7 @@
   import { SplitText } from "gsap/dist/SplitText";
   import { page } from "$app/stores";
   import { PUBLIC_IMAGE_URL } from "$env/static/public";
+  import formatDate from "$lib/functions/formatDate";
 
   let section: HTMLElement;
   let img: HTMLElement;
@@ -63,13 +64,25 @@
       </div>
     </span>
     <div
-      class="absolute bottom-14 portrait:left-auto landscape:right-5 landscape:md:right-auto flex flex-col overflow-hidden"
+      class="absolute bottom-20 portrait:right-auto landscape:right-5 landscape:md:right-auto flex flex-col overflow-hidden"
     >
     {#each sectionData?.categories?.data as category }  
       <p class="heading-anm uppercase text-yellow italic font-bold text-xl landscape:text-end landscape:md:text-start">
           {category?.attributes?.category}
       </p>
     {/each}
+    </div>
+    <div class="absolute bottom-10 md:bottom-20 md:right-40 flex flex-col overflow-hidden">
+      {#if sectionData.dateStart }
+        <p class="heading-anm uppercase text-white text-xl">
+          {formatDate(sectionData.dateStart)}
+        </p>
+      {/if}
+      {#if sectionData.dateFinish }
+        <p class="heading-anm uppercase text-white text-xl">
+          {formatDate(sectionData.dateFinish)}
+        </p>
+      {/if}
     </div>
   </div>
 </section>

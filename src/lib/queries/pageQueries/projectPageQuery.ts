@@ -12,6 +12,8 @@ export default function (locale:string, slug:string) {
                         seoKeywords
                         title
                         slug
+                        dateStart
+                        dateFinish
                         categories {
                             data {
                                 attributes {
