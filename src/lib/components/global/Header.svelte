@@ -223,7 +223,23 @@
     class="flex flex-col items-center space-y-4 nav-animation w-full"
   >
     <div class="bg-white h-px w-full" />
-    <a class="w-full text-center md:text-start pb-8 mb:pb-0" href="{$page.params.lang ? "/"+$page.params.lang : ""}/privacy">{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a>
+    <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:justify-between w-full pb-5">
+      <a
+        href="{$page.params.lang ? '/' + $page.params.lang : ''}/policy"
+        class="text-white text-center md:text-start text-md"
+        >{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a
+      >
+      <a
+        href="{$page.params.lang ? '/' + $page.params.lang : ''}/gdpr"
+        class="text-white text-center md:text-start text-md"
+        >{$page.data.layoutData?.data?.menu?.data?.attributes?.gdprMenuItem}</a
+      >
+      <a
+        href="{$page.params.lang ? '/' + $page.params.lang : ''}/cookies"
+        class="text-white text-center md:text-start text-md md:pr-14"
+        >{$page.data.layoutData?.data?.menu?.data?.attributes?.cookiesMenuItem}</a
+      >
+    </div>
   </div>
 </div>
 <style lang="postcss">
