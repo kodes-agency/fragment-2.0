@@ -7,6 +7,8 @@
   import { page } from "$app/stores";
   import { PUBLIC_IMAGE_URL } from "$env/static/public";
   import formatDate from "$lib/functions/formatDate";
+  import formatDoubleDate from "$lib/functions/formatDoubleDate";
+
 
   let section: HTMLElement;
   let img: HTMLElement;
@@ -73,14 +75,14 @@
     {/each}
     </div>
     <div class="absolute bottom-10 md:bottom-20 md:right-40 flex flex-col overflow-hidden">
-      {#if sectionData.dateStart }
+      {#if sectionData.dateStart && !sectionData.dateFinish}
         <p class="heading-anm uppercase text-white text-xl">
           {formatDate(sectionData.dateStart)}
         </p>
       {/if}
-      {#if sectionData.dateFinish }
+      {#if sectionData.dateFinish && sectionData.dateFinish }
         <p class="heading-anm uppercase text-white text-xl">
-          {formatDate(sectionData.dateFinish)}
+          {formatDoubleDate(sectionData.dateStart)} {formatDate(sectionData.dateFinish)}
         </p>
       {/if}
     </div>
