@@ -225,16 +225,19 @@
     <div class="bg-white h-px w-full" />
     <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:justify-between w-full pb-5">
       <a
+        on:click={initMenuAnimation}
         href="{$page.params.lang ? '/' + $page.params.lang : ''}/policy"
         class="text-white text-center md:text-start text-md"
         >{$page.data.layoutData?.data?.menu?.data?.attributes?.privacyMenuItem}</a
       >
       <a
+        on:click={initMenuAnimation}
         href="{$page.params.lang ? '/' + $page.params.lang : ''}/gdpr"
         class="text-white text-center md:text-start text-md"
         >{$page.data.layoutData?.data?.menu?.data?.attributes?.gdprMenuItem}</a
       >
       <a
+        on:click={initMenuAnimation}
         href="{$page.params.lang ? '/' + $page.params.lang : ''}/cookies"
         class="text-white text-center md:text-start text-md md:pr-14"
         >{$page.data.layoutData?.data?.menu?.data?.attributes?.cookiesMenuItem}</a
@@ -247,7 +250,6 @@
   nav {
   background: linear-gradient(to bottom, rgba(24, 24, 24, 1) 0%, rgba(24, 24, 24, 0.738) 19%, rgba(24, 24, 24, 0.541) 34%, rgba(24, 24, 24, 0.382) 47%, rgba(24, 24, 24, 0.278) 56.5%, rgba(24, 24, 24, 0.194) 65%, rgba(24, 24, 24, 0.126) 73%, rgba(24, 24, 24, 0.075) 80.2%, rgba(24, 24, 24, 0.042) 86.1%, rgba(24, 24, 24, 0.021) 91%, rgba(24, 24, 24, 0.008) 95.2%, rgba(24, 24, 24, 0.002) 98.2%, transparent 100%);
   }
-
 
   .isRotated {
     transform: rotate(45deg);
