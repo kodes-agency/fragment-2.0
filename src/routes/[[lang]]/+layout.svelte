@@ -54,6 +54,7 @@
 
   $: cookiesPolicy =
     $page?.data?.layoutData?.data?.cookiesPolicy?.data?.attributes;
+
 </script>
 
 <svelte:head>
@@ -67,35 +68,35 @@
 
 </svelte:head>
 
-{#if $page.route.id != "/[[lang]]/landing/[slug]" }
+{#if $page.route.id != "/[[lang]]/landing/[slug]" && cookiesPolicy }
 <GdprBanner
   cookieName="gdpr_cookie_consent"
-  heading={cookiesPolicy.bannerHeading}
-  description={cookiesPolicy.bannerDescription}
-  acceptLabel={cookiesPolicy.acceptLabel}
-  rejectLabel={cookiesPolicy.rejectLabel}
-  settingsLabel={cookiesPolicy.settingsLabel}
-  closeLabel={cookiesPolicy.closeLabel}
-  editLabel={cookiesPolicy.editLabel}
+  heading={cookiesPolicy?.bannerHeading}
+  description={cookiesPolicy?.bannerDescription}
+  acceptLabel={cookiesPolicy?.acceptLabel}
+  rejectLabel={cookiesPolicy?.rejectLabel}
+  settingsLabel={cookiesPolicy?.settingsLabel}
+  closeLabel={cookiesPolicy?.closeLabel}
+  editLabel={cookiesPolicy?.editLabel}
   choices={{
     necessary: {
-      label: `${cookiesPolicy.necessaryLabel}`,
-      description: `${cookiesPolicy.necessaryDescription}`,
+      label: `${cookiesPolicy?.necessaryLabel}`,
+      description: `${cookiesPolicy?.necessaryDescription}`,
       value: true,
     },
     tracking: {
-      label: `${cookiesPolicy.trackingLabel}`,
-      description: `${cookiesPolicy.trackingDescription}`,
+      label: `${cookiesPolicy?.trackingLabel}`,
+      description: `${cookiesPolicy?.trackingDescription}`,
       value: true,
     },
     analytics: {
-      label: `${cookiesPolicy.analyticsLabel}`,
-      description: `${cookiesPolicy.analyticsDescription}`,
+      label: `${cookiesPolicy?.analyticsLabel}`,
+      description: `${cookiesPolicy?.analyticsDescription}`,
       value: true,
     },
     marketing: {
-      label: `${cookiesPolicy.marketingLabel}`,
-      description: `${cookiesPolicy.marketingDescription}`,
+      label: `${cookiesPolicy?.marketingLabel}`,
+      description: `${cookiesPolicy?.marketingDescription}`,
       value: true,
     },
   }}
