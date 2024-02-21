@@ -184,7 +184,7 @@
 </nav>
 <!-- Navigation menu modal -->
 <div
-  class="menu hidden opacity-0 bg-black fixed top-0 py-5 px-5 md:px-10 lg:px-12 z-40 flex-col min-h-screen justify-end space-y-6 md:space-y-10 items-center w-full"
+  class="menu hidden opacity-0 bg-black fixed top-0 py-5 px-5 md:px-10 lg:px-12 z-40 flex-col min-h-screen justify-center md:justify-end space-y-6 md:space-y-10 items-center w-full"
 >
   <div class="flex flex-col space-y-5">
     <!-- Navigation links -->
@@ -220,7 +220,7 @@
   </div>
   <!-- Bottom modal links -->
   <div
-    class="flex flex-col items-center space-y-4 nav-animation w-full"
+    class="hidden md:flex flex-col items-center space-y-4 nav-animation w-full"
   >
     <div class="bg-white h-px w-full" />
     <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:justify-between w-full pb-5">
